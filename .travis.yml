@@ -1,0 +1,23 @@
+language: python
+python:
+- '3.5'
+- '3.6'
+- '3.7'
+- '3.8'
+install:
+- pip install coverage coveralls
+- python bootstrap.py
+- "./bin/buildout"
+script:
+- coverage erase
+- coverage run ./bin/test
+- coveralls
+deploy:
+  provider: pypi
+  on:
+    tags: true
+  user: __token__
+  password:
+    secure: KBIrgeWyygHxSZYtp9B5G9+oV5S3vkO7iSab3+wniopqF0PChYBvOzI2v2snoE4YKs1v6AyBX1954wNbJzoce9pNUWTXuK6DCLAHtBpIc5S6MLq/tTKRASgEVyezPeZeDA/qiuHUDTcw0eLRnEsyWhfrO2ireG2xcDpK3RA4FpkjfyCp4ef4QhlvDutos1kM/yX66tqgguIKd8AZpUSBKeW4L8Ovtov7nPdieY5fyL2FsQJLHQzD4UMROoOtJb/Xuv+HDGP8CGwyPw7a+/wq25fvRU4EdsBkpiPFrPSKCAQ7tO4WVhLXj6eYcdqeodJbMCTXbEURSsLTYDlHOjOdzakDR1VRetPOK8ZA4bpmAAwyrfTc7KY/02xb16JWvvmW147x1ATRIV8XemEcGrEOpd/uYlQiHsa2iiyQ3Q5xfZDcOX0rT7v5+iKGbq3Jwa07M0t1Exs9OOYBDrXdvAB0F1+oFW0IUQJv3YgUnKtxihcK7QnWDH8mJj2myGccVkCXEEadEfITT6fnxXJdBtvhf6r96wlbPe9jbbp50Enrad0bDOs4cE93Whzkx9o2dkBw25UklCdPwMWAAin0h6wq4Tx4mHUqG/A+yjxqONBfZUQieQ8X3kPUr2OuJsH1vEG1UCMKKBGlceaaI8mn9zyC+ZJ8Xi/IxzK7bEWmq3z1Emc=
+  distributions: sdist bdist_egg bdist_wheel
+  skip_existing: true
