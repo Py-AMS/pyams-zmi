@@ -31,6 +31,7 @@ from pyams_utils.data import ObjectDataManagerMixin
 from pyams_utils.date import SH_DATE_FORMAT, format_datetime
 from pyams_utils.factory import get_object_factory, is_interface
 from pyams_utils.interfaces import ICacheKeyValue
+from pyams_utils.interfaces.data import IObjectData
 from pyams_utils.list import boolean_iter
 from pyams_utils.url import absolute_url
 from pyams_zmi.interfaces.table import ITableAdminView, ITableElementEditor, ITableElementName
@@ -92,6 +93,15 @@ def get_attributes(table, element, source, column=None):
     return result
 
 
+def get_data_attributes(element):
+    """Get object data attributes"""
+    data = IObjectData(element, None)
+    if data is not None:
+        return ' '.join(("data-{}='{}'".format(k, v if isinstance(v, str) else json.dumps(v))
+                         for k, v in data.object_data.items()))
+    return ''
+
+
 class Table(ObjectDataManagerMixin, BaseTable):
     """Extended table class"""
 
@@ -136,8 +146,6 @@ class Table(ObjectDataManagerMixin, BaseTable):
                 'data-ams-type': get_column_type
             }
         }
-        for key, value in self.object_data.items():
-            result['table'].update({'data-{}'.format(key): json.dumps(value)})
         return result
 
     def get_selected_row_class(self, row, css_class=None):
@@ -153,7 +161,8 @@ class Table(ObjectDataManagerMixin, BaseTable):
 
     def render_table(self):
         return super(Table, self).render_table() \
-            .replace('<table', '<table {}'.format(get_attributes(self, 'table', self)))
+            .replace('<table', '<table {}'.format(get_attributes(self, 'table', self))) \
+            .replace('<table', '<table {}'.format(get_data_attributes(self)))
 
     def render_row(self, row, css_class=None):
         css_class = self.get_selected_row_class(row[0], css_class)
@@ -162,7 +171,8 @@ class Table(ObjectDataManagerMixin, BaseTable):
 
     def render_head_cell(self, column):
         return super(Table, self).render_head_cell(column) \
-            .replace('<th', '<th {}'.format(get_attributes(self, 'th', column)))
+            .replace('<th', '<th {}'.format(get_attributes(self, 'th', column))) \
+            .replace('<th', '<th {}'.format(get_data_attributes(column)))
 
     def render_cell(self, item, column, colspan=0):
         return super(Table, self).render_cell(item, column, colspan) \
@@ -327,7 +337,7 @@ class JsActionColumn(ActionColumn):
         return self.href
 
 
-class TrashColumn(JsActionColumn):
+class TrashColumn(ObjectDataManagerMixin, JsActionColumn):
     """Trash column"""
 
     hint = _("Delete element")
@@ -336,12 +346,11 @@ class TrashColumn(JsActionColumn):
     href = 'MyAMS.container.deleteElement'
     modal_target = False
 
-    weight = 999
+    object_data = {
+        'ams-modules': 'container'
+    }
 
-    def render_head_cell(self):
-        """Column header cell renderer"""
-        return super(TrashColumn, self).render_head_cell() \
-            .replace('<th ', '<th data-ams-modules="container" ')
+    weight = 999
 
 
 class DateColumn(GetAttrColumn):
