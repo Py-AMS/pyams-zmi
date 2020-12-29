@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.1.1
+-----
+ - updated forms legend display condition
+
 1.1.0
 -----
  - added support for IObjectData interface in tables
