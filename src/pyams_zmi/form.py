@@ -181,7 +181,7 @@ class FormGroupSwitcher(ObjectDataManagerMixin, Group):
         if self.mode == 'never':
             return 'closed'
         # else: automatic mode
-        for widget in self.widgets:
+        for widget in self.widgets.values():
             if widget.ignore_context:
                 continue
             field = widget.field
