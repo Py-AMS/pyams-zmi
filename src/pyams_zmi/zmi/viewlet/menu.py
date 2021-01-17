@@ -45,7 +45,7 @@ class NavigationMenu(TemplateBasedViewletManager, WeightOrderedViewletManager):
     @property
     def header(self):
         """Menu header getter"""
-        header = queryMultiAdapter((self.context, self.request, self.view), IMenuHeader)
+        header = queryMultiAdapter((self.context, self.request, self.view, self), IMenuHeader)
         return header or self._header
 
 
