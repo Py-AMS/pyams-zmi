@@ -40,6 +40,7 @@ __docformat__ = 'restructuredtext'
 class ZMIConfiguration(Persistent, Contained):
     """ZMI configuration class"""
 
+    site_name = FieldProperty(IZMIConfiguration['site_name'])
     application_name = FieldProperty(IZMIConfiguration['application_name'])
     application_package = FieldProperty(IZMIConfiguration['application_package'])
     inner_package_name = FieldProperty(IZMIConfiguration['inner_package_name'])

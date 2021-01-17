@@ -44,6 +44,10 @@ MYAMS_BUNDLES_VOCABULARY = SimpleVocabulary(
 class IZMIConfiguration(Interface):
     """Static management configuration interface"""
 
+    site_name = TextLine(title=_("Site name"),
+                         default='PyAMS website',
+                         required=False)
+
     application_name = TextLine(title=_("Application name"),
                                 default='PyAMS',
                                 required=False)

@@ -41,14 +41,14 @@ __docformat__ = 'restructuredtext'
 from pyams_zmi import _
 
 
-@viewletmanager_config(name='configuration.menu', layer=IAdminLayer,
-                       manager=IControlPanelMenu, weight=10,
+@viewletmanager_config(name='configuration.menu', context=ISiteRoot, layer=IAdminLayer,
+                       manager=IControlPanelMenu, weight=10, permission=MANAGE_SYSTEM_PERMISSION,
                        provides=IConfigurationMenu)
 class ConfigurationMenu(NavigationMenuItem):
     """Configuration menu"""
 
     label = _("Configuration")
-    icon_class = 'fas fa-screwdriver'
+    icon_class = 'fas fa-sliders-h'
 
 
 @viewletmanager_config(name='zmi-configuration.menu', context=ISiteRoot, layer=IAdminLayer,
@@ -69,9 +69,9 @@ class ZMIConfigurationForm(AdminEditForm):
     title = _("ZMI configuration")
     legend = _("Interface configuration")
 
-    fields = Fields(IZMIConfiguration).select('application_name', 'application_package',
-                                              'inner_package_name', 'inner_package',
-                                              'myams_bundle')
+    fields = Fields(IZMIConfiguration).select('site_name', 'application_name',
+                                              'application_package', 'inner_package_name',
+                                              'inner_package', 'myams_bundle')
 
     def get_content(self):
         return IZMIConfiguration(self.context)
@@ -84,13 +84,13 @@ class ZMIConfigurationFormRenderer(ContextRequestViewAdapter):
 
     def render(self, changes):
         """ZMI configuration form renderer"""
-        if changes:
+        if not changes:
             return {
-                'status': 'redirect'
+                'status': 'info',
+                'message': self.request.localizer.translate(self.view.no_changes_message)
             }
         return {
-            'status': 'info',
-            'message': self.request.localizer.translate(self.view.no_changes_message)
+            'status': 'redirect'
         }
 
 
