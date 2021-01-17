@@ -1,6 +1,13 @@
 Changelog
 =========
 
+1.2.0
+-----
+ - forms and tables templates updates
+ - added inner table mixin class
+ - included breadcrumbs content provider
+ - updated control panel permissions
+
 1.1.2
 -----
  - updated Gitlab-CI configuration
