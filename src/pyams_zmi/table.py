@@ -34,7 +34,8 @@ from pyams_utils.interfaces import ICacheKeyValue
 from pyams_utils.interfaces.data import IObjectData
 from pyams_utils.list import boolean_iter
 from pyams_utils.url import absolute_url
-from pyams_zmi.interfaces.table import ITableAdminView, ITableElementEditor, ITableElementName
+from pyams_zmi.interfaces.table import IInnerTable, ITableAdminView, ITableElementEditor, \
+    ITableElementName
 from pyams_zmi.view import InnerAdminView
 
 
@@ -179,27 +180,23 @@ class Table(ObjectDataManagerMixin, BaseTable):
             .replace('<td', '<td {}'.format(get_attributes(self, 'td', item, column)))
 
 
-@implementer(ITableAdminView)
-class TableAdminView(InnerAdminView):
-    """Table admin view
-
-    This class is a wrapper for an admin view based on an inner table.
-    """
+class InnerTableMixin:
+    """Inner table mixin class"""
 
     table_class = Table
     table_label = FieldProperty(ITableAdminView['table_label'])
 
     empty_template = get_view_template(name='empty')
 
-    def __init__(self, context, request):
-        super(TableAdminView, self).__init__(context, request)
+    def __init__(self, context, request, *args, **kwargs):
+        super().__init__(context, request, *args, **kwargs)
         factory = get_object_factory(self.table_class) if is_interface(self.table_class) \
             else self.table_class
         self.table = factory(context, request)
 
     def update(self):
         """Admin view updater"""
-        super(TableAdminView, self).update()  # pylint: disable=no-member
+        super().update()  # pylint: disable=no-member
         self.table.update()
 
     def render(self):
@@ -207,7 +204,20 @@ class TableAdminView(InnerAdminView):
         has_values, values = boolean_iter(self.table.values)  # pylint: disable=no-member,unused-variable
         if not has_values:
             return self.empty_template()
-        return super(TableAdminView, self).render()  # pylint: disable=no-member
+        return super().render()  # pylint: disable=no-member
+
+
+@implementer(ITableAdminView)
+class TableAdminView(InnerTableMixin, InnerAdminView):
+    """Table admin view
+
+    This class is a wrapper for an admin view based on an inner table.
+    """
+
+
+@implementer(IInnerTable)
+class InnerTableAdminView(InnerTableMixin):
+    """Inner table admin view"""
 
 
 class I18nColumnMixin:

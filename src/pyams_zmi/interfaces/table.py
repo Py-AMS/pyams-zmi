@@ -40,6 +40,10 @@ class ITableAdminView(IInnerAdminView):
 class IInnerTable(IContentProvider):
     """Inner admin table view interface"""
 
+    table_class = Attribute("Inner table class")
+
+    table_label = TextLine(title="Inner table label")
+
 
 class ITableElementName(Interface):
     """Table element name interface"""
