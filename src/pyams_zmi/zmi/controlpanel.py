@@ -20,7 +20,7 @@ from zope.interface import implementer
 
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_pagelet.pagelet import pagelet_config
-from pyams_security.interfaces.base import MANAGE_SYSTEM_PERMISSION
+from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
 from pyams_site.interfaces import ISiteRoot
 from pyams_table.interfaces import IColumn, IValues
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
@@ -39,7 +39,7 @@ from pyams_zmi import _
 
 @viewletmanager_config(name='utilities.menu', context=ISiteRoot, layer=IAdminLayer,
                        manager=IControlPanelMenu, weight=10,
-                       permission=MANAGE_SYSTEM_PERMISSION, provides=IUtilitiesMenu)
+                       permission=VIEW_SYSTEM_PERMISSION, provides=IUtilitiesMenu)
 class UtilitiesMenuItem(NavigationMenuItem):
     """Utilities menu item"""
 
@@ -73,7 +73,7 @@ class UtilityNameColumn(NameColumn):
 
 
 @pagelet_config(name='utilities.html', context=ISiteRoot, layer=IPyAMSLayer,
-                permission=MANAGE_SYSTEM_PERMISSION)
+                permission=VIEW_SYSTEM_PERMISSION)
 class UtilitiesView(TableAdminView):
     """Utilities view"""
 
