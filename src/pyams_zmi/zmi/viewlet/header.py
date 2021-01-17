@@ -17,14 +17,16 @@ top panel of PyAMS management interface.
 """
 
 from zope.component import queryMultiAdapter
+from zope.interface import Interface
 
 from pyams_skin.interfaces.view import IModalPage
 from pyams_skin.interfaces.viewlet import IHeaderViewletManager
 from pyams_template.template import get_view_template, template_config
+from pyams_utils.adapter import adapter_config
 from pyams_viewlet.manager import TemplateBasedViewletManager, WeightOrderedViewletManager, \
     viewletmanager_config
 from pyams_viewlet.viewlet import EmptyContentProvider, Viewlet, viewlet_config
-from pyams_zmi.interfaces import IAdminLayer, IPageTitle
+from pyams_zmi.interfaces import IAdminLayer, IAdminView, IPageTitle
 from pyams_zmi.interfaces.configuration import IZMIConfiguration
 from pyams_zmi.interfaces.viewlet import IPageHeaderViewletManager
 
@@ -68,3 +70,11 @@ class ContentHeaderViewlet(Viewlet):
         if IModalPage.providedBy(self.view):
             return self.modal_template()
         return super(ContentHeaderViewlet, self).render()
+
+
+@adapter_config(required=(Interface, IAdminLayer, IAdminView),
+                provides=IPageTitle)
+def admin_view_title_adapter(context, request, view):
+    """Admin view default title adapter"""
+    configuration = IZMIConfiguration(request.root)
+    return configuration.site_name
