@@ -58,6 +58,7 @@ class ZMIConfiguration(Persistent, Contained):
         return result
 
     myams_bundle = FieldProperty(IZMIConfiguration['myams_bundle'])
+    favicon = FileProperty(IZMIConfiguration['favicon'])
 
     include_header = FieldProperty(IZMIConfiguration['include_header'])
     fixed_header = FieldProperty(IZMIConfiguration['fixed_header'])

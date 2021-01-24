@@ -71,7 +71,7 @@ class ZMIConfigurationForm(AdminEditForm):
 
     fields = Fields(IZMIConfiguration).select('site_name', 'application_name',
                                               'application_package', 'inner_package_name',
-                                              'inner_package', 'myams_bundle')
+                                              'inner_package', 'myams_bundle', 'favicon')
 
     def get_content(self):
         return IZMIConfiguration(self.context)

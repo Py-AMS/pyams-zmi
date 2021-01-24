@@ -73,6 +73,10 @@ class IZMIConfiguration(Interface):
                           vocabulary=MYAMS_BUNDLES_VOCABULARY,
                           default='full')
 
+    favicon = ImageField(title=_("Icon"),
+                         description=_("Favorites icon"),
+                         required=False)
+
     include_header = Bool(title=_("Include header"),
                           required=False,
                           default=True)
