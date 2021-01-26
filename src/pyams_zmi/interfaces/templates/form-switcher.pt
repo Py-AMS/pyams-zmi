@@ -1,4 +1,4 @@
-${structure:provider:pyams.header}
+<i tal:omit-tag="">${structure:provider:pyams.header}</i>
 <fieldset class="border"
 		  data-ams-modules="plugins">
 	<legend class="switcher"
@@ -8,16 +8,16 @@ ${structure:provider:pyams.header}
 			data-ams-data='${tales:object_data(view)}'>
 		<i tal:omit-tag="" i18n:translate="">${view.legend}</i>
 	</legend>
-	${structure:provider:pyams.help}
+	<i tal:omit-tag="">${structure:provider:pyams.help}</i>
 	<tal:loop repeat="widget view.widgets.values()">
-		${structure:provider:pyams.widget(view=widget)}
+		<i tal:omit-tag="">${structure:provider:pyams.widget(view=widget)}</i>
 	</tal:loop>
 	<tal:loop condition="view.groups | nothing"
 			  repeat="group view.groups">
-		${structure:group.render()}
+		<i tal:omit-tag="">${structure:group.render()}</i>
 	</tal:loop>
 	<tal:loop repeat="subform view.subforms">
-		${structure:subform.render()}
+		<i tal:omit-tag="">${structure:subform.render()}</i>
 	</tal:loop>
 	<div class="form-tabs"
 		 tal:condition="view.tabforms">
@@ -35,9 +35,9 @@ ${structure:provider:pyams.header}
 			<div tal:repeat="tabform view.tabforms"
 				 id="tab_${tales:cache_key(tabform)}"
 				 class="tab-pane fade show ${'active' if repeat['tabform'].start() else ''}">
-				${structure:tabform.render()}
+				<i tal:omit-tag="">${structure:tabform.render()}</i>
 			</div>
 		</div>
 	</div>
 </fieldset>
-${structure:provider:pyams.footer}
+<i tal:omit-tag="">${structure:provider:pyams.footer}</i>
