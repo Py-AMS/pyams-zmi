@@ -104,7 +104,7 @@ class IFormGroupSwitcher(IGroup):
                            values=('always', 'never', 'auto'),
                            default='auto')
 
-    switcher_state = Attribute("Initial switcher state")
+    state = Attribute("Initial switcher state")
 
 
 @template_config(template='templates/form-checker.pt', layer=IAdminLayer)

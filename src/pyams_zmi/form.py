@@ -171,14 +171,14 @@ class FormGroupSwitcher(ObjectDataManagerMixin, Group):
 
     minus_class = FieldProperty(IFormGroupSwitcher['minus_class'])
     plus_class = FieldProperty(IFormGroupSwitcher['plus_class'])
-    mode = FieldProperty(IFormGroupSwitcher['mode'])
+    switcher_mode = FieldProperty(IFormGroupSwitcher['switcher_mode'])
 
     @property
     def state(self):
         """Current state getter"""
-        if self.mode == 'always':
+        if self.switcher_mode == 'always':
             return 'open'
-        if self.mode == 'never':
+        if self.switcher_mode == 'never':
             return 'closed'
         # else: automatic mode
         for widget in self.widgets.values():
