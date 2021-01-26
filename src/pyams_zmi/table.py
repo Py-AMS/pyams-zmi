@@ -300,13 +300,9 @@ class IconColumn(Column):
         return self.request.localizer.translate(self.hint)
 
 
-class ActionColumn(IconColumn):
+class BaseActionColumn(IconColumn):
     """Base action column"""
 
-    css_classes = {
-        'th': 'action',
-        'td': 'action'
-    }
     status = 'primary'
     href = None
     target = None
@@ -314,29 +310,70 @@ class ActionColumn(IconColumn):
 
     permission = None
 
-    def render_cell(self, item):
-        """Column cell renderer"""
+    css_classes = {
+        'th': 'action',
+        'td': 'action'
+    }
+
+    def is_visible(self, item):
+        """Action visibility checker"""
         if not self.has_permission(item):
-            return ''
+            return False
         if self.checker:
             if callable(self.checker):
                 checked = self.checker(item)  # pylint: disable=not-callable
             else:
                 checked = self.checker
             if not checked:
-                return ''
-        return '''<a href="{}"
-                     data-ams-stop-propagation="true"
-                     {} {} data-ams-hint-gravity="e">
-            {}
-        </a>'''.format(self.get_url(item),
-                       'data-ams-target="{0}"'.format(self.target) if self.target else '',
-                       'data-toggle="modal"' if self.modal_target else '',
-                       self.get_icon(item))
+                return False
+        return True
 
     def get_url(self, item):
         """Action URL getter"""
         return absolute_url(item, self.request, self.href)
+
+
+class ActionColumn(BaseActionColumn):
+    """Base action column"""
+
+    def render_cell(self, item):
+        """Column cell renderer"""
+        if not self.is_visible(item):
+            return ''
+        return '<a href="{}" ' \
+               '   data-ams-stop-propagation="true" ' \
+               '   {} {} {}>{}</a>'.format(
+                self.get_url(item),
+                'data-ams-target="{}"'.format(self.target) if self.target else '',
+                'data-toggle="modal"' if self.modal_target else '',
+                'data-ams-modules="modal"' if self.modal_target else '',
+                self.get_icon(item))
+
+
+class ButtonColumn(BaseActionColumn):
+    """Button action column"""
+
+    label = None
+
+    css_classes = {
+        'th': 'action',
+        'td': 'action py-1'
+    }
+
+    def render_cell(self, item):
+        """Column cell renderer"""
+        if not self.is_visible(item):
+            return ''
+        return '<a class="btn btn-sm btn-{} text-nowrap" ' \
+               '   href="{}" ' \
+               '   data-ams-stop-propagation="true" ' \
+               '   {} {} {}>{}</a>'.format(
+                self.status,
+                self.get_url(item),
+                'data-ams-target="{0}"'.format(self.target) if self.target else '',
+                'data-toggle="modal"' if self.modal_target else '',
+                'data-ams-modules="modal"' if self.modal_target else '',
+                self.request.localizer.translate(self.label))
 
 
 class JsActionColumn(ActionColumn):
