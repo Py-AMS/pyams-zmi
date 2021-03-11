@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.5.0
+-----
+ - removed support for Python < 3.7
+ - removed toolbar viewlet manager from modal dialogs
+ - small templates updates
+
 1.4.0
 -----
  - updated forms and tables templates
