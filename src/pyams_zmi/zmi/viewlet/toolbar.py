@@ -18,6 +18,7 @@ contextual actions on content views.
 
 from zope.interface import Interface
 
+from pyams_skin.interfaces.view import IModalPage
 from pyams_skin.viewlet.menu import DropdownMenu
 from pyams_template.template import template_config
 from pyams_viewlet.manager import TemplateBasedViewletManager, WeightOrderedViewletManager, \
@@ -35,6 +36,15 @@ __docformat__ = 'restructuredtext'
 @template_config(template='templates/toolbar.pt')
 class ToolbarViewletManager(TemplateBasedViewletManager, WeightOrderedViewletManager):
     """Actions viewlet manager"""
+
+
+@viewletmanager_config(name='pyams.toolbar', layer=IAdminLayer, view=IModalPage,
+                       provides=IToolbarViewletManager)
+class ModalToolbarViewletManager(ToolbarViewletManager):
+    """Modal page actions viewlet manager"""
+
+    def _get_viewlets(self):
+        return ()
 
 
 @viewletmanager_config(name='pyams.context_addings', layer=IAdminLayer,
