@@ -24,7 +24,7 @@ from pyams_pagelet.pagelet import Pagelet
 from pyams_utils.adapter import adapter_config
 from pyams_utils.factory import get_object_factory, is_interface
 from pyams_zmi.form import AdminAddForm
-from pyams_zmi.interfaces import IPageTitle
+from pyams_zmi.interfaces import IAdminLayer, IPageTitle
 from pyams_zmi.interfaces.form import ISearchButtons, ISearchInfo, ISearchView
 from pyams_zmi.table import TableAdminView
 from pyams_zmi.view import InnerAdminView
@@ -74,7 +74,7 @@ class SearchResultsView(TableAdminView, Pagelet):
     title = None
 
 
-@adapter_config(required=(Interface, Interface, SearchResultsView),
+@adapter_config(required=(Interface, IAdminLayer, SearchResultsView),
                 provides=IPageTitle)
 def search_results_title(context, request, view):  # pylint: disable=unused-argument
     """Search results view title adapter"""
