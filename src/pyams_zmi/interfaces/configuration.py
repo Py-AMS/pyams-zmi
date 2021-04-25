@@ -21,7 +21,8 @@ from zope.interface import Attribute, Interface
 from zope.schema import Bool, Choice, TextLine
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
-from myams_js import myams_core_svg_bundle, myams_full_bundle, myams_mini_svg_bundle
+from myams_js import emerald_core_svg_bundle, emerald_mini_svg_bundle, myams_core_svg_bundle, \
+    myams_full_bundle, myams_mini_svg_bundle
 from pyams_file.schema import FileField, ImageField
 from pyams_i18n.schema import I18nTextLineField
 
@@ -34,7 +35,9 @@ from pyams_zmi import _
 MYAMS_BUNDLES = OrderedDict((
     ('full', (myams_full_bundle, _("MyAMS full bundle"))),
     ('mini+svg', (myams_mini_svg_bundle, _("MyAMS mini bundle (with SVG icons)"))),
-    ('core+svg', (myams_core_svg_bundle, _("MyAMS core bundle (with SVG icons)")))
+    ('core+svg', (myams_core_svg_bundle, _("MyAMS core bundle (with SVG icons)"))),
+    ('emerald-mini', (emerald_mini_svg_bundle, _("Emerald mini bundle (with SVG icons)"))),
+    ('emerald-core', (emerald_core_svg_bundle, _("Emerald core bundle (with SVG icons)")))
 ))
 
 MYAMS_BUNDLES_VOCABULARY = SimpleVocabulary(
