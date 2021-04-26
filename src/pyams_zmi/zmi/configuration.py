@@ -69,9 +69,10 @@ class ZMIConfigurationForm(AdminEditForm):
     title = _("ZMI configuration")
     legend = _("Interface configuration")
 
-    fields = Fields(IZMIConfiguration).select('site_name', 'application_name',
-                                              'application_package', 'inner_package_name',
-                                              'inner_package', 'myams_bundle', 'favicon')
+    fields = Fields(IZMIConfiguration).select('site_name',
+                                              'application_name', 'application_package',
+                                              'inner_package_name', 'inner_package',
+                                              'environment', 'myams_bundle', 'favicon')
 
     def get_content(self):
         return IZMIConfiguration(self.context)

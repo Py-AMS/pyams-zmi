@@ -45,13 +45,14 @@ class ZMIConfiguration(Persistent, Contained):
     application_package = FieldProperty(IZMIConfiguration['application_package'])
     inner_package_name = FieldProperty(IZMIConfiguration['inner_package_name'])
     inner_package = FieldProperty(IZMIConfiguration['inner_package'])
+    environment = FieldProperty(IZMIConfiguration['environment'])
 
     @property
     def version(self):
         """Get complete version string"""
         result = pkg_resources.get_distribution(self.application_package).version
         if self.inner_package and (self.inner_package != self.application_package):
-            result = '{} ({} v{})'.format(
+            result = '{}<span class="mx-2">&ndash;</span>{} - {}'.format(
                 result,
                 self.inner_package_name,
                 pkg_resources.get_distribution(self.inner_package).version)

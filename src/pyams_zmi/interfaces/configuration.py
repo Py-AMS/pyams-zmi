@@ -69,6 +69,10 @@ class IZMIConfiguration(Interface):
                                            "application version"),
                              required=False)
 
+    environment = TextLine(title=_("Environment name"),
+                           description=_("Short text used to describe runtime environment"),
+                           required=False)
+
     version = Attribute("Application version")
 
     myams_bundle = Choice(title=_("MyAMS bundle"),
