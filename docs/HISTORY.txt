@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.5.2
+-----
+ - added runtime environment description string to be displayed below version number
+ - updated version display template
+ - updated translations
+
 1.5.1
 -----
  - added MyAMS Emerald theme to ZMI configuration
