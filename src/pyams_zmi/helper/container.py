@@ -16,7 +16,7 @@ This module provides container-related helpers to delete elements or update elem
 attributes.
 """
 
-from pyramid.httpexceptions import HTTPInternalServerError, HTTPUnauthorized
+from pyramid.httpexceptions import HTTPForbidden, HTTPInternalServerError
 
 from pyams_security.permission import get_edit_permission
 
@@ -74,8 +74,8 @@ def delete_container_element(request, container_factory=None, ignore_permission=
         permission = get_edit_permission(request, context)
         if permission is None:
             raise HTTPInternalServerError("Missing permission definition!")
-        if not request.has_permission(permission, context):
-            raise HTTPUnauthorized()
+        if not request.has_permission(permission, context=context):
+            raise HTTPForbidden()
     # Delete element
     del container[name]
     return {
