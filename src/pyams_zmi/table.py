@@ -23,6 +23,7 @@ from zope.interface import implementer
 from zope.location import ILocation
 from zope.schema.fieldproperty import FieldProperty
 
+from pyams_security.security import ProtectedViewObjectMixin
 from pyams_table.column import Column, GetAttrColumn
 from pyams_table.table import Table as BaseTable
 from pyams_template.template import get_view_template
@@ -333,8 +334,13 @@ class BaseActionColumn(IconColumn):
         return absolute_url(item, self.request, self.href)
 
 
-class ActionColumn(BaseActionColumn):
-    """Base action column"""
+class ActionColumn(ProtectedViewObjectMixin, BaseActionColumn):
+    """Base action column
+
+    This column class inherits from :py:class:`ProtectedViewObjectMixin
+    <pyams_security.security.ProtectedViewObjectMixin>`, so you can use adapters
+    to define permission required to enable this action.
+    """
 
     def render_cell(self, item):
         """Column cell renderer"""
@@ -389,6 +395,8 @@ class TrashColumn(ObjectDataManagerMixin, JsActionColumn):
 
     hint = _("Delete element")
     icon_class = 'fa fa-trash-alt'
+
+    action_type = 'delete'
 
     href = 'MyAMS.container.deleteElement'
     modal_target = False
