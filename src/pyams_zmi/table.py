@@ -206,7 +206,7 @@ class InnerTableMixin:
     def render(self):
         """Admin view renderer"""
         has_values, values = boolean_iter(self.table.values)  # pylint: disable=no-member,unused-variable
-        if not has_values:
+        if (not has_values) and not getattr(self.table, 'display_if_empty', False):
             return self.empty_template()
         return super().render()  # pylint: disable=no-member
 
