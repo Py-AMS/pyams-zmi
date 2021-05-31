@@ -9,7 +9,7 @@
 			   i18n:attributes="data-original-title"></i>
 		</a>
 		<i tal:omit-tag="" i18n:translate="">${view.table_label}</i>
-		<i tal:omit-tag="">${structure:provider:pyams.toolbar}</i>
+		<i tal:omit-tag="">${structure:provider:pyams.toolbar(view=view.table)}</i>
 	</h2>
 	<i tal:omit-tag="">${structure:provider:pyams.help}</i>
 	<p class="m-3">
