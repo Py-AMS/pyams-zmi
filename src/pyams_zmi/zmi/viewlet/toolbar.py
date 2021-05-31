@@ -47,7 +47,7 @@ class ModalToolbarViewletManager(ToolbarViewletManager):
         return ()
 
 
-@viewletmanager_config(name='pyams.context_addings', layer=IAdminLayer,
+@viewletmanager_config(name='pyams.context_addings', layer=IAdminLayer, view=Interface,
                        manager=IToolbarViewletManager, weight=10,
                        provides=IContextAddingsViewletManager)
 class AddingsViewletManager(DropdownMenu):
