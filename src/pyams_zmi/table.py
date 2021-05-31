@@ -112,6 +112,9 @@ class Table(ObjectDataManagerMixin, BaseTable):
         """Table ID getter"""
         return get_table_id(self, self.context)
 
+    batch_size = 500
+    start_batching_at = 500
+
     css_classes = {
         'table': 'table table-striped table-hover table-sm datatable'
     }
