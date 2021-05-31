@@ -287,7 +287,7 @@ class IconColumn(Column):
         """Column permission test"""
         if not self.permission:
             return True
-        return self.request.has_permission(self.permission, permission=item)
+        return self.request.has_permission(self.permission, context=item)
 
     def get_icon(self, item):
         """Column icon getter"""
