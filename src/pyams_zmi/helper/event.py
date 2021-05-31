@@ -24,7 +24,7 @@ from zope.dublincore.interfaces import IZopeDublinCore
 from pyams_form.interfaces.widget import IFieldWidget
 from pyams_form.util import expand_prefix
 from pyams_utils.url import absolute_url
-from pyams_zmi.table import get_row_id
+from pyams_zmi.table import get_row_id, get_table_id
 
 
 __docformat__ = 'restructuredtext'
@@ -68,6 +68,22 @@ def get_json_widget_refresh_callback(form, field_name, request):
         'options': {
             'widget_id': widget.id,
             'content': widget()
+        }
+    }
+
+
+def get_json_table_row_add_callback(context, request, table_factory, item):
+    """Get table row add callback settings"""
+    table = table_factory(context, request)
+    table.update()
+    row = table.setup_row(item)
+    return {
+        'module': 'helpers',
+        'callback': 'MyAMS.helpers.addTableRow',
+        'options': {
+            'table_id': get_table_id(table),
+            'row_id': get_row_id(table, item),
+            'content': table.render_row(row)
         }
     }
 
