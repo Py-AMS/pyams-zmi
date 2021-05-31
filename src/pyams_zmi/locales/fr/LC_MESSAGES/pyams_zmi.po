@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2021-04-26 14:34+0200\n"
+"POT-Creation-Date: 2021-05-31 10:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,11 +27,11 @@ msgstr "Rechercher"
 msgid "Search criteria"
 msgstr "Critères de recherche"
 
-#: src/pyams_zmi/table.py:243 src/pyams_zmi/zmi/registry.py:92
+#: src/pyams_zmi/table.py:247 src/pyams_zmi/zmi/registry.py:92
 msgid "Name"
 msgstr "Nom"
 
-#: src/pyams_zmi/table.py:390
+#: src/pyams_zmi/table.py:399
 msgid "Delete element"
 msgstr "Supprimer cet élément"
 
@@ -49,7 +49,8 @@ msgstr "MyAMS core-bundle (Thème MyAMS en version core, avec icônes SVG)"
 
 #: src/pyams_zmi/interfaces/configuration.py:39
 msgid "Emerald mini bundle (with SVG icons)"
-msgstr "Emerald mini-bundle (Thème Emerald en version minimale, avec icônes SVG)"
+msgstr ""
+"Emerald mini-bundle (Thème Emerald en version minimale, avec icônes SVG)"
 
 #: src/pyams_zmi/interfaces/configuration.py:40
 msgid "Emerald core bundle (with SVG icons)"
@@ -251,22 +252,35 @@ msgstr "Chercher"
 msgid "Back to previous page"
 msgstr "Revenir à la page précédente"
 
-#: src/pyams_zmi/interfaces/templates/inner-table-empty.pt:9
+#: src/pyams_zmi/interfaces/templates/table.pt:19
+#: src/pyams_zmi/interfaces/templates/inner-table.pt:13
+msgid "WARNING: only the first ${length} results are displayed in this table!"
+msgstr "ATTENTION : la liste est tronquée, seuls les ${length} premiers résultats sont affichés !"
+
+#: src/pyams_zmi/interfaces/templates/inner-table-empty.pt:11
 #: src/pyams_zmi/interfaces/templates/table-empty.pt:16
 msgid "This table is empty."
 msgstr "Cette table ne contient aucun élément."
 
-#: src/pyams_zmi/helper/container.py:55
+#: src/pyams_zmi/helper/container.py:55 src/pyams_zmi/helper/container.py:113
 msgid "No provided object_name argument!"
-msgstr "Paramètre 'object_name' absent !"
+msgstr "Le nom de l'objet à mettre à jour n'a pas été renseigné !"
 
-#: src/pyams_zmi/helper/container.py:68
+#: src/pyams_zmi/helper/container.py:68 src/pyams_zmi/helper/container.py:135
 msgid "Given element name doesn't exist!"
 msgstr "L'élément sélectionné n'existe pas !"
 
 #: src/pyams_zmi/helper/container.py:83
 msgid "Element was deleted successfully."
 msgstr "L'élément a été supprimé avec succès."
+
+#: src/pyams_zmi/helper/container.py:122
+msgid "No provided attribute name!"
+msgstr "Le nom de l'attribut à mettre à jour n'a pas été renseigné !"
+
+#: src/pyams_zmi/helper/container.py:150
+msgid "Element was updated successfully."
+msgstr "L'élément a été modifié avec succès."
 
 #: src/pyams_zmi/zmi/configuration.py:50
 msgid "Configuration"
