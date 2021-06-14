@@ -16,6 +16,7 @@ This module is used to display running version of all installed packages.
 """
 
 import os
+
 from pkg_resources import Environment
 from pyramid.decorator import reify
 
@@ -28,8 +29,8 @@ from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
 from pyams_viewlet.viewlet import ViewContentProvider, viewlet_config
 from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.table import IInnerTable
-from pyams_zmi.interfaces.viewlet import IUtilitiesMenu
 from pyams_zmi.table import InnerTableAdminView, MultipleTablesAdminView, NameColumn, Table
+from pyams_zmi.zmi.interfaces import IConfigurationMenu
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
 
 
@@ -40,7 +41,7 @@ from pyams_zmi import _
 
 @viewlet_config(name='environment.menu',
                 context=ISiteRoot, layer=IAdminLayer,
-                manager=IUtilitiesMenu, weight=50,
+                manager=IConfigurationMenu, weight=50,
                 permission=MANAGE_SYSTEM_PERMISSION)
 class EnvironmentMenu(NavigationMenuItem):
     """Environment menu"""
