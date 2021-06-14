@@ -45,6 +45,11 @@ class IInnerTable(IContentProvider):
     table_label = TextLine(title="Inner table label")
 
 
+@template_config(template='templates/table-multiple.pt')
+class IMultipleTableView(IInnerAdminView):
+    """Multiple table view"""
+
+
 class ITableElementName(Interface):
     """Table element name interface"""
 
