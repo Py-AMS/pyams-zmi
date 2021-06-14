@@ -25,7 +25,7 @@ from zope.schema.fieldproperty import FieldProperty
 
 from pyams_security.security import ProtectedViewObjectMixin
 from pyams_table.column import Column, GetAttrColumn
-from pyams_table.table import Table as BaseTable
+from pyams_table.table import Table as BaseTable, get_weight
 from pyams_template.template import get_view_template
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
 from pyams_utils.data import ObjectDataManagerMixin
@@ -35,7 +35,8 @@ from pyams_utils.interfaces import ICacheKeyValue
 from pyams_utils.interfaces.data import IObjectData
 from pyams_utils.list import boolean_iter
 from pyams_utils.url import absolute_url
-from pyams_zmi.interfaces.table import IInnerTable, ITableAdminView, ITableElementEditor, \
+from pyams_zmi.interfaces.table import IInnerTable, IMultipleTableView, ITableAdminView, \
+    ITableElementEditor, \
     ITableElementName
 from pyams_zmi.view import InnerAdminView
 
@@ -222,6 +223,35 @@ class TableAdminView(InnerTableMixin, InnerAdminView):
 @implementer(IInnerTable)
 class InnerTableAdminView(InnerTableMixin):
     """Inner table admin view"""
+
+
+class MultipleTablesMixin:
+    """Multiple tables mixin view class"""
+
+    table_label = FieldProperty(ITableAdminView['table_label'])
+
+    def __init__(self, context, request, *args, **kwargs):
+        super().__init__(context, request, *args, **kwargs)
+
+    @reify
+    def tables(self):
+        """Tables getter"""
+        registry = self.request.registry
+        return sorted((table
+                       for name, table in
+                       registry.getAdapters((self.context, self.request, self),  # pylint: disable=no-member
+                                            IInnerTable)),
+                      key=get_weight)
+
+    def update(self):
+        """View update"""
+        super().update()
+        [table.update() for table in self.tables]
+
+
+@implementer(IMultipleTableView)
+class MultipleTablesAdminView(MultipleTablesMixin, InnerAdminView):
+    """Multiple tables admin view"""
 
 
 class I18nColumnMixin:
