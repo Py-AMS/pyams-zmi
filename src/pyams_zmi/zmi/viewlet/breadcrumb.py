@@ -43,6 +43,7 @@ class SiteRootBreadcrumbItem(AdminLayerBreadcrumbItem):
 
     @property
     def label(self):
+        """Label getter"""
         configuration = IZMIConfiguration(self.request.root)
         return configuration.site_name
 

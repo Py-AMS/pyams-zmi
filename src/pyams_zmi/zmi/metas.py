@@ -35,6 +35,9 @@ from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.configuration import IZMIConfiguration
 
 
+THUMB_HREF_STR = '{}/++thumb++{}x{}?_={}'
+
+
 @adapter_config(name='favicon',
                 required=(Interface, IAdminLayer, Interface),
                 provides=IHTMLContentMetas)
@@ -49,24 +52,22 @@ class IconMetasAdapter(ContextRequestViewAdapter):
         if (config is not None) and (config.favicon is not None):
             icon = config.favicon
             icon_url = absolute_url(icon, self.request)
-            icon_size = icon.get_image_size()[0]
-            dc = IZopeDublinCore(icon)
+            icon_size = icon.get_image_size()[0]  # pylint: disable=no-member
+            dc = IZopeDublinCore(icon)  # pylint: disable=invalid-name
             timestamp = datetime.timestamp(tztime(dc.modified))
             for size in (180, 144, 114, 72, 32, 16):
                 if icon_size >= size:
                     yield LinkMeta('apple-touch-icon',
-                                   type=icon.content_type,
-                                   href='{}/++thumb++{}x{}?_={}'.format(
-                                       icon_url, size, size, timestamp),
+                                   type=icon.content_type,  # pylint: disable=no-member
+                                   href=THUMB_HREF_STR.format(icon_url, size, size, timestamp),
                                    sizes='{0}x{0}'.format(size))
             for size in (128, 124, 32):
                 if icon_size >= size:
                     yield LinkMeta('icon',
-                                   type=icon.content_type,
-                                   href='{}/++thumb++{}x{}?_={}'.format(
-                                       icon_url, size, size, timestamp),
+                                   type=icon.content_type,  # pylint: disable=no-member
+                                   href=THUMB_HREF_STR.format(icon_url, size, size, timestamp),
                                    sizes='{0}x{0}'.format(size))
-            yield LinkMeta('shortcut-icon', type=icon.content_type, href=icon_url)
+            yield LinkMeta('shortcut-icon', type=icon.content_type, href=icon_url)  # pylint: disable=no-member
 
 
 @view_config(name='favicon.ico', request_type=IPyAMSLayer)

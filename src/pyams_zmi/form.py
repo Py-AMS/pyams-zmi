@@ -57,7 +57,7 @@ class AdminAddForm(ObjectDataManagerMixin, GroupForm, AddForm, AdminView):
     @handler(IAddFormButtons['add'])
     def handle_add(self, action):
         """Default add form button handler"""
-        super(AdminAddForm, self).handle_add(self, action)  # pylint: disable=too-many-function-args
+        super().handle_add(self, action)  # pylint: disable=too-many-function-args
 
 
 @implementer(IModalPage)
@@ -75,7 +75,7 @@ class AdminModalAddForm(AdminAddForm):
 
     @handler(IModalAddFormButtons['add'])
     def handle_add(self, action):
-        super(AdminModalAddForm, self).handle_add(self, action)  # pylint: disable=too-many-function-args
+        super().handle_add(self, action)  # pylint: disable=too-many-function-args
 
 
 @implementer(IInnerPage)
@@ -102,7 +102,7 @@ class AdminEditForm(ObjectDataManagerMixin, GroupForm, EditForm, AdminView):
 
     @handler(IEditFormButtons['apply'])
     def handle_apply(self, action):
-        super(AdminEditForm, self).handle_apply(self, action)  # pylint: disable=too-many-function-args
+        super().handle_apply(self, action)  # pylint: disable=too-many-function-args
 
 
 @implementer(IModalPage)
@@ -120,7 +120,7 @@ class AdminModalEditForm(AdminEditForm):
 
     @handler(IModalEditFormButtons['apply'])
     def handle_apply(self, action):
-        super(AdminModalEditForm, self).handle_apply(self, action)  # pylint: disable=too-many-function-args
+        super().handle_apply(self, action)  # pylint: disable=too-many-function-args
 
 
 @implementer(IInnerPage)
@@ -192,7 +192,7 @@ class FormGroupSwitcher(ObjectDataManagerMixin, Group):
                 name = field.getName()
                 value = getattr(field.interface(context), name, None)
             if value and (value != field.default):
-                if II18nField.providedBy(field):
+                if II18nField.providedBy(field):  # pylint: disable=no-value-for-parameter
                     for i18n_value in value.values():
                         if i18n_value:
                             return 'open'
@@ -216,7 +216,7 @@ class FormGroupChecker(ObjectDataManagerMixin, Group):
     checker_mode = FieldProperty(IFormGroupChecker['checker_mode'])
 
     def __init__(self, context, request, parent_form):
-        super(FormGroupChecker, self).__init__(context, request, parent_form)
+        super().__init__(context, request, parent_form)
         name, field = next(iter(self.fields.items()))
         self.checker_fieldname = name
         self.legend = field.field.title

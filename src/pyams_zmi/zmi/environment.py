@@ -25,7 +25,6 @@ from pyams_security.interfaces.base import MANAGE_SYSTEM_PERMISSION
 from pyams_site.interfaces import ISiteRoot
 from pyams_table.interfaces import IColumn, IValues
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
-from pyams_utils.text import text_to_html
 from pyams_viewlet.viewlet import ViewContentProvider, viewlet_config
 from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.table import IInnerTable

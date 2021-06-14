@@ -69,12 +69,12 @@ class ContentHeaderViewlet(Viewlet):
     def render(self):
         if IModalPage.providedBy(self.view):
             return self.modal_template()
-        return super(ContentHeaderViewlet, self).render()
+        return super().render()
 
 
 @adapter_config(required=(Interface, IAdminLayer, IAdminView),
                 provides=IPageTitle)
-def admin_view_title_adapter(context, request, view):
+def admin_view_title_adapter(context, request, view):  # pylint: disable=unused-argument
     """Admin view default title adapter"""
     configuration = IZMIConfiguration(request.root)
     return configuration.site_name

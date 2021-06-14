@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2021-05-31 10:38+0200\n"
+"POT-Creation-Date: 2021-06-14 21:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,11 +28,11 @@ msgstr ""
 msgid "Search criteria"
 msgstr ""
 
-#: ./src/pyams_zmi/table.py:247 ./src/pyams_zmi/zmi/registry.py:92
+#: ./src/pyams_zmi/table.py:275 ./src/pyams_zmi/zmi/registry.py:92
 msgid "Name"
 msgstr ""
 
-#: ./src/pyams_zmi/table.py:399
+#: ./src/pyams_zmi/table.py:427
 msgid "Delete element"
 msgstr ""
 
@@ -236,6 +236,7 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
+#: ./src/pyams_zmi/interfaces/templates/table-multiple.pt:9
 #: ./src/pyams_zmi/interfaces/templates/table.pt:9
 #: ./src/pyams_zmi/interfaces/templates/table-empty.pt:8
 #: ./src/pyams_zmi/interfaces/templates/form.pt:10
@@ -244,7 +245,7 @@ msgid "Back to previous page"
 msgstr ""
 
 #: ./src/pyams_zmi/interfaces/templates/table.pt:19
-#: ./src/pyams_zmi/interfaces/templates/inner-table.pt:13
+#: ./src/pyams_zmi/interfaces/templates/inner-table.pt:14
 msgid "WARNING: only the first ${length} results are displayed in this table!"
 msgstr ""
 
@@ -273,6 +274,51 @@ msgstr ""
 
 #: ./src/pyams_zmi/helper/container.py:150
 msgid "Element was updated successfully."
+msgstr ""
+
+#: ./src/pyams_zmi/zmi/environment.py:49
+msgid "Environment"
+msgstr ""
+
+#: ./src/pyams_zmi/zmi/environment.py:59
+msgid "Application runtime environment"
+msgstr ""
+
+#: ./src/pyams_zmi/zmi/environment.py:96
+msgid "Package name"
+msgstr ""
+
+#: ./src/pyams_zmi/zmi/environment.py:111
+msgid "Version"
+msgstr ""
+
+#: ./src/pyams_zmi/zmi/environment.py:126
+msgid "Path"
+msgstr ""
+
+#: ./src/pyams_zmi/zmi/environment.py:142
+msgid "Packages versions"
+msgstr ""
+
+#: ./src/pyams_zmi/zmi/environment.py:182
+msgid "Variable name"
+msgstr ""
+
+#: ./src/pyams_zmi/zmi/environment.py:196
+#: ./src/pyams_zmi/zmi/environment.py:266
+msgid "Value"
+msgstr ""
+
+#: ./src/pyams_zmi/zmi/environment.py:212
+msgid "Environment variables"
+msgstr ""
+
+#: ./src/pyams_zmi/zmi/environment.py:252
+msgid "Setting name"
+msgstr ""
+
+#: ./src/pyams_zmi/zmi/environment.py:282
+msgid "Configuration settings"
 msgstr ""
 
 #: ./src/pyams_zmi/zmi/configuration.py:50

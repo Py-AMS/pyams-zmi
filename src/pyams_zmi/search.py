@@ -56,14 +56,14 @@ class SearchView(InnerAdminView):
     search_form = SearchForm
 
     def __init__(self, context, request):
-        super(SearchView, self).__init__(context, request)
+        super().__init__(context, request)
         factory = get_object_factory(self.search_form) if is_interface(self.search_form) \
             else self.search_form
         self.search_form = factory(context, request)
 
     def update(self):
         """Search view update"""
-        super(SearchView, self).update()  # pylint: disable=no-member
+        super().update()  # pylint: disable=no-member
         self.search_form.update()
 
 

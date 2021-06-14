@@ -101,7 +101,7 @@ def get_data_attributes(element):
     data = IObjectData(element, None)
     if data is not None:
         return ' '.join(("data-{}='{}'".format(k, v if isinstance(v, str) else json.dumps(v))
-                         for k, v in data.object_data.items()))
+                         for k, v in data.object_data.items()))  # pylint: disable=no-member
     return ''
 
 
@@ -166,22 +166,22 @@ class Table(ObjectDataManagerMixin, BaseTable):
         return klass
 
     def render_table(self):
-        return super(Table, self).render_table() \
+        return super().render_table() \
             .replace('<table', '<table {}'.format(get_attributes(self, 'table', self))) \
             .replace('<table', '<table {}'.format(get_data_attributes(self)))
 
     def render_row(self, row, css_class=None):
         css_class = self.get_selected_row_class(row[0], css_class)
-        return super(Table, self).render_row(row, css_class) \
+        return super().render_row(row, css_class) \
             .replace('<tr', '<tr {}'.format(get_attributes(self, 'tr', row[0][0])))
 
     def render_head_cell(self, column):
-        return super(Table, self).render_head_cell(column) \
+        return super().render_head_cell(column) \
             .replace('<th', '<th {}'.format(get_attributes(self, 'th', column))) \
             .replace('<th', '<th {}'.format(get_data_attributes(column)))
 
     def render_cell(self, item, column, colspan=0):
-        return super(Table, self).render_cell(item, column, colspan) \
+        return super().render_cell(item, column, colspan) \
             .replace('<td', '<td {}'.format(get_attributes(self, 'td', item, column)))
 
 
@@ -230,9 +230,6 @@ class MultipleTablesMixin:
 
     table_label = FieldProperty(ITableAdminView['table_label'])
 
-    def __init__(self, context, request, *args, **kwargs):
-        super().__init__(context, request, *args, **kwargs)
-
     @reify
     def tables(self):
         """Tables getter"""
@@ -246,7 +243,8 @@ class MultipleTablesMixin:
     def update(self):
         """View update"""
         super().update()
-        [table.update() for table in self.tables]
+        for table in self.tables:
+            table.update()
 
 
 @implementer(IMultipleTableView)
@@ -448,7 +446,7 @@ class DateColumn(GetAttrColumn):
 
     def get_value(self, obj):
         """Date column value getter"""
-        value = super(DateColumn, self).get_value(obj)
+        value = super().get_value(obj)
         if not value:
             return '--'
         return format_datetime(value, self.formatter, self.request)
