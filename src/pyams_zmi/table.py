@@ -18,16 +18,15 @@ This module provides bases classes for tables management.
 import json
 
 from pyramid.decorator import reify
-from zope.component import queryAdapter, queryMultiAdapter
+from zope.component import queryMultiAdapter
 from zope.interface import implementer
-from zope.location import ILocation
 from zope.schema.fieldproperty import FieldProperty
 
 from pyams_security.security import ProtectedViewObjectMixin
 from pyams_table.column import Column, GetAttrColumn
 from pyams_table.table import Table as BaseTable, get_weight
 from pyams_template.template import get_view_template
-from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
+from pyams_utils.adapter import ContextRequestViewAdapter
 from pyams_utils.data import ObjectDataManagerMixin
 from pyams_utils.date import SH_DATE_FORMAT, format_datetime
 from pyams_utils.factory import get_object_factory, is_interface
@@ -36,8 +35,8 @@ from pyams_utils.interfaces.data import IObjectData
 from pyams_utils.list import boolean_iter
 from pyams_utils.url import absolute_url
 from pyams_zmi.interfaces.table import IInnerTable, IMultipleTableView, ITableAdminView, \
-    ITableElementEditor, \
-    ITableElementName
+    ITableElementEditor
+from pyams_zmi.utils import get_object_label
 from pyams_zmi.view import InnerAdminView
 
 
@@ -103,6 +102,22 @@ def get_data_attributes(element):
         return ' '.join(("data-{}='{}'".format(k, v if isinstance(v, str) else json.dumps(v))
                          for k, v in data.object_data.items()))  # pylint: disable=no-member
     return ''
+
+
+def get_ordered_data_attributes(source, container, request, target='reorder.json'):
+    """Get object data attributes for ordered table"""
+    source.setdefault('table', {}).update({
+        'data-searching': 'false',
+        'data-info': 'false',
+        'data-paging': 'false',
+        'data-ordering': 'false',
+        'data-row-reorder': '{"update": false}',
+        'data-ams-location': absolute_url(container, request),
+        'data-ams-reorder-url': target
+    })
+    source.setdefault('tr', {}).update({
+        'data-ams-row-value': lambda row, col: get_row_name(row)
+    })
 
 
 class Table(ObjectDataManagerMixin, BaseTable):
@@ -263,10 +278,18 @@ class I18nColumnMixin:
         return self.request.localizer.translate(self.i18n_header)
 
 
-@adapter_config(required=ILocation, provides=ITableElementName)
-def location_element_name(context):
-    """Basic location name factory"""
-    return context.__name__
+class ReorderColumn(Column):
+    """Reorder column"""
+
+    weight = 0
+
+    css_classes = {
+        'th': 'reorder action',
+        'td': 'action'
+    }
+
+    def render_cell(self, item):
+        return '<i class="fas fa-arrows-alt-v"></i>'
 
 
 class NameColumn(I18nColumnMixin, GetAttrColumn):
