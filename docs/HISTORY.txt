@@ -1,6 +1,19 @@
 Changelog
 =========
 
+1.7.0
+-----
+ - added runtime environment view to display Python packages versions, environment
+   variables and configuration settings
+ - added skin management form
+ - added top menus groups viewlet manager
+ - added home name to ZMI configuration
+ - added base class to handle multi-tables views
+ - added generic IObjectLabel interface to get label of any object
+ - added reordering tables column and data attributes getter
+ - updated JSON widget refresh callback
+ - updated forms and tables templates
+
 1.6.0
 -----
  - use ProtectedViewObjectMixin as base class for table action column, to be able to

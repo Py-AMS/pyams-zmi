@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2021-06-14 21:40+0200\n"
+"POT-Creation-Date: 2021-07-03 13:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,152 +61,160 @@ msgid "Site name"
 msgstr ""
 
 #: ./src/pyams_zmi/interfaces/configuration.py:54
-msgid "Application name"
+msgid "Home name"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/configuration.py:58
-msgid "Application package"
+#: ./src/pyams_zmi/interfaces/configuration.py:55
+msgid "Label used to get access to site's root in breadcrumbs link"
 msgstr ""
 
 #: ./src/pyams_zmi/interfaces/configuration.py:59
-msgid "Name of the main package used to get application version"
+msgid "Application name"
+msgstr ""
+
+#: ./src/pyams_zmi/interfaces/configuration.py:63
+msgid "Application package"
 msgstr ""
 
 #: ./src/pyams_zmi/interfaces/configuration.py:64
+msgid "Name of the main package used to get application version"
+msgstr ""
+
+#: ./src/pyams_zmi/interfaces/configuration.py:69
 msgid "Secondary name"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/configuration.py:67
+#: ./src/pyams_zmi/interfaces/configuration.py:72
 msgid "Secondary package"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/configuration.py:68
+#: ./src/pyams_zmi/interfaces/configuration.py:73
 msgid "Name of the secondary package used to complete application version"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/configuration.py:72
+#: ./src/pyams_zmi/interfaces/configuration.py:77
 msgid "Environment name"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/configuration.py:73
+#: ./src/pyams_zmi/interfaces/configuration.py:78
 msgid "Short text used to describe runtime environment"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/configuration.py:78
+#: ./src/pyams_zmi/interfaces/configuration.py:83
 msgid "MyAMS bundle"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/configuration.py:79
+#: ./src/pyams_zmi/interfaces/configuration.py:84
 msgid "MyAMS bundle used by the application"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/configuration.py:83
+#: ./src/pyams_zmi/interfaces/configuration.py:88
 msgid "Icon"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/configuration.py:84
+#: ./src/pyams_zmi/interfaces/configuration.py:89
 msgid "Favorites icon"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/configuration.py:87
+#: ./src/pyams_zmi/interfaces/configuration.py:92
 msgid "Include header"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/configuration.py:91
+#: ./src/pyams_zmi/interfaces/configuration.py:96
 msgid "Fixed header"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/configuration.py:92
+#: ./src/pyams_zmi/interfaces/configuration.py:97
 msgid ""
 "If selected, the header will not scroll but will stay fixed at the top of the"
 " screen"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/configuration.py:97
+#: ./src/pyams_zmi/interfaces/configuration.py:102
 msgid "Logo image"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/configuration.py:98
+#: ./src/pyams_zmi/interfaces/configuration.py:103
 msgid "SVG or bitmap image used as logo"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/configuration.py:101
+#: ./src/pyams_zmi/interfaces/configuration.py:106
 msgid "Include site search"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/configuration.py:102
+#: ./src/pyams_zmi/interfaces/configuration.py:107
 msgid "Include a global site search access link in page header"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/configuration.py:107
+#: ./src/pyams_zmi/interfaces/configuration.py:112
 msgid "Site search placeholder"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/configuration.py:110
+#: ./src/pyams_zmi/interfaces/configuration.py:115
 msgid "Site search handler"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/configuration.py:114
+#: ./src/pyams_zmi/interfaces/configuration.py:119
 msgid "Include navigation menus"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/configuration.py:118
+#: ./src/pyams_zmi/interfaces/configuration.py:123
 msgid "Include minify buttons"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/configuration.py:119
+#: ./src/pyams_zmi/interfaces/configuration.py:124
 msgid ""
 "If selected, this will provide features to reduce or hide navigation menus"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/configuration.py:124
+#: ./src/pyams_zmi/interfaces/configuration.py:129
 msgid "Fixed menus"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/configuration.py:128
+#: ./src/pyams_zmi/interfaces/configuration.py:133
 msgid "Accordion menus"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/configuration.py:129
+#: ./src/pyams_zmi/interfaces/configuration.py:134
 msgid "If selected, only one navigation menu can be opened at a given time"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/configuration.py:134
+#: ./src/pyams_zmi/interfaces/configuration.py:139
 msgid "Include ribbon"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/configuration.py:135
+#: ./src/pyams_zmi/interfaces/configuration.py:140
 msgid "Display breadcrumbs ribbon?"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/configuration.py:139
+#: ./src/pyams_zmi/interfaces/configuration.py:144
 msgid "Fixed ribon"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/configuration.py:140
+#: ./src/pyams_zmi/interfaces/configuration.py:145
 msgid ""
 "If selected, the ribbon will not scroll but will stay fixed at the top of the"
 " page"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/configuration.py:145
+#: ./src/pyams_zmi/interfaces/configuration.py:150
 msgid "Base body CSS class"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/configuration.py:150
+#: ./src/pyams_zmi/interfaces/configuration.py:155
 msgid "Custom stylesheet"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/configuration.py:151
+#: ./src/pyams_zmi/interfaces/configuration.py:156
 msgid ""
 "Custom stylesheet used to override or extend default MyAMS management skin"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/configuration.py:155
+#: ./src/pyams_zmi/interfaces/configuration.py:160
 msgid "Custom script"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/configuration.py:156
+#: ./src/pyams_zmi/interfaces/configuration.py:161
 msgid "Custom javascript used to override or extend default MyAMS modules"
 msgstr ""
 
@@ -319,6 +327,14 @@ msgstr ""
 
 #: ./src/pyams_zmi/zmi/environment.py:282
 msgid "Configuration settings"
+msgstr ""
+
+#: ./src/pyams_zmi/zmi/skin.py:44 ./src/pyams_zmi/zmi/skin.py:58
+msgid "Graphic theme"
+msgstr ""
+
+#: ./src/pyams_zmi/zmi/skin.py:93
+msgid "Skin properties"
 msgstr ""
 
 #: ./src/pyams_zmi/zmi/configuration.py:50
