@@ -1,6 +1,6 @@
 <section class="rounded-lg"
 		 data-ams-modules="modal plugins">
-	<h2>
+	<h2 class="d-flex flex-wrap pl-3">
 		<a tal:define="back_url view.back_url | nothing"
 		   tal:condition="back_url"
 		   class="mr-1"
@@ -9,7 +9,7 @@
 			   data-original-title="Back to previous page"
 			   i18n:attributes="data-original-title"></i>
 		</a>
-		<i tal:omit-tag="" i18n:translate="">${view.table_label}</i>
+		<span class="flex-grow-1" i18n:translate="">${view.table_label}</span>
 	</h2>
 	<i tal:omit-tag="">${structure:provider:pyams.help}</i>
 	<div class="ams-form" tal:repeat="table view.tables">

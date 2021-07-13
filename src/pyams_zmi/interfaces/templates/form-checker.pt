@@ -1,5 +1,5 @@
 <i tal:omit-tag="">${structure:provider:pyams.header}</i>
-<fieldset class="border my-2"
+<fieldset class="border"
 		  data-ams-modules="plugins">
 	<legend class="checker"
 			data-ams-checker-mode="${view.checker_mode}"

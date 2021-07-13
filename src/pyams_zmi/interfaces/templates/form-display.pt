@@ -1,7 +1,7 @@
 <section class="rounded-lg"
 		 data-ams-modules="form plugins"
 		 i18n:domain="pyams_zmi">
-	<h2 class="bg-secondary-modal d-flex flex-wrap pl-3 py-2">
+	<h2 class="bg-secondary-modal d-flex flex-wrap pl-3">
 		<a tal:define="back_url view.back_url | nothing"
 		   tal:condition="back_url"
 		   class="mr-1"
