@@ -50,6 +50,17 @@ class TopMenuViewletManager(TemplateBasedViewletManager, WeightOrderedViewletMan
     """Displayed menu selection"""
 
 
+@template_config(template='templates/top-menus-group.pt')
+class TopMenusGroupViewletManager(TemplateBasedViewletManager, WeightOrderedViewletManager):
+    """Top menus group viewlet manager"""
+
+    min_display_size = ''
+    """Minimum media display size; can be 'sm', 'md'..."""
+
+    label = 'Group label'
+    """Menus group label"""
+
+
 @template_config(template='templates/top-menu-item.pt')
 class TopMenuItem(ObjectDataManagerMixin, Viewlet):
     """Top menu item"""
