@@ -51,6 +51,11 @@ class IZMIConfiguration(Interface):
                          default='PyAMS website',
                          required=False)
 
+    home_name = I18nTextLineField(title=_("Home name"),
+                                  description=_("Label used to get access to site's root in "
+                                                "breadcrumbs link"),
+                                  required=False)
+
     application_name = TextLine(title=_("Application name"),
                                 default='PyAMS',
                                 required=False)
