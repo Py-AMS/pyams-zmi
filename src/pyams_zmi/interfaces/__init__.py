@@ -48,3 +48,7 @@ class ICompositeView(IViewletManager):
 
 class IPageTitle(Interface):
     """Simple page title interface"""
+
+
+class IObjectLabel(Interface):
+    """Object label interface"""
