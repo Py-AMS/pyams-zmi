@@ -1,6 +1,6 @@
 <tal:var define="zmi tales:zmi.configuration"
 		 i18n:domain="pyams_zmi">
-	<nav data-ams-menu-accordion="'true' if zmi.accordion_menus else None">
+	<nav data-ams-menu-accordion="${'true' if zmi.accordion_menus else None}">
 		<ul>
 			<tal:loop repeat="viewlet view.viewlets">
 				${structure:viewlet.render()}
