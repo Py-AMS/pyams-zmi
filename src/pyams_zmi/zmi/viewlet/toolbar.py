@@ -30,6 +30,8 @@ from pyams_zmi.interfaces.viewlet import IActionsViewletManager, IContextAddings
 
 __docformat__ = 'restructuredtext'
 
+from pyams_zmi import _
+
 
 @viewletmanager_config(name='pyams.toolbar', layer=IAdminLayer, view=Interface,
                        provides=IToolbarViewletManager)
@@ -63,3 +65,6 @@ class AddingsViewletManager(DropdownMenu):
                        provides=IActionsViewletManager)
 class ActionsViewletManager(DropdownMenu):
     """Custom actions menu"""
+
+    label = _("Actions")
+    css_class = 'btn-sm'
