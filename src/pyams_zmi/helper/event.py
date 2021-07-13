@@ -20,7 +20,9 @@ from datetime import datetime
 
 from zope.component import getMultiAdapter
 from zope.dublincore.interfaces import IZopeDublinCore
+from zope.interface import alsoProvides
 
+from pyams_form.interfaces.form import IContextAware
 from pyams_form.interfaces.widget import IFieldWidget
 from pyams_form.util import expand_prefix
 from pyams_utils.url import absolute_url
@@ -47,12 +49,14 @@ def get_json_image_refresh_callback(image, image_id, request):
     }
 
 
-def get_json_widget_refresh_callback(form, field_name, request):
+def get_json_widget_refresh_callback(form, field_name, request=None):
     """Get widget refresh callback settings"""
     field = form.fields[field_name]
     factory = field.widget_factory.get(form.mode)
+    if request is None:
+        request = form.request
     if factory is not None:
-        widget = factory(field, request)
+        widget = factory(field.field, request)
     else:
         widget = getMultiAdapter((field.field, request), IFieldWidget)
     widget.name = expand_prefix(form.prefix) + expand_prefix(form.widgets.prefix) + field.__name__
@@ -61,6 +65,8 @@ def get_json_widget_refresh_callback(form, field_name, request):
     widget.context = form.get_content()
     widget.mode = form.mode
     widget.ignore_request = True
+    widget.ignore_context = False
+    alsoProvides(widget, IContextAware)
     widget.update()
     return {
         'module': 'helpers',
