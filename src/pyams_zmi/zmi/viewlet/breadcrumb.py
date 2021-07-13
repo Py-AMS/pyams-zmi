@@ -20,6 +20,7 @@ __docformat__ = 'restructuredtext'
 from zope.interface import Interface
 from zope.location import ILocation
 
+from pyams_i18n.interfaces import II18n
 from pyams_site.interfaces import ISiteRoot
 from pyams_skin.interfaces.viewlet import IBreadcrumbItem
 from pyams_skin.viewlet.breadcrumb import BreadcrumbItem
@@ -45,6 +46,7 @@ class SiteRootBreadcrumbItem(AdminLayerBreadcrumbItem):
     def label(self):
         """Label getter"""
         configuration = IZMIConfiguration(self.request.root)
-        return configuration.site_name
+        return II18n(configuration).query_attribute('home_name', request=self.request) or \
+            configuration.site_name
 
-    css_class = 'breadcrumb-item persistent strong'
+    css_class = 'breadcrumb-item persistent'
