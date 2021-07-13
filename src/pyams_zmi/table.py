@@ -276,11 +276,7 @@ class NameColumn(I18nColumnMixin, GetAttrColumn):
     weight = 10
 
     def get_value(self, obj):
-        adapter = queryMultiAdapter((obj, self.request, self.table),
-                                    ITableElementName)
-        if adapter is None:
-            adapter = queryAdapter(obj, ITableElementName)
-        return adapter
+        return get_object_label(obj, self.request, self.table)
 
 
 class IconColumn(Column):
