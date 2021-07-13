@@ -50,10 +50,6 @@ class IMultipleTableView(IInnerAdminView):
     """Multiple table view"""
 
 
-class ITableElementName(Interface):
-    """Table element name interface"""
-
-
 class ITableWithActions(Interface):
     """Marker interface for table with inner actions menu"""
 
