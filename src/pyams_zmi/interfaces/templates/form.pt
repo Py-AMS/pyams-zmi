@@ -10,7 +10,12 @@
 			   data-original-title="Back to previous page"
 			   i18n:attributes="data-original-title"></i>
 		</a>
-		<span class="flex-grow-1" i18n:translate="">${view.title}</span>
+		<tal:var define="title view.title">
+			<span tal:condition="title.startswith('<')"
+				  class="flex-grow-1">${structure:title}</span>
+			<span tal:condition="not:title.startswith('<')"
+				  class="flex-grow-1" i18n:translate="">${title}</span>
+		</tal:var>
 		<i tal:omit-tag="">${structure:provider:pyams.toolbar}</i>
 	</h2>
 	<form class="ams-form ${view.css_class | ''}"
