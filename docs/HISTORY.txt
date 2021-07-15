@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.7.1
+-----
+ - updated form title rendering template to handle pre-formatted HTML code
+
 1.7.0
 -----
  - added runtime environment view to display Python packages versions, environment
