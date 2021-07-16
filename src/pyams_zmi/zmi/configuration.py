@@ -15,11 +15,14 @@
 This module provides views and content providers used to handle ZMI configuration.
 """
 
+from zope.interface import Interface
+
 from pyams_form.ajax import ajax_form_config
 from pyams_form.browser.checkbox import SingleCheckBoxFieldWidget
 from pyams_form.field import Fields
 from pyams_form.group import Group
 from pyams_form.interfaces.form import IAJAXFormRenderer, IGroup
+from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_security.interfaces.base import MANAGE_SYSTEM_PERMISSION
 from pyams_site.interfaces import ISiteRoot
@@ -29,7 +32,7 @@ from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
 from pyams_viewlet.manager import viewletmanager_config
 from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.form import AdminEditForm, FormGroupChecker
-from pyams_zmi.interfaces import IAdminLayer
+from pyams_zmi.interfaces import IAdminLayer, IObjectLabel
 from pyams_zmi.interfaces.configuration import IZMIConfiguration
 from pyams_zmi.zmi.interfaces import IConfigurationMenu
 from pyams_zmi.interfaces.viewlet import IControlPanelMenu
@@ -39,6 +42,17 @@ from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
 __docformat__ = 'restructuredtext'
 
 from pyams_zmi import _
+
+
+@adapter_config(required=(ISiteRoot, IAdminLayer, Interface),
+                provides=IObjectLabel)
+def site_root_label(context, request, view):
+    """Site root label getter"""
+    configuration = IZMIConfiguration(context)
+    i18n = II18n(configuration)
+    return i18n.query_attribute('home_name', request=request) or \
+        i18n.query_attribute('site_name', request=request) or \
+        request.localizer.translate(_("Home"))
 
 
 @viewletmanager_config(name='configuration.menu', context=ISiteRoot, layer=IAdminLayer,
