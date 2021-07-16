@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.7.2
+-----
+ - added title check in form header rendering
+ - added site root label adapter
+
 1.7.1
 -----
  - updated form title rendering template to handle pre-formatted HTML code
