@@ -1,7 +1,9 @@
 <section class="rounded-lg"
 		 data-ams-modules="form plugins"
 		 i18n:domain="pyams_zmi">
-	<h2 class="bg-secondary-modal d-flex flex-wrap pl-3">
+	<h2 class="bg-secondary-modal d-flex flex-wrap pl-3 py-2-modal"
+		tal:define="title view.title"
+		tal:condition="title">
 		<a tal:define="back_url view.back_url | nothing"
 		   tal:condition="back_url"
 		   class="mr-1"
@@ -10,7 +12,10 @@
 			   data-original-title="Back to previous page"
 			   i18n:attributes="data-original-title"></i>
 		</a>
-		<span class="flex-grow-1" i18n:translate="">${view.title}</span>
+		<span tal:condition="title.startswith('<')"
+			  class="flex-grow-1">${structure:title}</span>
+		<span tal:condition="not:title.startswith('<')"
+			  class="flex-grow-1" i18n:translate="">${title}</span>
 		<i tal:omit-tag="">${structure:provider:pyams.toolbar}</i>
 	</h2>
 	<div class="ams-form ${view.css_class | ''}"

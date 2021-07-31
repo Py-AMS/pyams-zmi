@@ -33,7 +33,7 @@
 							  suffix provider:pyams.suffix;
 							  has_widgets tuple(filter(lambda x: x.mode != 'hidden', view.widgets.values()));
 							  has_border has_widgets or getattr(view, 'has_border', False);"
-				  tal:omit-tag="not:prefix or has_widgets or suffix"
+				  tal:omit-tag="not:prefix or has_widgets or has_border or suffix"
 				  class="${'border' if has_border else None}">
 			<legend tal:condition="view.legend and (help or prefix or has_widgets or suffix)"
 					i18n:translate="">${view.legend}</legend>
