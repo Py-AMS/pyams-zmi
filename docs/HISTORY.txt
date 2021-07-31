@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.7.3
+-----
+ - added label adapters for generic utilities
+ - updated forms templates
+
 1.7.2
 -----
  - added title check in form header rendering
