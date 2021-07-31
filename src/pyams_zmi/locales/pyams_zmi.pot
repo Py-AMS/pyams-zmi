@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2021-07-03 13:31+0200\n"
+"POT-Creation-Date: 2021-07-23 00:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,11 +28,11 @@ msgstr ""
 msgid "Search criteria"
 msgstr ""
 
-#: ./src/pyams_zmi/table.py:275 ./src/pyams_zmi/zmi/registry.py:92
+#: ./src/pyams_zmi/table.py:298 ./src/pyams_zmi/zmi/registry.py:92
 msgid "Name"
 msgstr ""
 
-#: ./src/pyams_zmi/table.py:427
+#: ./src/pyams_zmi/table.py:446
 msgid "Delete element"
 msgstr ""
 
@@ -247,8 +247,8 @@ msgstr ""
 #: ./src/pyams_zmi/interfaces/templates/table-multiple.pt:9
 #: ./src/pyams_zmi/interfaces/templates/table.pt:9
 #: ./src/pyams_zmi/interfaces/templates/table-empty.pt:8
-#: ./src/pyams_zmi/interfaces/templates/form.pt:10
-#: ./src/pyams_zmi/interfaces/templates/form-display.pt:10
+#: ./src/pyams_zmi/interfaces/templates/form.pt:12
+#: ./src/pyams_zmi/interfaces/templates/form-display.pt:12
 msgid "Back to previous page"
 msgstr ""
 
@@ -329,55 +329,71 @@ msgstr ""
 msgid "Configuration settings"
 msgstr ""
 
-#: ./src/pyams_zmi/zmi/skin.py:44 ./src/pyams_zmi/zmi/skin.py:58
+#: ./src/pyams_zmi/zmi/skin.py:46 ./src/pyams_zmi/zmi/skin.py:60
 msgid "Graphic theme"
 msgstr ""
 
-#: ./src/pyams_zmi/zmi/skin.py:93
+#: ./src/pyams_zmi/zmi/skin.py:95
 msgid "Skin properties"
 msgstr ""
 
-#: ./src/pyams_zmi/zmi/configuration.py:50
+#: ./src/pyams_zmi/zmi/configuration.py:55
+msgid "Home"
+msgstr ""
+
+#: ./src/pyams_zmi/zmi/configuration.py:64
 msgid "Configuration"
 msgstr ""
 
-#: ./src/pyams_zmi/zmi/configuration.py:59
-#: ./src/pyams_zmi/zmi/configuration.py:69
+#: ./src/pyams_zmi/zmi/configuration.py:73
+#: ./src/pyams_zmi/zmi/configuration.py:83
 msgid "ZMI configuration"
 msgstr ""
 
-#: ./src/pyams_zmi/zmi/configuration.py:70
+#: ./src/pyams_zmi/zmi/configuration.py:84
 msgid "Interface configuration"
 msgstr ""
 
-#: ./src/pyams_zmi/zmi/configuration.py:145
+#: ./src/pyams_zmi/zmi/configuration.py:159
 msgid "Warning!"
 msgstr ""
 
-#: ./src/pyams_zmi/zmi/configuration.py:146
+#: ./src/pyams_zmi/zmi/configuration.py:160
 msgid "Removing navigation menus will also remove access to this form..."
 msgstr ""
 
-#: ./src/pyams_zmi/zmi/configuration.py:167
+#: ./src/pyams_zmi/zmi/configuration.py:181
 msgid "Custom extensions"
 msgstr ""
 
-#: ./src/pyams_zmi/zmi/controlpanel.py:46
+#: ./src/pyams_zmi/zmi/controlpanel.py:52
+msgid "Blobs references manager"
+msgstr ""
+
+#: ./src/pyams_zmi/zmi/controlpanel.py:59
+msgid "Internal IDs"
+msgstr ""
+
+#: ./src/pyams_zmi/zmi/controlpanel.py:66 ./src/pyams_zmi/zmi/timezone.py:47
+msgid "Server timezone"
+msgstr ""
+
+#: ./src/pyams_zmi/zmi/controlpanel.py:73
+msgid "Principals annotations"
+msgstr ""
+
+#: ./src/pyams_zmi/zmi/controlpanel.py:82
 msgid "Utilities"
 msgstr ""
 
-#: ./src/pyams_zmi/zmi/controlpanel.py:80
+#: ./src/pyams_zmi/zmi/controlpanel.py:116
 #: ./src/pyams_zmi/zmi/viewlet/menu.py:112
 msgid "Control panel"
 msgstr ""
 
-#: ./src/pyams_zmi/zmi/controlpanel.py:82 ./src/pyams_zmi/zmi/registry.py:137
-#: ./src/pyams_zmi/zmi/registry.py:191
+#: ./src/pyams_zmi/zmi/controlpanel.py:118 ./src/pyams_zmi/zmi/registry.py:137
+#: ./src/pyams_zmi/zmi/registry.py:192
 msgid "Site utilities"
-msgstr ""
-
-#: ./src/pyams_zmi/zmi/timezone.py:47
-msgid "Server timezone"
 msgstr ""
 
 #: ./src/pyams_zmi/zmi/timezone.py:48
@@ -399,14 +415,15 @@ msgstr ""
 #: ./src/pyams_zmi/zmi/registry.py:149
 msgid ""
 "The local registry is used to store 'local' utilities, whose configuration is stored into the ZODB. Some of these utilities have important settings which can define the whole application behaviour.\n"
+"\n"
 "Some of these components are created automatically, while other ones are created by sites managers, like SQLAlchemy or ZODB connections.\n"
 msgstr ""
 
-#: ./src/pyams_zmi/zmi/registry.py:167 ./src/pyams_zmi/zmi/registry.py:193
+#: ./src/pyams_zmi/zmi/registry.py:168 ./src/pyams_zmi/zmi/registry.py:194
 msgid "Global registry"
 msgstr ""
 
-#: ./src/pyams_zmi/zmi/registry.py:203
+#: ./src/pyams_zmi/zmi/registry.py:204
 msgid ""
 "The global registry is used to store utilities which are defined statically "
 "in Python code or using ZCML directives.\n"
@@ -414,6 +431,10 @@ msgstr ""
 
 #: ./src/pyams_zmi/zmi/viewlet/header.py:59
 msgid "PyAMS admin page"
+msgstr ""
+
+#: ./src/pyams_zmi/zmi/viewlet/toolbar.py:69
+msgid "Actions"
 msgstr ""
 
 #: ./src/pyams_zmi/zmi/viewlet/userlinks.py:87

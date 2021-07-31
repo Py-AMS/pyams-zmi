@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2021-07-03 13:31+0200\n"
+"POT-Creation-Date: 2021-07-23 00:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,11 +27,11 @@ msgstr "Rechercher"
 msgid "Search criteria"
 msgstr "Critères de recherche"
 
-#: src/pyams_zmi/table.py:275 src/pyams_zmi/zmi/registry.py:92
+#: src/pyams_zmi/table.py:298 src/pyams_zmi/zmi/registry.py:92
 msgid "Name"
 msgstr "Nom"
 
-#: src/pyams_zmi/table.py:427
+#: src/pyams_zmi/table.py:446
 msgid "Delete element"
 msgstr "Supprimer cet élément"
 
@@ -256,8 +256,8 @@ msgstr "Chercher"
 #: src/pyams_zmi/interfaces/templates/table-multiple.pt:9
 #: src/pyams_zmi/interfaces/templates/table.pt:9
 #: src/pyams_zmi/interfaces/templates/table-empty.pt:8
-#: src/pyams_zmi/interfaces/templates/form.pt:10
-#: src/pyams_zmi/interfaces/templates/form-display.pt:10
+#: src/pyams_zmi/interfaces/templates/form.pt:12
+#: src/pyams_zmi/interfaces/templates/form-display.pt:12
 msgid "Back to previous page"
 msgstr "Revenir à la page précédente"
 
@@ -337,56 +337,72 @@ msgstr "Nom du paramètre"
 msgid "Configuration settings"
 msgstr "Paramètres de configuration"
 
-#: src/pyams_zmi/zmi/skin.py:44 src/pyams_zmi/zmi/skin.py:58
+#: src/pyams_zmi/zmi/skin.py:46 src/pyams_zmi/zmi/skin.py:60
 msgid "Graphic theme"
 msgstr "Thème graphique"
 
-#: src/pyams_zmi/zmi/skin.py:93
+#: src/pyams_zmi/zmi/skin.py:95
 msgid "Skin properties"
 msgstr "Propriétés du thème graphique"
 
-#: src/pyams_zmi/zmi/configuration.py:50
+#: src/pyams_zmi/zmi/configuration.py:55
+msgid "Home"
+msgstr "Accueil"
+
+#: src/pyams_zmi/zmi/configuration.py:64
 msgid "Configuration"
 msgstr "Configuration"
 
-#: src/pyams_zmi/zmi/configuration.py:59 src/pyams_zmi/zmi/configuration.py:69
+#: src/pyams_zmi/zmi/configuration.py:73 src/pyams_zmi/zmi/configuration.py:83
 msgid "ZMI configuration"
 msgstr "Configuration ZMI"
 
-#: src/pyams_zmi/zmi/configuration.py:70
+#: src/pyams_zmi/zmi/configuration.py:84
 msgid "Interface configuration"
 msgstr "Interface d'administration"
 
-#: src/pyams_zmi/zmi/configuration.py:145
+#: src/pyams_zmi/zmi/configuration.py:159
 msgid "Warning!"
 msgstr "ATTENTION !"
 
-#: src/pyams_zmi/zmi/configuration.py:146
+#: src/pyams_zmi/zmi/configuration.py:160
 msgid "Removing navigation menus will also remove access to this form..."
 msgstr ""
 "En supprimant les menus de navigation, vous supprimerez également l'accès à "
 "ce formulaire !!"
 
-#: src/pyams_zmi/zmi/configuration.py:167
+#: src/pyams_zmi/zmi/configuration.py:181
 msgid "Custom extensions"
 msgstr "Personnalisation"
 
-#: src/pyams_zmi/zmi/controlpanel.py:46
+#: src/pyams_zmi/zmi/controlpanel.py:52
+msgid "Blobs references manager"
+msgstr "Gestionnaire de blobs"
+
+#: src/pyams_zmi/zmi/controlpanel.py:59
+msgid "Internal IDs"
+msgstr "Identifiants internes"
+
+#: src/pyams_zmi/zmi/controlpanel.py:66 src/pyams_zmi/zmi/timezone.py:47
+msgid "Server timezone"
+msgstr "Fuseau horaire"
+
+#: src/pyams_zmi/zmi/controlpanel.py:73
+msgid "Principals annotations"
+msgstr "Profils utilisateurs"
+
+#: src/pyams_zmi/zmi/controlpanel.py:82
 msgid "Utilities"
 msgstr "Utilitaires"
 
-#: src/pyams_zmi/zmi/controlpanel.py:80 src/pyams_zmi/zmi/viewlet/menu.py:112
+#: src/pyams_zmi/zmi/controlpanel.py:116 src/pyams_zmi/zmi/viewlet/menu.py:112
 msgid "Control panel"
 msgstr "Panneau de configuration"
 
-#: src/pyams_zmi/zmi/controlpanel.py:82 src/pyams_zmi/zmi/registry.py:137
-#: src/pyams_zmi/zmi/registry.py:191
+#: src/pyams_zmi/zmi/controlpanel.py:118 src/pyams_zmi/zmi/registry.py:137
+#: src/pyams_zmi/zmi/registry.py:192
 msgid "Site utilities"
 msgstr "Utilitaires"
-
-#: src/pyams_zmi/zmi/timezone.py:47
-msgid "Server timezone"
-msgstr "Fuseau horaire"
 
 #: src/pyams_zmi/zmi/timezone.py:48
 msgid "Properties"
@@ -409,23 +425,25 @@ msgid ""
 "The local registry is used to store 'local' utilities, whose configuration "
 "is stored into the ZODB. Some of these utilities have important settings "
 "which can define the whole application behaviour.\n"
+"\n"
 "Some of these components are created automatically, while other ones are "
 "created by sites managers, like SQLAlchemy or ZODB connections.\n"
 msgstr ""
 "Le registre local est utilisé pour enregistrer des utilitaires dont la "
-"définition et le paramétrage sont stockés dans la ZODB. Certain de ces "
+"définition et le paramétrage sont stockés dans la ZODB. Certains de ces "
 "utilitaires ont des paramètres importants qui déterminent le mode de "
 "fonctionnement de toute l'application.\n"
+"\n"
 "Certains de ces composants sont créés automatiquement (via la commande "
 "*pyams_upgrade*), tandis que d'autres tels que les connexions SQLAlchemy ou "
 "ZEO sont créés manuellement par les administrateurs en fonction des "
 "besoins.\n"
 
-#: src/pyams_zmi/zmi/registry.py:167 src/pyams_zmi/zmi/registry.py:193
+#: src/pyams_zmi/zmi/registry.py:168 src/pyams_zmi/zmi/registry.py:194
 msgid "Global registry"
 msgstr "Registre global"
 
-#: src/pyams_zmi/zmi/registry.py:203
+#: src/pyams_zmi/zmi/registry.py:204
 msgid ""
 "The global registry is used to store utilities which are defined statically "
 "in Python code or using ZCML directives.\n"
@@ -437,6 +455,10 @@ msgstr ""
 #: src/pyams_zmi/zmi/viewlet/header.py:59
 msgid "PyAMS admin page"
 msgstr "PyAMS"
+
+#: src/pyams_zmi/zmi/viewlet/toolbar.py:69
+msgid "Actions"
+msgstr "Actions"
 
 #: src/pyams_zmi/zmi/viewlet/userlinks.py:87
 msgid "Logout"

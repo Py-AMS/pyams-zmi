@@ -27,9 +27,10 @@ from pyams_table.interfaces import IColumn, IValues
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
 from pyams_utils.registry import get_local_registry, get_pyramid_registry
 from pyams_viewlet.viewlet import viewlet_config
-from pyams_zmi.interfaces import IAdminLayer
+from pyams_zmi.interfaces import IAdminLayer, IObjectLabel
 from pyams_zmi.interfaces.viewlet import IUtilitiesMenu
 from pyams_zmi.table import NameColumn, Table, TableAdminView
+from pyams_zmi.utils import get_object_label
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
 
 
@@ -58,7 +59,9 @@ class RegistryTableComponentColumn(NameColumn):
         """Component column value getter"""
         component = obj.component
         if component is not None:
-            name = getattr(component, '__name__', None)
+            name = get_object_label(component, request=self.request, view=self.table)
+            if not name:
+                name = getattr(component, '__name__', None)
             if not name:
                 name = str(component.__class__)
         else:
@@ -148,10 +151,11 @@ class LocalRegistryInfo(AlertMessage):
     css_class = 'mx-2'
     _message = _("""The local registry is used to store 'local' utilities, whose configuration \
 is stored into the ZODB. Some of these utilities have important settings which can define \
-the whole application behaviour.
+the whole application behaviour.\n
 Some of these components are created automatically, while other ones are created by sites \
 managers, like SQLAlchemy or ZODB connections.
 """)
+    message_renderer = 'markdown'
 
 
 #

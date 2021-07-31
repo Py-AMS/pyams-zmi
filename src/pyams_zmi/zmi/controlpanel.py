@@ -16,16 +16,20 @@ This module defines views and content providers which are used to get access to 
 site manager contents view.
 """
 
-from zope.interface import implementer
+from zope.interface import Interface, implementer
+from zope.intid import IIntIds
+from zope.principalannotation.interfaces import IPrincipalAnnotationUtility
 
+from pyams_file.interfaces import IBlobReferenceManager
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_pagelet.pagelet import pagelet_config
 from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
 from pyams_site.interfaces import ISiteRoot
 from pyams_table.interfaces import IColumn, IValues
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
+from pyams_utils.interfaces.timezone import IServerTimezone
 from pyams_viewlet.manager import viewletmanager_config
-from pyams_zmi.interfaces import IAdminLayer
+from pyams_zmi.interfaces import IAdminLayer, IObjectLabel
 from pyams_zmi.interfaces.table import ITableWithActions
 from pyams_zmi.interfaces.viewlet import IControlPanelMenu, IUtilitiesMenu
 from pyams_zmi.table import NameColumn, Table, TableAdminView
@@ -34,7 +38,39 @@ from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
 
 __docformat__ = 'restructuredtext'
 
-from pyams_zmi import _
+from pyams_zmi import _  # pylint: disable=ungrouped-import
+
+
+#
+# Generic utilities labels
+#
+
+@adapter_config(required=(IBlobReferenceManager, IAdminLayer, Interface),
+                provides=IObjectLabel)
+def blob_reference_manager_label(context, request, view):
+    """Blobs references manager label"""
+    return request.localizer.translate(_("Blobs references manager"))
+
+
+@adapter_config(required=(IIntIds, IAdminLayer, Interface),
+                provides=IObjectLabel)
+def intids_label(context, request, view):
+    """Internal IDs label"""
+    return request.localizer.translate(_("Internal IDs"))
+
+
+@adapter_config(required=(IServerTimezone, IAdminLayer, Interface),
+                provides=IObjectLabel)
+def timezone_label(context, request, view):
+    """Server timezone label getter"""
+    return request.localizer.translate(_("Server timezone"))
+
+
+@adapter_config(required=(IPrincipalAnnotationUtility, IAdminLayer, Interface),
+                provides=IObjectLabel)
+def principal_annotation_utility_label(context, request, view):
+    """Principal annotation utility label getter"""
+    return request.localizer.translate(_("Principals annotations"))
 
 
 @viewletmanager_config(name='utilities.menu', context=ISiteRoot, layer=IAdminLayer,
