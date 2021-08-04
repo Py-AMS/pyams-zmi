@@ -1,4 +1,4 @@
-<section class="rounded-lg"
+<section class="rounded-lg" i18n:domain="pyams_zmi"
 		 data-ams-modules="modal plugins">
 	<h2 class="d-flex flex-wrap pl-3">
 		<a tal:define="back_url view.back_url | nothing"
