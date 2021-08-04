@@ -71,7 +71,7 @@ def delete_container_element(request, container_factory=None, ignore_permission=
     # Check permission
     context = container[name]
     if not ignore_permission:
-        permission = get_edit_permission(request, context)
+        permission = get_edit_permission(request, context, action='delete')
         if permission is None:
             raise HTTPInternalServerError("Missing permission definition!")
         if not request.has_permission(permission, context=context):
