@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.7.4
+-----
+ - added support for custom "delete" permission checker in container helper
+ - added missing I18n domain in tables templates
+
 1.7.3
 -----
  - added label adapters for generic utilities
