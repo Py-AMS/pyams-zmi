@@ -22,7 +22,9 @@ from zope.schema.fieldproperty import FieldProperty
 from pyams_form.interfaces.form import IFormCreatedEvent
 from pyams_layer.skin import apply_skin
 from pyams_pagelet.interfaces import IPageletCreatedEvent
-from pyams_zmi.interfaces import IAdminView, IInnerAdminView, PYAMS_ADMIN_SKIN_NAME
+from pyams_viewlet.manager import get_weight
+from pyams_zmi.interfaces import IAdminView, ICompositeView, IInnerAdminView, \
+    PYAMS_ADMIN_SKIN_NAME
 
 
 __docformat__ = 'restructuredtext'
@@ -31,13 +33,6 @@ __docformat__ = 'restructuredtext'
 @implementer(IAdminView)
 class AdminView:
     """Base admin view"""
-
-
-@implementer(IInnerAdminView)
-class InnerAdminView(AdminView):
-    """Inner admin view"""
-
-    title = FieldProperty(IInnerAdminView['title'])
 
 
 @subscriber(IPageletCreatedEvent, context_selector=IAdminView)
@@ -50,3 +45,31 @@ def handle_admin_view(event):
 def handle_admin_form(event):
     """Automatically apply admin skin to admin forms"""
     apply_skin(event.object.request, PYAMS_ADMIN_SKIN_NAME)
+
+
+@implementer(IInnerAdminView)
+class InnerAdminView(AdminView):
+    """Inner admin view"""
+
+    title = FieldProperty(IInnerAdminView['title'])
+
+
+class CompositeAdminView(InnerAdminView):
+    """Composite admin view"""
+
+    @property
+    def views(self):
+        """Inner views getter"""
+        registry = self.request.registry
+        for name, view in sorted(registry.getAdapters((self.context, self.request, self),
+                                                      ICompositeView),
+                                 key=get_weight):
+            view.update()
+            yield view
+
+    def render(self):
+        """View renderer"""
+        return ''.join((
+            view.render()
+            for view in self.views
+        ))
