@@ -35,7 +35,7 @@ from pyams_utils.interfaces.data import IObjectData
 from pyams_utils.list import boolean_iter
 from pyams_utils.url import absolute_url
 from pyams_zmi.interfaces.table import IInnerTable, IMultipleTableView, ITableAdminView, \
-    ITableElementEditor
+    ITableElementEditor, ITableView
 from pyams_zmi.utils import get_object_label
 from pyams_zmi.view import InnerAdminView
 
@@ -225,6 +225,14 @@ class InnerTableMixin:
         if (not has_values) and not getattr(self.table, 'display_if_empty', False):
             return self.empty_template()
         return super().render()  # pylint: disable=no-member
+
+
+@implementer(ITableView)
+class TableView(InnerTableMixin):
+    """Table view
+
+    This class is a wrapper for a base view including a table.
+    """
 
 
 @implementer(ITableAdminView)
