@@ -1,6 +1,15 @@
 Changelog
 =========
 
+1.8.0
+-----
+ - added base ITableView marker interface
+ - added TableView and InnerAdminView base classes
+ - added CompositeAdminView base class, built from adapters to ICompositeView interface
+ - updated utilities view default table length
+ - updated view interface of actions viewlet to be able to display menu in inner views
+ - updated headers templates to be able to include HTML code in forms headers
+
 1.7.4
 -----
  - added support for custom "delete" permission checker in container helper
