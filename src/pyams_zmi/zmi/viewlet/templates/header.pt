@@ -1,1 +1,1 @@
-<h1 i18n:translate="">${view.title}</h1>
+<h1 i18n:translate="">${structure:view.title}</h1>
