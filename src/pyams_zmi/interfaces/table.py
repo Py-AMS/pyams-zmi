@@ -15,8 +15,6 @@
 This modules defines public interfaces of table views.
 """
 
-__docformat__ = 'restructuredtext'
-
 from zope.contentprovider.interfaces import IContentProvider
 from zope.interface import Attribute, Interface
 from zope.schema import Bool, TextLine
@@ -25,9 +23,16 @@ from pyams_template.template import template_config
 from pyams_zmi.interfaces import IInnerAdminView
 
 
+__docformat__ = 'restructuredtext'
+
+
 @template_config(template='templates/table.pt')
 @template_config(template='templates/table-empty.pt', name='empty')
-class ITableAdminView(IInnerAdminView):
+class ITableView(Interface):
+    """Table view interface"""
+
+
+class ITableAdminView(ITableView, IInnerAdminView):
     """Admin table view interface"""
 
     table_class = Attribute("Inner table class")
