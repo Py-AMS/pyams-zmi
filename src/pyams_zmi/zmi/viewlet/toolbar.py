@@ -60,7 +60,7 @@ class AddingsViewletManager(DropdownMenu):
     icon_class = 'fas fa-plus'
 
 
-@viewletmanager_config(name='pyams.actions', layer=IAdminLayer,
+@viewletmanager_config(name='pyams.actions', layer=IAdminLayer, view=Interface,
                        manager=IToolbarViewletManager, weight=999,
                        provides=IActionsViewletManager)
 class ActionsViewletManager(DropdownMenu):
