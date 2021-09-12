@@ -88,6 +88,12 @@ class UtilitiesMenuItem(NavigationMenuItem):
 class UtilitiesTable(Table):
     """Utilities table list"""
 
+    @property
+    def data_attributes(self):
+        attributes = super().data_attributes
+        attributes.setdefault('table', {}).setdefault('data-page-length', 25)
+        return attributes
+
 
 @adapter_config(required=(ISiteRoot, IAdminLayer, UtilitiesTable),
                 provides=IValues)
