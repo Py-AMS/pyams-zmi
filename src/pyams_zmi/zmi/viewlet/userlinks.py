@@ -15,7 +15,7 @@
 This module provides "pyams.userlinks" viewlet manager as well as other components which are
 used to add links on top of PyAMS management interface.
 """
-
+from pyams_security.interfaces import UNKNOWN_PRINCIPAL_ID
 from pyams_skin.viewlet.menu import MenuDivider, MenuItem
 from pyams_template.template import template_config
 from pyams_viewlet.manager import TemplateBasedViewletManager, WeightOrderedViewletManager, \
@@ -48,7 +48,7 @@ class UserMenuViewletManager(TemplateBasedViewletManager, WeightOrderedViewletMa
 
     def __new__(cls, context, request, view, manager=None):  # pylint: disable=unused-argument
         principal = request.principal
-        if principal.id == '__none__':
+        if principal.id == UNKNOWN_PRINCIPAL_ID:
             return None
         return WeightOrderedViewletManager.__new__(cls)
 
