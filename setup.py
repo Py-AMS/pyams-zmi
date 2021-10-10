@@ -23,7 +23,7 @@ DOCS = os.path.join(os.path.dirname(__file__),
 README = os.path.join(DOCS, 'README.txt')
 HISTORY = os.path.join(DOCS, 'HISTORY.txt')
 
-version = '1.8.0'
+version = '1.8.1'
 long_description = open(README).read() + '\n\n' + open(HISTORY).read()
 
 tests_require = [
@@ -69,7 +69,7 @@ setup(name='pyams_zmi',
           'pyams_i18n',
           'pyams_layer',
           'pyams_pagelet',
-          'pyams_security',
+          'pyams_security >= 1.8.1',
           'pyams_site',
           'pyams_skin',
           'pyams_table',
