@@ -22,7 +22,7 @@ from zope.component import getMultiAdapter
 from zope.dublincore.interfaces import IZopeDublinCore
 from zope.interface import alsoProvides
 
-from pyams_form.interfaces.form import IContextAware
+from pyams_form.interfaces.form import IContextAware, IFormAware
 from pyams_form.interfaces.widget import IFieldWidget
 from pyams_form.util import expand_prefix
 from pyams_utils.url import absolute_url
@@ -66,6 +66,7 @@ def get_json_widget_refresh_callback(form, field_name, request=None):
     widget.mode = form.mode
     widget.ignore_request = True
     widget.ignore_context = False
+    alsoProvides(widget, IFormAware)
     alsoProvides(widget, IContextAware)
     widget.update()
     return {
