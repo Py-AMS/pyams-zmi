@@ -98,9 +98,11 @@ def get_attributes(table, element, source, column=None):
 def get_data_attributes(element):
     """Get object data attributes"""
     data = IObjectData(element, None)
-    if data is not None:
-        return ' '.join(("data-{}='{}'".format(k, v if isinstance(v, str) else json.dumps(v))
-                         for k, v in data.object_data.items()))  # pylint: disable=no-member
+    if data and data.object_data:
+        return ' '.join((
+            "data-{}='{}'".format(k, v if isinstance(v, str) else json.dumps(v))
+            for k, v in data.object_data.items()
+        ))
     return ''
 
 
