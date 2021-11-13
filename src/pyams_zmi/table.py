@@ -176,30 +176,27 @@ class Table(ObjectDataManagerMixin, BaseTable):
         klass = self.css_classes.get('tr.selected')
         if callable(klass):
             klass = klass(*row)
-        if klass and css_class:
-            klass = '{} {}'.format(klass, css_class)
-        else:
-            klass = css_class or ''
-        return klass
+        return f"{css_class if css_class else ''} {klass if klass else ''}".strip()
 
     def render_table(self):
         return super().render_table() \
-            .replace('<table', '<table {}'.format(get_attributes(self, 'table', self))) \
-            .replace('<table', '<table {}'.format(get_data_attributes(self)))
+            .replace('<table', f"<table {get_attributes(self, 'table', self)}") \
+            .replace('<table', f"<table {get_data_attributes(self)}")
 
     def render_row(self, row, css_class=None):
         css_class = self.get_selected_row_class(row[0], css_class)
         return super().render_row(row, css_class) \
-            .replace('<tr', '<tr {}'.format(get_attributes(self, 'tr', row[0][0])))
+            .replace('<tr', f"<tr {get_attributes(self, 'tr', row[0][0])}")
 
     def render_head_cell(self, column):
         return super().render_head_cell(column) \
-            .replace('<th', '<th {}'.format(get_attributes(self, 'th', column))) \
-            .replace('<th', '<th {}'.format(get_data_attributes(column)))
+            .replace('<th', f"<th {get_attributes(self, 'th', column)}") \
+            .replace('<th', f"<th {get_data_attributes(column)}")
 
     def render_cell(self, item, column, colspan=0):
         return super().render_cell(item, column, colspan) \
-            .replace('<td', '<td {}'.format(get_attributes(self, 'td', item, column)))
+            .replace('<td', f"<td {self.get_css_class('td', None, item, column)}") \
+            .replace('<td', f"<td {get_attributes(self, 'td', item, column)}")
 
 
 class InnerTableMixin:
