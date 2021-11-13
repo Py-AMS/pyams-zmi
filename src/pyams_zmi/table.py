@@ -289,13 +289,24 @@ class ReorderColumn(Column):
     """Reorder column"""
 
     weight = 0
+    sortable = 'false'
 
     css_classes = {
         'th': 'reorder action',
-        'td': 'action'
+        'td': 'sorter action mouse-move'
     }
 
+    permission = None
+
+    def has_permission(self, item):
+        """Column permission test"""
+        if not self.permission:
+            return True
+        return self.request.has_permission(self.permission, context=item)
+
     def render_cell(self, item):
+        if not self.has_permission(item):
+            return ''
         return '<i class="fas fa-arrows-alt-v"></i>'
 
 
