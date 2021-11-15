@@ -105,6 +105,6 @@ def get_json_table_row_refresh_callback(context, request, table_factory, item):
         'callback': 'MyAMS.helpers.refreshTableRow',
         'options': {
             'row_id': get_row_id(table, item),
-            'data': table.render_json_row(row)
+            'data': table.render_row(row)
         }
     }
