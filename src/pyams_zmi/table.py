@@ -49,7 +49,7 @@ def get_table_id(table, context=None):
     """Table ID getter"""
     if context is None:
         context = table.context
-    return '{}_{}'.format(table.prefix, ICacheKeyValue(context))
+    return f'{table.prefix}_{ICacheKeyValue(context)}'
 
 
 def get_column_sort(column, ignored=None):  # pylint: disable=unused-argument
@@ -64,7 +64,7 @@ def get_column_type(column, ignored=None):  # pylint: disable=unused-argument
 
 def get_row_id(table, element, context=None):
     """Row ID getter"""
-    return '{}::{}'.format(get_table_id(table, context), ICacheKeyValue(element))
+    return f'{table.id}::{ICacheKeyValue(element)}'
 
 
 def get_row_name(element):
@@ -91,7 +91,7 @@ def get_attributes(table, element, source, column=None):
     for key, value in attrs.items():
         checked_value = check_attribute(value, source, column)
         if checked_value is not None:
-            result += " {}='{}'".format(key, checked_value)
+            result += f" {key}='{checked_value}'"
     return result
 
 
@@ -100,7 +100,7 @@ def get_data_attributes(element):
     data = IObjectData(element, None)
     if data and data.object_data:
         return ' '.join((
-            "data-{}='{}'".format(k, v if isinstance(v, str) else json.dumps(v))
+            f"data-{k}='{v if isinstance(v, str) else json.dumps(v)}'"
             for k, v in data.object_data.items()
         ))
     return ''
