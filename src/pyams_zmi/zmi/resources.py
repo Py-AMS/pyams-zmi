@@ -32,8 +32,7 @@ from pyams_zmi.interfaces.configuration import IZMIConfiguration, MYAMS_BUNDLES
 __docformat__ = 'restructuredtext'
 
 
-@adapter_config(name='zmi',
-                required=(Interface, IAdminLayer, Interface),
+@adapter_config(required=(Interface, IAdminLayer, Interface),
                 provides=IResources)
 class ZMIResourcesAdapter(ContextRequestViewAdapter):
     """ZMI resources adapter"""
