@@ -55,7 +55,7 @@ class ModalToolbarViewletManager(ToolbarViewletManager):
 class AddingsViewletManager(DropdownMenu):
     """Custom addings menu"""
 
-    status = 'success'
+    status = 'primary'
     css_class = 'btn-sm'
     icon_class = 'fas fa-plus'
 
