@@ -10,6 +10,7 @@
 			   i18n:attributes="data-original-title"></i>
 		</a>
 		<span class="flex-grow-1" i18n:translate="">${view.table_label}</span>
+		<i tal:omit-tag="">${structure:provider:pyams.toolbar}</i>
 	</h2>
 	<i tal:omit-tag="">${structure:provider:pyams.help}</i>
 	<div class="ams-form" tal:repeat="table view.tables">
