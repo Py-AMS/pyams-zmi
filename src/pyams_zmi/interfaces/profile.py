@@ -44,3 +44,6 @@ class IUserProfile(IAttributeAnnotatable):
                                       "provided in this selection list"),
                         vocabulary=USER_BUNDLES_VOCABULARY,
                         required=False)
+
+    def get_avatar(self, selection='square', size='48x48'):
+        """Get URL of avatar thumbnail for given selection and size"""

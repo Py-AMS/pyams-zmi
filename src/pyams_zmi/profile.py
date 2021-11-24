@@ -27,6 +27,7 @@ from zope.location import locate
 from zope.schema.fieldproperty import FieldProperty
 from zope.traversing.interfaces import ITraversable
 
+from pyams_file.image import get_image_selection
 from pyams_file.property import FileProperty
 from pyams_security.interfaces import ADMIN_USER_ID
 from pyams_security.interfaces.base import IPrincipalInfo, PUBLIC_PERMISSION
@@ -53,6 +54,12 @@ class UserProfile(Persistent, Contained):
             result.append((Allow, request.principal.id, ALL_PERMISSIONS))
         result.append((Allow, Everyone, PUBLIC_PERMISSION))
         return result
+
+    def get_avatar(self, selection='square', size='32x32', request=None):
+        """Avatar URL getter"""
+        if self.avatar:
+            return get_image_selection(self.avatar, selection, size, request)
+        return None
 
 
 @adapter_config(required=IPrincipalInfo,

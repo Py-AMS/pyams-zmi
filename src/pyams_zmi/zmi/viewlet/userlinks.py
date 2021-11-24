@@ -58,14 +58,11 @@ class UserMenuViewletManager(TemplateBasedViewletManager, WeightOrderedViewletMa
     @property
     def profile_icon(self):
         """Profile icon getter"""
+        result = None
         profile = IUserProfile(self.request, None)
         if profile is not None:
-            avatar = IThumbnails(profile.avatar, None)
-            if avatar is not None:
-                selection = avatar.get_selection('square')
-                icon = IThumbnails(selection).get_thumbnail('32x32')
-                return absolute_url(icon, self.request)
-        return '/--static--/myams/img/profile.png'
+            result = profile.get_avatar()
+        return result or '/--static--/myams/img/profile.png'
 
 
 @viewlet_config(name='username.menu', layer=IAdminLayer,
