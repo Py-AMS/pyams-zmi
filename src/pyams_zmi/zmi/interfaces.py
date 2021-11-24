@@ -17,8 +17,14 @@ This module provides configuration menu interfaces.
 
 __docformat__ = 'restructuredtext'
 
+from zope.interface import Interface
+
 from pyams_zmi.interfaces.viewlet import INavigationMenuItem
 
 
 class IConfigurationMenu(INavigationMenuItem):
     """Configuration menu"""
+
+
+class IUserProfileEditForm(Interface):
+    """Marker interface for user profile edit form"""

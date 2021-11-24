@@ -15,13 +15,16 @@
 This module provides "pyams.userlinks" viewlet manager as well as other components which are
 used to add links on top of PyAMS management interface.
 """
+from pyams_file.interfaces.thumbnail import IThumbnails
 from pyams_security.interfaces import UNKNOWN_PRINCIPAL_ID
 from pyams_skin.viewlet.menu import MenuDivider, MenuItem
 from pyams_template.template import template_config
+from pyams_utils.url import absolute_url
 from pyams_viewlet.manager import TemplateBasedViewletManager, WeightOrderedViewletManager, \
     viewletmanager_config
 from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.interfaces import IAdminLayer
+from pyams_zmi.interfaces.profile import IUserProfile
 from pyams_zmi.interfaces.viewlet import IPageHeaderViewletManager, IUserLinksViewletManager, \
     IUserMenuViewletManager
 
@@ -55,6 +58,13 @@ class UserMenuViewletManager(TemplateBasedViewletManager, WeightOrderedViewletMa
     @property
     def profile_icon(self):
         """Profile icon getter"""
+        profile = IUserProfile(self.request, None)
+        if profile is not None:
+            avatar = IThumbnails(profile.avatar, None)
+            if avatar is not None:
+                selection = avatar.get_selection('square')
+                icon = IThumbnails(selection).get_thumbnail('32x32')
+                return absolute_url(icon, self.request)
         return '/--static--/myams/img/profile.png'
 
 
@@ -63,7 +73,10 @@ class UserMenuViewletManager(TemplateBasedViewletManager, WeightOrderedViewletMa
 class UserNameMenuItem(MenuItem):
     """Logged in user name menu"""
 
-    css_class = 'bg-success text-white'
+    href = 'user-profile.html'
+    modal_target = True
+
+    css_class = 'bg-primary text-white'
     icon_class = 'fa fa-user-circle'
 
     @property

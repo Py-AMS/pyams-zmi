@@ -31,6 +31,8 @@ from pyams_zmi.interfaces.configuration import IZMIConfiguration, MYAMS_BUNDLES
 
 __docformat__ = 'restructuredtext'
 
+from pyams_zmi.interfaces.profile import IUserProfile
+
 
 @adapter_config(required=(Interface, IAdminLayer, Interface),
                 provides=IResources)
@@ -46,7 +48,13 @@ class ZMIResourcesAdapter(ContextRequestViewAdapter):
         configuration = IZMIConfiguration(request.root, None)
         if configuration is not None:
             # yield main bundle
-            bundle, _label = MYAMS_BUNDLES.get(configuration.myams_bundle)
+            bundle = None
+            if configuration.user_bundle_selection:
+                profile = IUserProfile(self.request.principal, None)
+                if profile is not None:
+                    bundle, _label = MYAMS_BUNDLES.get(profile.zmi_bundle)
+            if bundle is None:
+                bundle, _label = MYAMS_BUNDLES.get(configuration.myams_bundle)
             yield bundle
             # yield stylesheet
             stylesheet = configuration.custom_stylesheet
