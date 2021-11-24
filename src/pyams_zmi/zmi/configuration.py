@@ -86,7 +86,7 @@ class ZMIConfigurationForm(AdminEditForm):
     fields = Fields(IZMIConfiguration).select('site_name', 'home_name',
                                               'application_name', 'application_package',
                                               'inner_package_name', 'inner_package',
-                                              'environment', 'myams_bundle', 'favicon')
+                                              'environment', 'favicon', 'myams_bundle')
 
     def get_content(self):
         return IZMIConfiguration(self.context)
@@ -109,14 +109,25 @@ class ZMIConfigurationFormRenderer(ContextRequestViewAdapter):
         }
 
 
+@adapter_config(name='zmi-profile',
+                required=(ISiteRoot, IAdminLayer, ZMIConfigurationForm),
+                provides=IGroup)
+class ZMIConfigurationProfileGroup(FormGroupChecker):
+    """ZMI configuration profile fields"""
+
+    fields = Fields(IZMIConfiguration).select('user_bundle_selection', 'user_bundles')
+
+    weight = 5
+
+
 @adapter_config(name='zmi-header',
-                required=(ISiteRoot, IPyAMSLayer, ZMIConfigurationForm),
+                required=(ISiteRoot, IAdminLayer, ZMIConfigurationForm),
                 provides=IGroup)
 class ZMIConfigurationHeaderGroup(FormGroupChecker):
     """ZMI configuration header fields"""
 
     fields = Fields(IZMIConfiguration).select('include_header', 'fixed_header', 'logo')
-    fields['fixed_header'].widget_factory = SingleCheckBoxFieldWidget
+    # fields['fixed_header'].widget_factory = SingleCheckBoxFieldWidget
 
     weight = 10
 

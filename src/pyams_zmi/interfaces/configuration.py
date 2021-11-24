@@ -18,7 +18,7 @@ This module defines interfaces of ZMI configuration.
 from collections import OrderedDict
 
 from zope.interface import Attribute, Interface
-from zope.schema import Bool, Choice, TextLine
+from zope.schema import Bool, Choice, List, TextLine
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
 from myams_js import darkmode_core_svg_bundle, darkmode_full_bundle, darkmode_mini_svg_bundle, \
@@ -47,6 +47,8 @@ MYAMS_BUNDLES = OrderedDict((
 
 MYAMS_BUNDLES_VOCABULARY = SimpleVocabulary(
     [SimpleTerm(k, title=v[1]) for k, v in MYAMS_BUNDLES.items()])
+
+USER_BUNDLES_VOCABULARY = 'pyams_zmi.profile.bundles'
 
 
 class IZMIConfiguration(Interface):
@@ -89,6 +91,18 @@ class IZMIConfiguration(Interface):
                           description=_("MyAMS bundle used by the application"),
                           vocabulary=MYAMS_BUNDLES_VOCABULARY,
                           default='full')
+
+    user_bundle_selection = Bool(title=_("Allow bundle selection from user profile"),
+                                 description=_("If 'yes', bundle and theme selections "
+                                               "will be available from user profile"),
+                                 required=True,
+                                 default=False)
+
+    user_bundles = List(title=_("User selected bundles"),
+                        description=_("List of bundles which can be selected from "
+                                      "user profile"),
+                        value_type=Choice(vocabulary=MYAMS_BUNDLES_VOCABULARY),
+                        required=False)
 
     favicon = ImageField(title=_("Icon"),
                          description=_("Favorites icon"),

@@ -21,6 +21,7 @@ from persistent import Persistent
 from zope.container.contained import Contained
 from zope.interface import Interface
 from zope.schema.fieldproperty import FieldProperty
+from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
 from pyams_file.property import FileProperty
 from pyams_security.interfaces import IViewContextPermissionChecker
@@ -30,7 +31,10 @@ from pyams_utils.adapter import ContextAdapter, ContextRequestViewAdapter, adapt
     get_annotation_adapter
 from pyams_utils.factory import factory_config
 from pyams_utils.interfaces.tales import ITALESExtension
-from pyams_zmi.interfaces.configuration import IZMIConfiguration
+from pyams_utils.request import query_request
+from pyams_utils.vocabulary import vocabulary_config
+from pyams_zmi.interfaces.configuration import IZMIConfiguration, MYAMS_BUNDLES, \
+    USER_BUNDLES_VOCABULARY
 
 
 __docformat__ = 'restructuredtext'
@@ -60,6 +64,9 @@ class ZMIConfiguration(Persistent, Contained):
         return result
 
     myams_bundle = FieldProperty(IZMIConfiguration['myams_bundle'])
+    user_bundle_selection = FieldProperty(IZMIConfiguration['user_bundle_selection'])
+    user_bundles = FieldProperty(IZMIConfiguration['user_bundles'])
+
     favicon = FileProperty(IZMIConfiguration['favicon'])
 
     include_header = FieldProperty(IZMIConfiguration['include_header'])
@@ -126,3 +133,19 @@ class ZMIConfigurationTalesExtension(ContextRequestViewAdapter):
     def render(self, context=None):  # pylint: disable=unused-argument
         """TALES extension renderer"""
         return IZMIConfiguration(self.request.root, None)
+
+
+@vocabulary_config(USER_BUNDLES_VOCABULARY)
+class UserBundlesVocabulary(SimpleVocabulary):
+    """User bundles vocabulary"""
+
+    def __init__(self, context=None):
+        terms = []
+        request = query_request()
+        if request is not None:
+            configuration = IZMIConfiguration(request.root)
+            terms = [
+                SimpleTerm(v, title=MYAMS_BUNDLES[v][1])
+                for v in configuration.user_bundles or ()
+            ]
+        super().__init__(terms)
