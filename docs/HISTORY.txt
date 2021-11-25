@@ -1,6 +1,19 @@
 Changelog
 =========
 
+1.9.0
+-----
+ - added MyAMS dark theme support
+ - added custom breadcrumbs viewlet template
+ - added user profile management
+ - added support for user selection of graphical theme
+ - updated default toolbar add menu status
+ - updated table data-attributes getter
+ - updated reorder column
+ - renamed ZMI resources adapter to default
+ - use HTML code instead of JSON in row refresh event to get all row data-attributes
+ - use f-strings instead of *format*
+
 1.8.1
 -----
  - use constant for unknown principal ID
