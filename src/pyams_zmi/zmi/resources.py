@@ -52,7 +52,7 @@ class ZMIResourcesAdapter(ContextRequestViewAdapter):
             if configuration.user_bundle_selection:
                 profile = IUserProfile(self.request.principal, None)
                 if profile is not None:
-                    bundle, _label = MYAMS_BUNDLES.get(profile.zmi_bundle)
+                    bundle, _label = MYAMS_BUNDLES.get(profile.zmi_bundle, (None, None))
             if bundle is None:
                 bundle, _label = MYAMS_BUNDLES.get(configuration.myams_bundle)
             yield bundle
