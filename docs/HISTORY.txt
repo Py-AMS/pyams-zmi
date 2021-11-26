@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.9.2
+-----
+ - package version mismatch
+
 1.9.1
 -----
  - updated user profile theme selection checker to handle empty profiles
