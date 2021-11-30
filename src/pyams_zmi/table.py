@@ -155,7 +155,7 @@ class Table(ObjectDataManagerMixin, BaseTable):
                 'data-ams-location': absolute_url(self.context, self.request)
             },
             'tr': {
-                'id': lambda row, col: get_row_id(self, row),
+                'id': lambda row, col: self.get_row_id(row),
                 'data-ams-element-name': lambda row, col: get_row_name(row),
                 'data-ams-url': lambda row, col: getattr(get_row_editor(self, row), 'href', None),
                 'data-toggle':
@@ -170,6 +170,10 @@ class Table(ObjectDataManagerMixin, BaseTable):
             }
         }
         return result
+
+    def get_row_id(self, row):
+        """Row ID getter"""
+        return get_row_id(self, row)
 
     def get_selected_row_class(self, row, css_class=None):
         """Get selected row class"""

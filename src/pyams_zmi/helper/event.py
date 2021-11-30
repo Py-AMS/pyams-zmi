@@ -89,7 +89,7 @@ def get_json_table_row_add_callback(context, request, table_factory, item):
         'callback': 'MyAMS.helpers.addTableRow',
         'options': {
             'table_id': get_table_id(table),
-            'row_id': get_row_id(table, item),
+            'row_id': table.get_row_id(item),
             'content': table.render_row(row)
         }
     }
@@ -104,7 +104,7 @@ def get_json_table_row_refresh_callback(context, request, table_factory, item):
         'module': 'helpers',
         'callback': 'MyAMS.helpers.refreshTableRow',
         'options': {
-            'row_id': get_row_id(table, item),
+            'row_id': table.get_row_id(item),
             'data': table.render_row(row)
         }
     }
