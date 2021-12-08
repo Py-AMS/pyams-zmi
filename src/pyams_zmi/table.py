@@ -34,8 +34,8 @@ from pyams_utils.interfaces import ICacheKeyValue
 from pyams_utils.interfaces.data import IObjectData
 from pyams_utils.list import boolean_iter
 from pyams_utils.url import absolute_url
-from pyams_zmi.interfaces.table import IInnerTable, IMultipleTableView, ITableAdminView, \
-    ITableElementEditor, ITableView
+from pyams_zmi.interfaces.table import IInnerTable, IMultipleTableView, IReorderColumn, \
+    ITableAdminView, ITableElementEditor, ITableView
 from pyams_zmi.utils import get_object_label
 from pyams_zmi.view import InnerAdminView
 
@@ -112,13 +112,17 @@ def get_ordered_data_attributes(source, container, request, target='reorder.json
         'data-searching': 'false',
         'data-info': 'false',
         'data-paging': 'false',
-        'data-ordering': 'false',
+        'data-ams-order': '0,asc',
         'data-row-reorder': '{"update": false}',
         'data-ams-location': absolute_url(container, request),
         'data-ams-reorder-url': target
     })
     source.setdefault('tr', {}).update({
         'data-ams-row-value': lambda row, col: get_row_name(row)
+    })
+    source.setdefault('td', {}).update({
+        'data-order': lambda x, col: list(container.keys()).index(x.__name__)
+            if IReorderColumn.providedBy(col) else None
     })
 
 
@@ -289,6 +293,7 @@ class I18nColumnMixin:
         return self.request.localizer.translate(self.i18n_header)
 
 
+@implementer(IReorderColumn)
 class ReorderColumn(Column):
     """Reorder column"""
 

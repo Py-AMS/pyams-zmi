@@ -70,3 +70,7 @@ class ITableElementEditor(Interface):
     modal_target = Bool(title="Modal target?",
                         required=True,
                         default=True)
+
+
+class IReorderColumn(Interface):
+    """Reorder column marker interface"""
