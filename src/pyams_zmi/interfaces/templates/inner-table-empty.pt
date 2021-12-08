@@ -1,4 +1,5 @@
-<section i18n:domain="pyams_zmi">
+<section tal:omit-tag="getattr(view, 'hide_section', False)"
+		 i18n:domain="pyams_zmi">
 	<fieldset class="border position-relative">
 		<legend>
 			<i tal:omit-tag="" i18n:translate="">${view.table_label}</i>
