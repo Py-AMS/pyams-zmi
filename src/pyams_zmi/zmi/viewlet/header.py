@@ -64,6 +64,8 @@ class ContentHeaderViewlet(Viewlet):
     def title(self):
         """Title getter"""
         title = queryMultiAdapter((self.context, self.request, self.view), IPageTitle)
+        if title is None:
+            title = IPageTitle(self.context, None)
         return title or self._title
 
     def render(self):
