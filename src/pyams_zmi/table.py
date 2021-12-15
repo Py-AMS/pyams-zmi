@@ -264,11 +264,11 @@ class MultipleTablesMixin:
     def tables(self):
         """Tables getter"""
         registry = self.request.registry
-        return sorted((table
-                       for name, table in
-                       registry.getAdapters((self.context, self.request, self),  # pylint: disable=no-member
-                                            IInnerTable)),
-                      key=get_weight)
+        return sorted((
+            table
+            for name, table in registry.getAdapters((self.context, self.request, self),  # pylint: disable=no-member
+                                                    IInnerTable)
+        ), key=get_weight)
 
     def update(self):
         """View update"""
