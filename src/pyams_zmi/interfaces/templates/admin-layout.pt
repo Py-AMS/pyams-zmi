@@ -14,7 +14,7 @@
 			<tal:if condition="zmi.include_ribbon">
 				<i tal:omit-tag="">${structure:provider:pyams.page_ribbon}</i>
 			</tal:if>
-			<div id="content">
+			<div id="content" class="d-flex flex-column">
 				<i tal:omit-tag="">${structure:provider:pagelet}</i>
 			</div>
 		</div>
