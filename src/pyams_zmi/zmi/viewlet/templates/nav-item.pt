@@ -8,7 +8,7 @@
 		   class="${view.icon_class} fa-lg fa-fw mr-1"></i>
 		<span class="menu-item-parent" i18n:translate="">${view.label}</span>
 		<span tal:condition="view.badge"
-			  class="badge bg-${view.badge_status} float-right ml-1 mr-3"
+			  class="badge bg-${view.badge_status} float-right ml-1 mr-3 px-2 py-1"
 			  i18n:translate="">${view.badge}</span>
 	</a>
 	<ul tal:condition="view.viewlets">
