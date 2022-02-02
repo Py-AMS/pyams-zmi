@@ -21,9 +21,13 @@ from zope.interface import Attribute, Interface
 from zope.schema import Bool, Choice, List, TextLine
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
-from myams_js import darkmode_core_svg_bundle, darkmode_full_bundle, darkmode_mini_svg_bundle, \
-    emerald_core_svg_bundle, emerald_full_bundle, emerald_mini_svg_bundle, myams_core_svg_bundle, \
-    myams_full_bundle, myams_mini_svg_bundle
+from myams_js import darkmode_core_bundle, darkmode_core_svg_bundle, darkmode_full_bundle, \
+    darkmode_mini_bundle, \
+    darkmode_mini_svg_bundle, \
+    emerald_core_bundle, emerald_core_svg_bundle, emerald_full_bundle, emerald_mini_bundle, \
+    emerald_mini_svg_bundle, \
+    myams_core_bundle, myams_core_svg_bundle, \
+    myams_full_bundle, myams_mini_bundle, myams_mini_svg_bundle
 from pyams_file.schema import FileField, ImageField
 from pyams_i18n.schema import I18nTextLineField
 
@@ -35,14 +39,20 @@ from pyams_zmi import _
 
 MYAMS_BUNDLES = OrderedDict((
     ('full', (myams_full_bundle, _("MyAMS full bundle"))),
-    ('mini+svg', (myams_mini_svg_bundle, _("MyAMS mini bundle (with SVG icons)"))),
-    ('core+svg', (myams_core_svg_bundle, _("MyAMS core bundle (with SVG icons)"))),
+    ('mini', (myams_mini_bundle, _("MyAMS mini bundle (with CSS icons)"))),
+    ('mini-svg', (myams_mini_svg_bundle, _("MyAMS mini bundle (with SVG icons)"))),
+    ('core', (myams_core_bundle, _("MyAMS core bundle (with CSS icons)"))),
+    ('core-svg', (myams_core_svg_bundle, _("MyAMS core bundle (with SVG icons)"))),
     ('emerald', (emerald_full_bundle, _("Emerald full bundle"))),
-    ('emerald-mini', (emerald_mini_svg_bundle, _("Emerald mini bundle (with SVG icons)"))),
-    ('emerald-core', (emerald_core_svg_bundle, _("Emerald core bundle (with SVG icons)"))),
+    ('emerald-mini', (emerald_mini_bundle, _("Emerald mini bundle (with CSS icons)"))),
+    ('emerald-mini-svg', (emerald_mini_svg_bundle, _("Emerald mini bundle (with SVG icons)"))),
+    ('emerald-core', (emerald_core_bundle, _("Emerald core bundle (with CSS icons)"))),
+    ('emerald-core-svg', (emerald_core_svg_bundle, _("Emerald core bundle (with SVG icons)"))),
     ('darkmode', (darkmode_full_bundle, _("Dark mode full bundle"))),
-    ('darkmode-mini', (darkmode_mini_svg_bundle, _("Dark mode mini bundle (with SVG icons)"))),
-    ('darkmode-core', (darkmode_core_svg_bundle, _("Dark mode core bundle (with SVG icons)")))
+    ('darkmode-mini', (darkmode_mini_bundle, _("Dark mode mini bundle (with CSS icons)"))),
+    ('darkmode-mini-svg', (darkmode_mini_svg_bundle, _("Dark mode mini bundle (with SVG icons)"))),
+    ('darkmode-core', (darkmode_core_bundle, _("Dark mode core bundle (with CSS icons)"))),
+    ('darkmode-core-svg', (darkmode_core_svg_bundle, _("Dark mode core bundle (with SVG icons)")))
 ))
 
 MYAMS_BUNDLES_VOCABULARY = SimpleVocabulary(
