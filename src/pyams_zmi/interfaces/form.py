@@ -39,6 +39,10 @@ override_template(IInnerSubForm, template='templates/form-group.pt', layer=IAdmi
 override_template(IInnerTabForm, template='templates/form-tabform.pt', layer=IAdminLayer)
 
 
+class IFormTitle(Interface):
+    """Form title getter interface"""
+
+
 class IAddFormButtons(Interface):
     """Add forms buttons interface"""
 

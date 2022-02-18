@@ -28,14 +28,26 @@ from pyams_form.interfaces import DISPLAY_MODE
 from pyams_form.subform import InnerAddForm, InnerDisplayForm, InnerEditForm
 from pyams_i18n.schema import II18nField
 from pyams_skin.interfaces.view import IInnerPage, IModalPage
+from pyams_utils.adapter import query_adapter
 from pyams_utils.data import ObjectDataManagerMixin
 from pyams_zmi.interfaces.form import IAddFormButtons, IDisplayFormButtons, IEditFormButtons, \
-    IFormGroupChecker, IFormGroupSwitcher, IModalAddFormButtons, IModalDisplayFormButtons, \
+    IFormGroupChecker, IFormGroupSwitcher, IFormTitle, IModalAddFormButtons, \
+    IModalDisplayFormButtons, \
     IModalEditFormButtons
 from pyams_zmi.view import AdminView
 
 
 __docformat__ = 'restructuredtext'
+
+
+class BaseFormMixin:
+    """Base form mixin class"""
+
+    @property
+    def title(self):
+        """Title getter"""
+        title = query_adapter(IFormTitle, self.request, self.context, self)
+        return title or super().title
 
 
 #
@@ -44,7 +56,8 @@ __docformat__ = 'restructuredtext'
 
 # pylint: disable=abstract-method
 @implementer(IInnerPage)
-class AdminAddForm(ObjectDataManagerMixin, GroupForm, AddForm, AdminView):
+class AdminAddForm(ObjectDataManagerMixin, BaseFormMixin,
+                   GroupForm, AddForm, AdminView):
     """Management add form"""
 
     @property
@@ -79,7 +92,8 @@ class AdminModalAddForm(AdminAddForm):
 
 
 @implementer(IInnerPage)
-class AdminInnerAddForm(ObjectDataManagerMixin, GroupForm, InnerAddForm, AdminView):
+class AdminInnerAddForm(ObjectDataManagerMixin, BaseFormMixin,
+                        GroupForm, InnerAddForm, AdminView):
     """Inner management add form"""
 
     buttons = Buttons(Interface)
@@ -90,7 +104,8 @@ class AdminInnerAddForm(ObjectDataManagerMixin, GroupForm, InnerAddForm, AdminVi
 #
 
 @implementer(IInnerPage)
-class AdminEditForm(ObjectDataManagerMixin, GroupForm, EditForm, AdminView):
+class AdminEditForm(ObjectDataManagerMixin, BaseFormMixin,
+                    GroupForm, EditForm, AdminView):
     """Management edit form"""
 
     @property
@@ -124,7 +139,8 @@ class AdminModalEditForm(AdminEditForm):
 
 
 @implementer(IInnerPage)
-class AdminInnerEditForm(ObjectDataManagerMixin, GroupForm, InnerEditForm, AdminView):
+class AdminInnerEditForm(ObjectDataManagerMixin, BaseFormMixin,
+                         GroupForm, InnerEditForm, AdminView):
     """Inner management edit form"""
 
     buttons = Buttons(Interface)
@@ -135,7 +151,8 @@ class AdminInnerEditForm(ObjectDataManagerMixin, GroupForm, InnerEditForm, Admin
 #
 
 @implementer(IInnerPage)
-class AdminDisplayForm(ObjectDataManagerMixin, GroupManager, DisplayForm, AdminView):
+class AdminDisplayForm(ObjectDataManagerMixin, BaseFormMixin,
+                       GroupManager, DisplayForm, AdminView):
     """Management display form"""
 
     buttons = Buttons(IDisplayFormButtons)
@@ -151,7 +168,8 @@ class AdminModalDisplayForm(AdminDisplayForm):
 
 
 @implementer(IInnerPage)
-class AdminInnerDisplayForm(ObjectDataManagerMixin, GroupForm, InnerDisplayForm, AdminView):
+class AdminInnerDisplayForm(ObjectDataManagerMixin, BaseFormMixin,
+                            GroupForm, InnerDisplayForm, AdminView):
     """Inner management display form"""
 
     buttons = Buttons(Interface)
