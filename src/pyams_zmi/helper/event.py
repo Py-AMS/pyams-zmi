@@ -25,8 +25,9 @@ from zope.interface import alsoProvides
 from pyams_form.interfaces.form import IContextAware, IFormAware
 from pyams_form.interfaces.widget import IFieldWidget
 from pyams_form.util import expand_prefix
+from pyams_utils.factory import get_object_factory, is_interface
 from pyams_utils.url import absolute_url
-from pyams_zmi.table import get_row_id, get_table_id
+from pyams_zmi.table import get_table_id
 
 
 __docformat__ = 'restructuredtext'
@@ -81,7 +82,8 @@ def get_json_widget_refresh_callback(form, field_name, request=None):
 
 def get_json_table_row_add_callback(context, request, table_factory, item):
     """Get table row add callback settings"""
-    table = table_factory(context, request)
+    factory = get_object_factory(table_factory) if is_interface(table_factory) else table_factory
+    table = factory(context, request)
     table.update()
     row = table.setup_row(item)
     return {
@@ -97,7 +99,8 @@ def get_json_table_row_add_callback(context, request, table_factory, item):
 
 def get_json_table_row_refresh_callback(context, request, table_factory, item):
     """Get table row refresh callback settings"""
-    table = table_factory(context, request)
+    factory = get_object_factory(table_factory) if is_interface(table_factory) else table_factory
+    table = factory(context, request)
     table.update()
     row = table.setup_row(item)
     return {
