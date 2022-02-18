@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2022-01-19 19:56+0100\n"
+"POT-Creation-Date: 2022-02-16 22:58+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,11 +20,15 @@ msgstr ""
 msgid "PyAMS management skin"
 msgstr ""
 
-#: ./src/pyams_zmi/table.py:325 ./src/pyams_zmi/zmi/registry.py:95
+#: ./src/pyams_zmi/table.py:343 ./src/pyams_zmi/zmi/registry.py:95
 msgid "Name"
 msgstr ""
 
-#: ./src/pyams_zmi/table.py:473
+#: ./src/pyams_zmi/table.py:491
+msgid "Click icon to show or hide item"
+msgstr ""
+
+#: ./src/pyams_zmi/table.py:514
 msgid "Delete element"
 msgstr ""
 
@@ -53,29 +57,29 @@ msgid ""
 "You can choose a custom theme between those provided in this selection list"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/form.py:46 ./src/pyams_zmi/interfaces/form.py:56
+#: ./src/pyams_zmi/interfaces/form.py:50 ./src/pyams_zmi/interfaces/form.py:60
 msgid "Add"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/form.py:49 ./src/pyams_zmi/interfaces/form.py:69
-#: ./src/pyams_zmi/interfaces/form.py:145
+#: ./src/pyams_zmi/interfaces/form.py:53 ./src/pyams_zmi/interfaces/form.py:73
+#: ./src/pyams_zmi/interfaces/form.py:149
 msgid "Reset"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/form.py:59 ./src/pyams_zmi/interfaces/form.py:79
-#: ./src/pyams_zmi/interfaces/form.py:90
+#: ./src/pyams_zmi/interfaces/form.py:63 ./src/pyams_zmi/interfaces/form.py:83
+#: ./src/pyams_zmi/interfaces/form.py:94
 msgid "Cancel"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/form.py:66 ./src/pyams_zmi/interfaces/form.py:76
+#: ./src/pyams_zmi/interfaces/form.py:70 ./src/pyams_zmi/interfaces/form.py:80
 msgid "Apply"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/form.py:137
+#: ./src/pyams_zmi/interfaces/form.py:141
 msgid "Search for"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/form.py:143
+#: ./src/pyams_zmi/interfaces/form.py:147
 msgid "Search"
 msgstr ""
 
@@ -499,7 +503,11 @@ msgstr ""
 msgid "Site management"
 msgstr ""
 
-#: ./src/pyams_zmi/zmi/viewlet/toolbar.py:69
+#: ./src/pyams_zmi/zmi/viewlet/toolbar.py:58
+msgid "Add..."
+msgstr ""
+
+#: ./src/pyams_zmi/zmi/viewlet/toolbar.py:70
 msgid "Actions"
 msgstr ""
 

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2022-01-19 19:56+0100\n"
+"POT-Creation-Date: 2022-02-16 22:58+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,11 +19,15 @@ msgstr ""
 msgid "PyAMS management skin"
 msgstr "PyAMS: skin MyAMS"
 
-#: src/pyams_zmi/table.py:325 src/pyams_zmi/zmi/registry.py:95
+#: src/pyams_zmi/table.py:343 src/pyams_zmi/zmi/registry.py:95
 msgid "Name"
 msgstr "Nom"
 
-#: src/pyams_zmi/table.py:473
+#: src/pyams_zmi/table.py:491
+msgid "Click icon to show or hide item"
+msgstr "Cliquez pour afficher ou masquer cet élément"
+
+#: src/pyams_zmi/table.py:514
 msgid "Delete element"
 msgstr "Supprimer cet élément"
 
@@ -56,29 +60,29 @@ msgstr ""
 "Vous pouvez sélectionner un thème graphique parmi ceux qui ont été mis à "
 "votre disposition"
 
-#: src/pyams_zmi/interfaces/form.py:46 src/pyams_zmi/interfaces/form.py:56
+#: src/pyams_zmi/interfaces/form.py:50 src/pyams_zmi/interfaces/form.py:60
 msgid "Add"
 msgstr "Ajouter"
 
-#: src/pyams_zmi/interfaces/form.py:49 src/pyams_zmi/interfaces/form.py:69
-#: src/pyams_zmi/interfaces/form.py:145
+#: src/pyams_zmi/interfaces/form.py:53 src/pyams_zmi/interfaces/form.py:73
+#: src/pyams_zmi/interfaces/form.py:149
 msgid "Reset"
 msgstr "Annuler"
 
-#: src/pyams_zmi/interfaces/form.py:59 src/pyams_zmi/interfaces/form.py:79
-#: src/pyams_zmi/interfaces/form.py:90
+#: src/pyams_zmi/interfaces/form.py:63 src/pyams_zmi/interfaces/form.py:83
+#: src/pyams_zmi/interfaces/form.py:94
 msgid "Cancel"
 msgstr "Annuler"
 
-#: src/pyams_zmi/interfaces/form.py:66 src/pyams_zmi/interfaces/form.py:76
+#: src/pyams_zmi/interfaces/form.py:70 src/pyams_zmi/interfaces/form.py:80
 msgid "Apply"
 msgstr "Enregistrer"
 
-#: src/pyams_zmi/interfaces/form.py:137
+#: src/pyams_zmi/interfaces/form.py:141
 msgid "Search for"
 msgstr "Texte recherché"
 
-#: src/pyams_zmi/interfaces/form.py:143
+#: src/pyams_zmi/interfaces/form.py:147
 msgid "Search"
 msgstr "Chercher"
 
@@ -109,13 +113,11 @@ msgstr ""
 
 #: src/pyams_zmi/interfaces/configuration.py:47
 msgid "Emerald mini bundle (with CSS icons)"
-msgstr ""
-"Emerald mini-css (Thème Emerald en version minimale, avec icônes CSS)"
+msgstr "Emerald mini-css (Thème Emerald en version minimale, avec icônes CSS)"
 
 #: src/pyams_zmi/interfaces/configuration.py:48
 msgid "Emerald mini bundle (with SVG icons)"
-msgstr ""
-"Emerald mini-svg (Thème Emerald en version minimale, avec icônes SVG)"
+msgstr "Emerald mini-svg (Thème Emerald en version minimale, avec icônes SVG)"
 
 #: src/pyams_zmi/interfaces/configuration.py:49
 msgid "Emerald core bundle (with CSS icons)"
@@ -132,13 +134,11 @@ msgstr ""
 
 #: src/pyams_zmi/interfaces/configuration.py:52
 msgid "Dark mode mini bundle (with CSS icons)"
-msgstr ""
-"DarkMode mini-css (Thème sombre en version minimale, avec icônes CSS)"
+msgstr "DarkMode mini-css (Thème sombre en version minimale, avec icônes CSS)"
 
 #: src/pyams_zmi/interfaces/configuration.py:53
 msgid "Dark mode mini bundle (with SVG icons)"
-msgstr ""
-"DarkMode mini-svg (Thème sombre en version minimale, avec icônes SVG)"
+msgstr "DarkMode mini-svg (Thème sombre en version minimale, avec icônes SVG)"
 
 #: src/pyams_zmi/interfaces/configuration.py:54
 msgid "Dark mode core bundle (with CSS icons)"
@@ -539,7 +539,11 @@ msgstr "Gestion de contenu"
 msgid "Site management"
 msgstr "Gestion du site"
 
-#: src/pyams_zmi/zmi/viewlet/toolbar.py:69
+#: src/pyams_zmi/zmi/viewlet/toolbar.py:58
+msgid "Add..."
+msgstr "Ajouter..."
+
+#: src/pyams_zmi/zmi/viewlet/toolbar.py:70
 msgid "Actions"
 msgstr "Actions"
 
