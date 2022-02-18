@@ -1,6 +1,22 @@
 Changelog
 =========
 
+1.10.0
+------
+ - added table method to get row ID, which can be overridden to create custom implementations
+ - added marker interface on reorder column
+ - added padding to badge in navigation menus item
+ - added flex classes to main content element
+ - added support for interfaces factories in table refresh helpers
+ - added object hint and icon getter interfaces and default adapters
+ - added form getter interface
+ - added label to context addings dropdown menu
+ - added custom base table columns
+ - updated list of available MyAMS bundles
+ - updated empty table layout
+ - updated content header title getter
+ - updated form checker fieldset padding
+
 1.9.2
 -----
  - package version mismatch
