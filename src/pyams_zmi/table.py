@@ -36,7 +36,7 @@ from pyams_utils.list import boolean_iter
 from pyams_utils.url import absolute_url
 from pyams_zmi.interfaces.table import IInnerTable, IMultipleTableView, IReorderColumn, \
     ITableAdminView, ITableElementEditor, ITableView
-from pyams_zmi.utils import get_object_label
+from pyams_zmi.utils import get_object_hint, get_object_icon, get_object_label
 from pyams_zmi.view import InnerAdminView
 
 
@@ -153,7 +153,7 @@ class Table(ObjectDataManagerMixin, BaseTable):
         These attributes are to be use with DataTables plug-in, and can be overridden in
         subclasses.
         """
-        result = {
+        return {
             'table': {
                 'id': self.id,
                 'data-ams-location': absolute_url(self.context, self.request)
@@ -173,7 +173,6 @@ class Table(ObjectDataManagerMixin, BaseTable):
                 'data-ams-type': get_column_type
             }
         }
-        return result
 
     def get_row_id(self, row):
         """Row ID getter"""
@@ -319,6 +318,25 @@ class ReorderColumn(Column):
         return '<i class="fas fa-arrows-alt-v"></i>'
 
 
+class ContentTypeColumn(Column):
+    """Content type column"""
+
+    header = ''
+    css_classes = {
+        'th': 'action',
+        'td': 'sorter text-center'
+    }
+    sortable = 'false'
+    weight = 9
+
+    def render_cell(self, item):
+        icon = get_object_icon(item, self.request, self.table)
+        if not icon:
+            return ''
+        hint = get_object_hint(item, self.request, self.table) or ''
+        return f'<i class="{icon} hint" data-original-title="{hint}"></i>'
+
+
 class NameColumn(I18nColumnMixin, GetAttrColumn):
     """Common name column"""
 
@@ -366,8 +384,8 @@ class IconColumn(Column):
     def get_icon(self, item):
         """Column icon getter"""
         hint = self.get_icon_hint(item)
-        return '<i class="fa-fw {} {}" data-original-title="{}"></i>'.format(
-            self.get_icon_class(item), 'hint' if hint else '', hint)
+        return f'''<i class="fa-fw {self.get_icon_class(item)} {'hint' if hint else ''}"''' \
+               f''' data-original-title="{hint}"></i>'''
 
     def get_icon_class(self, item):  # pylint: disable=unused-argument
         """Column class getter"""
@@ -465,6 +483,29 @@ class JsActionColumn(ActionColumn):
     def get_url(self, item):
         """Action URL getter"""
         return self.href
+
+
+class VisibilityColumn(ObjectDataManagerMixin, JsActionColumn):
+    """Visibility switcher column"""
+
+    hint = _("Click icon to show or hide item")
+
+    href = 'MyAMS.container.switchElementAttribute'
+    modal_target = False
+
+    object_data = {
+        'ams-modules': 'container',
+        'ams-update-target': 'switch-visible-item.json',
+        'ams-attribute-name': 'visible',
+        'ams-icon-on': 'far fa-eye',
+        'ams-icon-off': 'far fa-eye-slash'
+    }
+
+    weight = 1
+
+    def get_icon_class(self, item):
+        """Icon class getter"""
+        return 'far fa-eye' if item.visible else 'far fa-eye-slash'
 
 
 class TrashColumn(ObjectDataManagerMixin, JsActionColumn):
