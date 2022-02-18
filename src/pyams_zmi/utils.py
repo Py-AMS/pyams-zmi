@@ -19,7 +19,7 @@ from zope.component import queryAdapter, queryMultiAdapter
 from zope.location import ILocation
 
 from pyams_utils.adapter import adapter_config
-from pyams_zmi.interfaces import IObjectLabel
+from pyams_zmi.interfaces import IObjectHint, IObjectIcon, IObjectLabel
 
 
 __docformat__ = 'restructuredtext'
@@ -36,4 +36,26 @@ def get_object_label(context, request, view=None):
     adapter = queryMultiAdapter((context, request, view), IObjectLabel)
     if adapter is None:
         adapter = queryAdapter(context, IObjectLabel)
+    return adapter
+
+
+@adapter_config(required=ILocation, provides=IObjectIcon)
+def location_icon(context):  # pylint: disable=unused-argument
+    """Basic location icon factory"""
+    return 'far fa-square'
+
+
+def get_object_icon(context, request, view=None):
+    """Get object icon"""
+    adapter = queryMultiAdapter((context, request, view), IObjectIcon)
+    if adapter is None:
+        adapter = queryAdapter(context, IObjectIcon)
+    return adapter
+
+
+def get_object_hint(context, request, view=None):
+    """Get object hint"""
+    adapter = queryMultiAdapter((context, request, view), IObjectHint)
+    if adapter is None:
+        adapter = queryAdapter(context, IObjectHint)
     return adapter

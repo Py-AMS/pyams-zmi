@@ -51,4 +51,12 @@ class IPageTitle(Interface):
 
 
 class IObjectLabel(Interface):
-    """Object label interface"""
+    """Object label getter interface"""
+
+
+class IObjectIcon(Interface):
+    """Object icon getter interface"""
+
+
+class IObjectHint(Interface):
+    """Object hint getter interface"""
