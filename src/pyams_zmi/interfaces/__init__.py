@@ -35,6 +35,8 @@ PYAMS_ADMIN_SKIN_NAME = 'PyAMS admin skin'
 class IAdminView(IFullPage):
     """Management view marker interface"""
 
+    header_label = TextLine(title="Header label")
+
 
 class IInnerAdminView(IInnerPage, IAdminView):
     """Inner management view marker interface"""

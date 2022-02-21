@@ -29,6 +29,7 @@ from pyams_viewlet.viewlet import EmptyContentProvider, Viewlet, viewlet_config
 from pyams_zmi.interfaces import IAdminLayer, IAdminView, IPageTitle
 from pyams_zmi.interfaces.configuration import IZMIConfiguration
 from pyams_zmi.interfaces.viewlet import IPageHeaderViewletManager
+from pyams_zmi.utils import get_object_label
 
 
 __docformat__ = 'restructuredtext'
@@ -74,9 +75,21 @@ class ContentHeaderViewlet(Viewlet):
         return super().render()
 
 
+def get_admin_view_title(context, request, view, label=None):
+    """Shared tool view title getter"""
+    translate = request.localizer.translate
+    object_label = get_object_label(context, request, view)
+    if label is None:
+        label = getattr(view, 'header_label', None)
+    if not label:
+        return object_label
+    return '{} <small><small>' \
+           ' <i class="px-2 fas fa-chevron-right"></i> ' \
+           '{}</small></small>'.format(object_label, translate(label))
+
+
 @adapter_config(required=(Interface, IAdminLayer, IAdminView),
                 provides=IPageTitle)
-def admin_view_title_adapter(context, request, view):  # pylint: disable=unused-argument
-    """Admin view default title adapter"""
-    configuration = IZMIConfiguration(request.root)
-    return configuration.site_name
+def admin_view_title(context, request, view):
+    """Base admin view title adapter"""
+    return get_admin_view_title(context, request, view)

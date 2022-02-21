@@ -34,6 +34,8 @@ __docformat__ = 'restructuredtext'
 class AdminView:
     """Base admin view"""
 
+    header_label = FieldProperty(IAdminView['header_label'])
+
 
 @subscriber(IPageletCreatedEvent, context_selector=IAdminView)
 def handle_admin_view(event):
