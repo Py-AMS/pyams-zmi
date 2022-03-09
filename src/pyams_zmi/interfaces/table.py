@@ -12,18 +12,20 @@
 
 """PyAMS_zmi.interfaces.table module
 
-This modules defines public interfaces of table views.
+This module defines public interfaces of table views.
 """
 
 from zope.contentprovider.interfaces import IContentProvider
 from zope.interface import Attribute, Interface
-from zope.schema import Bool, TextLine
+from zope.schema import Bool, Choice, TextLine
 
 from pyams_template.template import template_config
 from pyams_zmi.interfaces import IInnerAdminView
 
 
 __docformat__ = 'restructuredtext'
+
+from pyams_zmi import _
 
 
 @template_config(template='templates/table.pt')
@@ -57,6 +59,26 @@ class IMultipleTableView(IInnerAdminView):
 
 class ITableWithActions(Interface):
     """Marker interface for table with inner actions menu"""
+
+
+@template_config(template='templates/table-switcher.pt')
+class ITableGroupSwitcher(Interface):
+    """Table group switcher interface"""
+
+    legend = TextLine(title=_("Switcher legend"),
+                      required=True)
+
+    minus_class = TextLine(title="Expanded switcher FontAwesome CSS class (without prefix)",
+                           default='minus')
+
+    plus_class = TextLine(title="Reduced switcher FontAwesome CSS class (without prefix)",
+                          default='plus')
+
+    switcher_mode = Choice(title="Switcher display mode",
+                           values=('always', 'never', 'auto'),
+                           default='auto')
+
+    state = Attribute("Initial switcher state")
 
 
 class ITableElementEditor(Interface):

@@ -16,12 +16,12 @@ This module provides bases classes for tables management.
 """
 
 import json
-
 from pyramid.decorator import reify
 from zope.component import queryMultiAdapter
 from zope.interface import implementer
 from zope.schema.fieldproperty import FieldProperty
 
+from pyams_security.permission import get_permission_checker
 from pyams_security.security import ProtectedViewObjectMixin
 from pyams_table.column import Column, GetAttrColumn
 from pyams_table.table import Table as BaseTable, get_weight
@@ -29,13 +29,14 @@ from pyams_template.template import get_view_template
 from pyams_utils.adapter import ContextRequestViewAdapter
 from pyams_utils.data import ObjectDataManagerMixin
 from pyams_utils.date import SH_DATE_FORMAT, format_datetime
-from pyams_utils.factory import get_object_factory, is_interface
+from pyams_utils.factory import get_object_factory
 from pyams_utils.interfaces import ICacheKeyValue
 from pyams_utils.interfaces.data import IObjectData
 from pyams_utils.list import boolean_iter
 from pyams_utils.url import absolute_url
+from pyams_viewlet.viewlet import ViewContentProvider
 from pyams_zmi.interfaces.table import IInnerTable, IMultipleTableView, IReorderColumn, \
-    ITableAdminView, ITableElementEditor, ITableView
+    ITableAdminView, ITableElementEditor, ITableGroupSwitcher, ITableView
 from pyams_zmi.utils import get_object_hint, get_object_icon, get_object_label
 from pyams_zmi.view import InnerAdminView
 
@@ -294,6 +295,39 @@ class MultipleTablesMixin:
 @implementer(IMultipleTableView)
 class MultipleTablesAdminView(MultipleTablesMixin, InnerAdminView):
     """Multiple tables admin view"""
+
+
+@implementer(ITableGroupSwitcher)
+class TableGroupSwitcher(ObjectDataManagerMixin, InnerTableAdminView, ViewContentProvider):
+    """Table group switcher
+
+    This switcher group is very similar to the form group switcher, but is only
+    used to handle an inner table.
+    """
+
+    legend = FieldProperty(ITableGroupSwitcher['legend'])
+    minus_class = FieldProperty(ITableGroupSwitcher['minus_class'])
+    plus_class = FieldProperty(ITableGroupSwitcher['plus_class'])
+    switcher_mode = FieldProperty(ITableGroupSwitcher['switcher_mode'])
+
+    @property
+    def state(self):
+        """Current state getter"""
+        if self.switcher_mode == 'always':
+            return 'open'
+        if self.switcher_mode == 'never':
+            return 'closed'
+        # else: automatic mode
+        has_values, _values = boolean_iter(self.table.values)
+        return 'open' if has_values else 'closed'
+
+    def get_forms(self, include_self=True):
+        """Forms getter
+
+        This method doesn't return anything, but  is used when component is used as
+        an inner form adapter!
+        """
+        yield from ()
 
 
 class I18nColumnMixin:
