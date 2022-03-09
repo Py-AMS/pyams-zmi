@@ -80,6 +80,21 @@ def get_json_widget_refresh_callback(form, field_name, request=None):
     }
 
 
+def get_json_table_refresh_callback(context, request, table_factory):
+    """Get table refresh callback settings"""
+    factory = get_object_factory(table_factory) if is_interface(table_factory) else table_factory
+    table = factory(context, request)
+    table.update()
+    return {
+        'module': 'helpers',
+        'callback': 'MyAMS.helpers.refreshElement',
+        'options': {
+            'object_id': get_table_id(table),
+            'content': table.render()
+        }
+    }
+
+
 def get_json_table_row_add_callback(context, request, table_factory, item):
     """Get table row add callback settings"""
     factory = get_object_factory(table_factory) if is_interface(table_factory) else table_factory
