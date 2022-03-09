@@ -212,13 +212,28 @@ class InnerTableMixin:
     table_class = Table
     table_label = FieldProperty(ITableAdminView['table_label'])
 
+    container_intf = None
+    container_name = ''
+
     empty_template = get_view_template(name='empty')
 
     def __init__(self, context, request, *args, **kwargs):
         super().__init__(context, request, *args, **kwargs)
-        factory = get_object_factory(self.table_class) if is_interface(self.table_class) \
-            else self.table_class
-        self.table = factory(context, request)
+        container = self.get_container()
+        self.table = self.get_table(container)
+
+    def get_container(self):
+        """Table container getter"""
+        if self.container_intf is None:
+            return self.context
+        registry = self.request.registry
+        return registry.queryAdapter(self.context, self.container_intf,
+                                     name=self.container_name)
+
+    def get_table(self, container):
+        """Table factory"""
+        factory = get_object_factory(self.table_class)
+        return factory(container, self.request)
 
     def update(self):
         """Admin view updater"""
