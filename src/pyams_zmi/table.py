@@ -534,27 +534,59 @@ class JsActionColumn(ActionColumn):
         return self.href
 
 
-class VisibilityColumn(ObjectDataManagerMixin, JsActionColumn):
-    """Visibility switcher column"""
-
-    hint = _("Click icon to show or hide item")
+class AttributeSwitcherColumn(ObjectDataManagerMixin, JsActionColumn):
+    """Attribute switcher column"""
 
     href = 'MyAMS.container.switchElementAttribute'
     modal_target = False
 
-    object_data = {
-        'ams-modules': 'container',
-        'ams-update-target': 'switch-visible-item.json',
-        'ams-attribute-name': 'visible',
-        'ams-icon-on': 'far fa-eye',
-        'ams-icon-off': 'far fa-eye-slash'
-    }
+    attribute_name = None
+    attribute_switcher = None
 
-    weight = 1
+    icon_on_class = 'far fa-eye'
+    icon_off_class = 'far fa-eye-slash'
+
+    @property
+    def object_data(self):
+        """Object data getter"""
+        return {
+            'ams-modules': 'container',
+            'ams-update-target': self.attribute_switcher,
+            'ams-attribute-name': self.attribute_name,
+            'ams-icon-on': self.icon_on_class,
+            'ams-icon-off': self.icon_off_class
+        }
 
     def get_icon_class(self, item):
         """Icon class getter"""
-        return 'far fa-eye' if item.visible else 'far fa-eye-slash'
+        return self.icon_on_class if getattr(item, self.attribute_name) else self.icon_off_class
+
+    def render_cell(self, item):
+        """Cell renderer"""
+        if self.has_permission(item):
+            return super().render_cell(item)
+        return f'<span class="hint" data-original-title="{self.get_icon_hint(item)}">' \
+               f'{self.get_icon(item)}' \
+               f'</span>'
+
+
+class VisibilityColumn(AttributeSwitcherColumn):
+    """Visibility switcher column"""
+
+    attribute_name = 'visible'
+    attribute_switcher = 'switch-visible-item.json'
+
+    weight = 1
+
+    def get_icon_hint(self, item):
+        """Icon hint getter"""
+        if self.has_permission(item):
+            hint = _("Click to show/hide item")
+        elif item.visible:
+            hint = _("This element is visible")
+        else:
+            hint = _("This element is not visible")
+        return self.request.localizer.translate(hint)
 
 
 class TrashColumn(ObjectDataManagerMixin, JsActionColumn):
