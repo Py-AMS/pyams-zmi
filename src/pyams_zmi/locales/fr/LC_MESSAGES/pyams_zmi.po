@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2022-02-16 22:58+0100\n"
+"POT-Creation-Date: 2022-03-04 22:24+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,15 +19,23 @@ msgstr ""
 msgid "PyAMS management skin"
 msgstr "PyAMS: skin MyAMS"
 
-#: src/pyams_zmi/table.py:343 src/pyams_zmi/zmi/registry.py:95
+#: src/pyams_zmi/table.py:359 src/pyams_zmi/zmi/registry.py:95
 msgid "Name"
 msgstr "Nom"
 
-#: src/pyams_zmi/table.py:491
-msgid "Click icon to show or hide item"
-msgstr "Cliquez pour afficher ou masquer cet élément"
+#: src/pyams_zmi/table.py:551
+msgid "Click to show/hide item"
+msgstr "Cliquez pour afficher/masquer cet élément"
 
-#: src/pyams_zmi/table.py:514
+#: src/pyams_zmi/table.py:553
+msgid "This element is visible"
+msgstr "Cet élément est visible"
+
+#: src/pyams_zmi/table.py:555
+msgid "This element is not visible"
+msgstr "Cet élément n'est pas visible"
+
+#: src/pyams_zmi/table.py:562
 msgid "Delete element"
 msgstr "Supprimer cet élément"
 
@@ -551,7 +559,7 @@ msgstr "Actions"
 msgid "Logout"
 msgstr "Déconnexion"
 
-#: src/pyams_zmi/zmi/viewlet/header.py:59
+#: src/pyams_zmi/zmi/viewlet/header.py:60
 msgid "PyAMS admin page"
 msgstr "PyAMS"
 
