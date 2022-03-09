@@ -606,6 +606,15 @@ class TrashColumn(ObjectDataManagerMixin, JsActionColumn):
 
     weight = 999
 
+    def has_permission(self, item):
+        """Column permission checker"""
+        request = self.request
+        checker = get_permission_checker(request, item, action=self.action_type)
+        permission = checker.edit_permission if checker is not None else None
+        if permission is not None:
+            return request.has_permission(permission, context=item)
+        return super().has_permission(item)
+
 
 class DateColumn(GetAttrColumn):
     """Date or datetime column"""
