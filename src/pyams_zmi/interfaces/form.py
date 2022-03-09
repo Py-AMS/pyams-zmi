@@ -18,6 +18,7 @@ This module provides public interfaces for management forms.
 from zope.interface import Attribute, Interface
 from zope.schema import Choice, TextLine
 
+from pyams_form.interfaces import INPUT_MODE
 from pyams_form.interfaces.form import IDisplayForm, IForm, IGroup, IInnerSubForm, IInnerTabForm
 from pyams_skin.schema.button import CloseButton, ResetButton, SubmitButton
 from pyams_template.template import override_template, template_config
@@ -43,11 +44,23 @@ class IFormTitle(Interface):
     """Form title getter interface"""
 
 
+def check_submit_button(form):
+    """Submit button checker"""
+    if form.mode != INPUT_MODE:
+        return False
+    for subform in form.get_forms():
+        for widget in (subform.widgets or {}).values():
+            if widget.mode == INPUT_MODE:
+                return True
+    return False
+
+
 class IAddFormButtons(Interface):
     """Add forms buttons interface"""
 
     add = SubmitButton(name='add',
-                       title=_("Add"))
+                       title=_("Add"),
+                       condition=check_submit_button)
 
     cancel = ResetButton(name='reset',
                          title=_("Reset"))
@@ -57,7 +70,8 @@ class IModalAddFormButtons(Interface):
     """Modal add forms buttons interface"""
 
     add = SubmitButton(name='add',
-                       title=_("Add"))
+                       title=_("Add"),
+                       condition=check_submit_button)
 
     close = CloseButton(name='close',
                         title=_("Cancel"))
@@ -67,7 +81,8 @@ class IEditFormButtons(Interface):
     """Edit forms buttons interface"""
 
     apply = SubmitButton(name='apply',
-                         title=_("Apply"))
+                         title=_("Apply"),
+                         condition=check_submit_button)
 
     cancel = ResetButton(name='reset',
                          title=_("Reset"))
@@ -77,7 +92,8 @@ class IModalEditFormButtons(Interface):
     """Modal edit forms buttons interface"""
 
     apply = SubmitButton(name='apply',
-                         title=_("Apply"))
+                         title=_("Apply"),
+                         condition=check_submit_button)
 
     close = CloseButton(name='close',
                         title=_("Cancel"))
