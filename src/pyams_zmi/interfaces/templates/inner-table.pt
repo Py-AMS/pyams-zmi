@@ -1,8 +1,9 @@
-<section tal:omit-tag="getattr(view, 'hide_section', False)">
+<section class="inner-table border-0"
+		 tal:omit-tag="getattr(view, 'hide_section', False)">
 	<fieldset class="border position-relative"
 			  data-ams-modules="plugins">
 		<legend>
-			<i tal:omit-tag="" i18n:translate="">${view.table_label}</i>
+			<i tal:omit-tag="" i18n:translate="">${structure:view.table_label}</i>
 		</legend>
 		<div class="actions-container position-absolute">
 			${structure:provider:pyams.toolbar(view=view.table)}
