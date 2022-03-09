@@ -88,8 +88,15 @@ def get_admin_view_title(context, request, view, label=None):
            '{}</small></small>'.format(object_label, translate(label))
 
 
-@adapter_config(required=(Interface, IAdminLayer, IAdminView),
+@adapter_config(required=(Interface, IAdminLayer, Interface),
                 provides=IPageTitle)
 def admin_view_title(context, request, view):
     """Base admin view title adapter"""
     return get_admin_view_title(context, request, view)
+
+
+@adapter_config(required=(Interface, IAdminLayer, IModalPage),
+                provides=IPageTitle)
+def get_modal_admin_view_title(context, request, view):
+    """Modal admin view title adapter"""
+    return get_object_label(request.root, request, view)
