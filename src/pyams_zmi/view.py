@@ -22,7 +22,7 @@ from zope.schema.fieldproperty import FieldProperty
 from pyams_form.interfaces.form import IFormCreatedEvent
 from pyams_layer.skin import apply_skin
 from pyams_pagelet.interfaces import IPageletCreatedEvent
-from pyams_viewlet.manager import get_weight
+from pyams_utils.adapter import get_adapter_weight
 from pyams_zmi.interfaces import IAdminView, ICompositeView, IInnerAdminView, \
     PYAMS_ADMIN_SKIN_NAME
 
@@ -65,7 +65,7 @@ class CompositeAdminView(InnerAdminView):
         registry = self.request.registry
         for name, view in sorted(registry.getAdapters((self.context, self.request, self),
                                                       ICompositeView),
-                                 key=get_weight):
+                                 key=get_adapter_weight):
             view.update()
             yield view
 
