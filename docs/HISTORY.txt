@@ -1,6 +1,18 @@
 Changelog
 =========
 
+1.11.0
+------
+ - added support for Python 3.10
+ - added "header_label" attribute to management views
+ - added default management view header title adapter
+ - added table group switcher
+ - added table attribute switcher column
+ - added trash column permission checker
+ - added submit form condition
+ - added helper to get table refresh event callback
+ - updated views title adapters
+
 1.10.0
 ------
  - added table method to get row ID, which can be overridden to create custom implementations
