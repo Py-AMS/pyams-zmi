@@ -21,7 +21,8 @@ from zope.component import queryMultiAdapter
 from zope.interface import implementer
 from zope.schema.fieldproperty import FieldProperty
 
-from pyams_security.permission import get_permission_checker
+from pyams_security.interfaces import ISecurityContext
+from pyams_security.permission import get_edit_permission, get_permission_checker
 from pyams_security.security import ProtectedViewObjectMixin
 from pyams_table.column import Column, GetAttrColumn
 from pyams_table.table import Table as BaseTable, get_weight
@@ -113,18 +114,25 @@ def get_ordered_data_attributes(source, container, request, target='reorder.json
         'data-searching': 'false',
         'data-info': 'false',
         'data-paging': 'false',
-        'data-ams-order': '0,asc',
-        'data-row-reorder': '{"update": false}',
-        'data-ams-location': absolute_url(container, request),
-        'data-ams-reorder-url': target
+        'data-ams-order': '0,asc'
     })
-    source.setdefault('tr', {}).update({
-        'data-ams-row-value': lambda row, col: get_row_name(row)
-    })
-    source.setdefault('td', {}).update({
-        'data-order': lambda x, col: list(container.keys()).index(x.__name__)
-            if IReorderColumn.providedBy(col) else None
-    })
+    context = ISecurityContext(container, None)
+    if context is None:
+        context = request.context
+    permission = get_edit_permission(request, context)
+    if (not permission) or request.has_permission(permission, context=container):
+        source.setdefault('table', {}).update({
+            'data-ams-location': absolute_url(container, request),
+            'data-row-reorder': '{"update": false}',
+            'data-ams-reorder-url': target
+        })
+        source.setdefault('tr', {}).update({
+            'data-ams-row-value': lambda row, col: get_row_name(row)
+        })
+        source.setdefault('td', {}).update({
+            'data-order': lambda x, col: list(container.keys()).index(x.__name__)
+                if IReorderColumn.providedBy(col) else None
+        })
 
 
 class Table(ObjectDataManagerMixin, BaseTable):
@@ -342,18 +350,19 @@ class I18nColumnMixin:
 
 
 @implementer(IReorderColumn)
-class ReorderColumn(Column):
+class ReorderColumn(ProtectedViewObjectMixin, Column):
     """Reorder column"""
 
     weight = 0
     sortable = 'false'
 
-    css_classes = {
-        'th': 'reorder action',
-        'td': 'sorter action mouse-move'
-    }
-
-    permission = None
+    @property
+    def css_classes(self):
+        has_permission = self.has_permission(self.context)
+        return {
+            'th': f"{'reorder ' if has_permission else ''}action",
+            'td': f"{'sorter mouse-move ' if has_permission else ''}action"
+        }
 
     def has_permission(self, item):
         """Column permission test"""

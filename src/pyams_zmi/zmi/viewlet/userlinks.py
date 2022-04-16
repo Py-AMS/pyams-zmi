@@ -15,11 +15,10 @@
 This module provides "pyams.userlinks" viewlet manager as well as other components which are
 used to add links on top of PyAMS management interface.
 """
-from pyams_file.interfaces.thumbnail import IThumbnails
-from pyams_security.interfaces import UNKNOWN_PRINCIPAL_ID
+
+from pyams_security.interfaces.names import UNKNOWN_PRINCIPAL_ID
 from pyams_skin.viewlet.menu import MenuDivider, MenuItem
 from pyams_template.template import template_config
-from pyams_utils.url import absolute_url
 from pyams_viewlet.manager import TemplateBasedViewletManager, WeightOrderedViewletManager, \
     viewletmanager_config
 from pyams_viewlet.viewlet import viewlet_config

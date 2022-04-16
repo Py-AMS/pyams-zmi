@@ -20,6 +20,7 @@ from zope.interface import Interface, implementer
 
 from pyams_form.button import Buttons
 from pyams_form.field import Fields
+from pyams_form.interfaces.form import IFormFields
 from pyams_pagelet.pagelet import Pagelet
 from pyams_utils.adapter import adapter_config
 from pyams_utils.factory import get_object_factory, is_interface
@@ -42,11 +43,17 @@ class SearchForm(AdminAddForm):
     title = _("Search form")
     legend = _("Search criteria")
 
-    fields = Fields(ISearchInfo)
     buttons = Buttons(ISearchButtons)
 
     ajax_form_handler = 'search-results.html'
     ajax_form_target = '#search-results'
+
+
+@adapter_config(required=(Interface, IAdminLayer, SearchForm),
+                provides=IFormFields)
+def search_form_fields(context, request, form):
+    """Search form fields getter"""
+    return Fields(ISearchInfo)
 
 
 @implementer(ISearchView)

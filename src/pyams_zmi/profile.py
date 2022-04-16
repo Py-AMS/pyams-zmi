@@ -29,8 +29,8 @@ from zope.traversing.interfaces import ITraversable
 
 from pyams_file.image import get_image_selection
 from pyams_file.property import FileProperty
-from pyams_security.interfaces import ADMIN_USER_ID
 from pyams_security.interfaces.base import IPrincipalInfo, PUBLIC_PERMISSION
+from pyams_security.interfaces.names import ADMIN_USER_ID
 from pyams_utils.adapter import ContextRequestAdapter, adapter_config, get_annotation_adapter
 from pyams_utils.factory import factory_config
 from pyams_utils.interfaces.tales import ITALESExtension
