@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.11.1
+------
+ - added i18n domain to inner table template
+ - use f-strings in header viewlet helpers
+
 1.11.0
 ------
  - added support for Python 3.10
