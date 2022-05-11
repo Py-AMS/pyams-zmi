@@ -26,7 +26,7 @@ from pyams_utils.adapter import adapter_config
 from pyams_viewlet.manager import TemplateBasedViewletManager, WeightOrderedViewletManager, \
     viewletmanager_config
 from pyams_viewlet.viewlet import EmptyContentProvider, Viewlet, viewlet_config
-from pyams_zmi.interfaces import IAdminLayer, IAdminView, IPageTitle
+from pyams_zmi.interfaces import IAdminLayer, IPageTitle
 from pyams_zmi.interfaces.configuration import IZMIConfiguration
 from pyams_zmi.interfaces.viewlet import IPageHeaderViewletManager
 from pyams_zmi.utils import get_object_label
@@ -83,9 +83,9 @@ def get_admin_view_title(context, request, view, label=None):
         label = getattr(view, 'header_label', None)
     if not label:
         return object_label
-    return '{} <small><small>' \
-           ' <i class="px-2 fas fa-chevron-right"></i> ' \
-           '{}</small></small>'.format(object_label, translate(label))
+    return f'{object_label} <small><small>' \
+           f' <i class="px-2 fas fa-chevron-right"></i> ' \
+           f'{translate(label)}</small></small>'
 
 
 @adapter_config(required=(Interface, IAdminLayer, Interface),
