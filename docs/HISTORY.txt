@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.11.2
+------
+ - corrected Gitlab-CI configuration
+
 1.11.1
 ------
  - added i18n domain to inner table template
