@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.11.3
+------
+ - use PyAMS_utils *copy_request* function to copy request in favicon view to keep request
+   registry
+
 1.11.2
 ------
  - corrected Gitlab-CI configuration
