@@ -29,6 +29,7 @@ from pyams_layer.interfaces import IPyAMSLayer
 from pyams_skin.interfaces.metas import IHTMLContentMetas
 from pyams_skin.metas import LinkMeta
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
+from pyams_utils.request import copy_request
 from pyams_utils.timezone import tztime
 from pyams_utils.url import absolute_url
 from pyams_zmi.interfaces import IAdminLayer
@@ -75,7 +76,7 @@ def favorite_icon(request):
     """Favorite icon view"""
     configuration = IZMIConfiguration(request.context)
     if configuration.favicon is not None:
-        request = request.copy()
+        request = copy_request(request)
         request.context = configuration.favicon
         return FileView(request)
     return HTTPNotFound()
