@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.11.4
+------
+ - updated translation handler in tables templates
+
 1.11.3
 ------
  - use PyAMS_utils *copy_request* function to copy request in favicon view to keep request
