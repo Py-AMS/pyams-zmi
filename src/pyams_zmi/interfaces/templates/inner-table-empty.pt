@@ -2,7 +2,7 @@
 		 i18n:domain="pyams_zmi">
 	<fieldset class="border position-relative">
 		<legend>
-			<i tal:omit-tag="" i18n:translate="">${view.table_label}</i>
+			<i tal:omit-tag="">${structure:request.localizer.translate(view.table_label)}</i>
 		</legend>
 		<div class="actions-container position-absolute">
 			${structure:provider:pyams.toolbar(view=view.table)}
