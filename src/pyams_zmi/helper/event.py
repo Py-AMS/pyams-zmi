@@ -82,7 +82,7 @@ def get_json_widget_refresh_callback(form, field_name, request=None):
 
 def get_json_table_refresh_callback(context, request, table_factory):
     """Get table refresh callback settings"""
-    factory = get_object_factory(table_factory) if is_interface(table_factory) else table_factory
+    factory = get_object_factory(table_factory)
     table = factory(context, request)
     table.update()
     return {
@@ -97,7 +97,7 @@ def get_json_table_refresh_callback(context, request, table_factory):
 
 def get_json_table_row_add_callback(context, request, table_factory, item):
     """Get table row add callback settings"""
-    factory = get_object_factory(table_factory) if is_interface(table_factory) else table_factory
+    factory = get_object_factory(table_factory)
     table = factory(context, request)
     table.update()
     row = table.setup_row(item)
@@ -114,7 +114,7 @@ def get_json_table_row_add_callback(context, request, table_factory, item):
 
 def get_json_table_row_refresh_callback(context, request, table_factory, item):
     """Get table row refresh callback settings"""
-    factory = get_object_factory(table_factory) if is_interface(table_factory) else table_factory
+    factory = get_object_factory(table_factory)
     table = factory(context, request)
     table.update()
     row = table.setup_row(item)
