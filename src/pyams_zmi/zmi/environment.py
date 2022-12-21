@@ -24,8 +24,8 @@ from pyams_layer.interfaces import IPyAMSLayer
 from pyams_pagelet.pagelet import pagelet_config
 from pyams_security.interfaces.base import MANAGE_SYSTEM_PERMISSION
 from pyams_site.interfaces import ISiteRoot
-from pyams_table.interfaces import IColumn, IValues
-from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
+from pyams_table.interfaces import IColumn
+from pyams_utils.adapter import adapter_config
 from pyams_viewlet.viewlet import ViewContentProvider, viewlet_config
 from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.table import IInnerTable
@@ -75,16 +75,9 @@ class PackagesVersionsTable(Table):
     def id(self):
         return '{}_packages'.format(super().id)
 
-
-@adapter_config(required=(ISiteRoot, IAdminLayer, PackagesVersionsTable),
-                provides=IValues)
-class PackagesVersionsTableValues(ContextRequestViewAdapter):
-    """Packages versions table values"""
-
-    @property
+    @reify
     def values(self):
-        """Packages versions table values getter"""
-        return self.view.environment
+        return self.environment
 
 
 @adapter_config(name='package-name',
@@ -161,16 +154,9 @@ class EnvironmentTable(Table):
     def id(self):
         return '{}_environ'.format(super().id)
 
-
-@adapter_config(required=(ISiteRoot, IAdminLayer, EnvironmentTable),
-                provides=IValues)
-class EnvironmentTableValues(ContextRequestViewAdapter):
-    """Environment table values"""
-
-    @property
+    @reify
     def values(self):
-        """Environment values getter"""
-        return self.view.environ
+        return self.environ
 
 
 @adapter_config(name='setting-name',
@@ -231,16 +217,9 @@ class ConfigurationTable(Table):
     def id(self):
         return '{}_config'.format(super().id)
 
-
-@adapter_config(required=(ISiteRoot, IAdminLayer, ConfigurationTable),
-                provides=IValues)
-class ConfigurationTableValues(ContextRequestViewAdapter):
-    """Configuration settings table values"""
-
-    @property
+    @reify
     def values(self):
-        """Configuration table values getter"""
-        return self.view.settings
+        return self.settings
 
 
 @adapter_config(name='setting-name',
