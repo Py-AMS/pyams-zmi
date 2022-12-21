@@ -45,6 +45,7 @@ class UserProfile(Persistent, Contained):
 
     avatar = FileProperty(IUserProfile['avatar'])
     zmi_bundle = FieldProperty(IUserProfile['zmi_bundle'])
+    tables_length = FieldProperty(IUserProfile['tables_length'])
 
     @staticmethod
     def __acl__():

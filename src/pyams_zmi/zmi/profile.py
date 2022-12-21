@@ -21,11 +21,13 @@ from pyams_form.ajax import AJAXFormRenderer, ajax_form_config
 from pyams_form.field import Fields
 from pyams_form.interfaces.form import IAJAXFormRenderer
 from pyams_layer.interfaces import IPyAMSLayer
+from pyams_table.interfaces import ITable
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
 from pyams_zmi.form import AdminModalEditForm
 from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.configuration import IZMIConfiguration
 from pyams_zmi.interfaces.profile import IUserProfile
+from pyams_zmi.interfaces.table import ITableAdminView, ITableAttributes
 from pyams_zmi.zmi.interfaces import IUserProfileEditForm
 
 
@@ -72,3 +74,18 @@ class UserProfileEditFormRenderer(AJAXFormRenderer):
                 'status': 'redirect'
             }
         return super().render(changes)
+
+
+@adapter_config(name='profile',
+                required=(Interface, IAdminLayer, ITable),
+                provides=ITableAttributes)
+class UserProfileTableAttributesAdapter(ContextRequestViewAdapter):
+    """User profile table attributes adapter"""
+
+    def update_attributes(self, source: dict):
+        """Update source attributes with selected profile length"""
+        profile = IUserProfile(self.request, None)
+        if profile is not None:
+            source.setdefault('table', {}).update({
+                'data-page-length': profile.tables_length
+            })

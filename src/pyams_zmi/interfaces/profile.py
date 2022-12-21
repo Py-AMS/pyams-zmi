@@ -45,5 +45,10 @@ class IUserProfile(IAttributeAnnotatable):
                         vocabulary=USER_BUNDLES_VOCABULARY,
                         required=False)
 
+    tables_length = Choice(title=_("Default tables length"),
+                           description=_("Default length of tables displayed by management interface"),
+                           values=(10, 25, 50, 100),
+                           default=10)
+
     def get_avatar(self, selection='square', size='48x48'):
         """Get URL of avatar thumbnail for given selection and size"""
