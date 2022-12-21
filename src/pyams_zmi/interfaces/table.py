@@ -42,6 +42,13 @@ class ITableAdminView(ITableView, IInnerAdminView):
     table_label = TextLine(title="Inner table label")
 
 
+class ITableAttributes(Interface):
+    """Table data attributes updater interface"""
+
+    def update_attributes(self, source: dict):
+        """Update source settings with new values"""
+
+
 @template_config(template='templates/inner-table.pt')
 @template_config(template='templates/inner-table-empty.pt', name='empty')
 class IInnerTable(IContentProvider):

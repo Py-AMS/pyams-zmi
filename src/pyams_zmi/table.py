@@ -16,6 +16,7 @@ This module provides bases classes for tables management.
 """
 
 import json
+
 from pyramid.decorator import reify
 from zope.component import queryMultiAdapter
 from zope.interface import implementer
@@ -37,10 +38,9 @@ from pyams_utils.list import boolean_iter
 from pyams_utils.url import absolute_url
 from pyams_viewlet.viewlet import ViewContentProvider
 from pyams_zmi.interfaces.table import IInnerTable, IMultipleTableView, IReorderColumn, \
-    ITableAdminView, ITableElementEditor, ITableGroupSwitcher, ITableView
+    ITableAdminView, ITableElementEditor, ITableGroupSwitcher, ITableView, ITableAttributes
 from pyams_zmi.utils import get_object_hint, get_object_icon, get_object_label
 from pyams_zmi.view import InnerAdminView
-
 
 __docformat__ = 'restructuredtext'
 
@@ -162,7 +162,7 @@ class Table(ObjectDataManagerMixin, BaseTable):
         These attributes are to be use with DataTables plug-in, and can be overridden in
         subclasses.
         """
-        return {
+        result = {
             'table': {
                 'id': self.id,
                 'data-ams-location': absolute_url(self.context, self.request)
@@ -182,6 +182,10 @@ class Table(ObjectDataManagerMixin, BaseTable):
                 'data-ams-type': get_column_type
             }
         }
+        for name, adapter in self.request.registry.getAdapters((self.context, self.request, self),
+                                                               ITableAttributes):
+            adapter.update_attributes(result)
+        return result
 
     def get_row_id(self, row):
         """Row ID getter"""
