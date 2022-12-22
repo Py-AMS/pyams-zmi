@@ -47,6 +47,11 @@ __docformat__ = 'restructuredtext'
 from pyams_zmi import _  # pylint: disable=ungrouped-imports
 
 
+def get_name(element):
+    """Element name getter"""
+    return getattr(element, '__name__', None)
+
+
 def get_table_id(table, context=None):
     """Table ID getter"""
     if context is None:
@@ -67,11 +72,6 @@ def get_column_type(column, ignored=None):  # pylint: disable=unused-argument
 def get_row_id(table, element, context=None):
     """Row ID getter"""
     return f'{table.id}::{ICacheKeyValue(element)}'
-
-
-def get_row_name(element):
-    """Row name getter"""
-    return getattr(element, '__name__', None)
 
 
 def get_row_editor(table, element):
@@ -127,7 +127,7 @@ def get_ordered_data_attributes(source, container, request, target='reorder.json
             'data-ams-reorder-url': target
         })
         source.setdefault('tr', {}).update({
-            'data-ams-row-value': lambda row, col: get_row_name(row)
+            'data-ams-row-value': lambda row, col: get_name(row)
         })
         source.setdefault('td', {}).update({
             'data-order': lambda x, col: list(container.keys()).index(x.__name__)
@@ -169,7 +169,7 @@ class Table(ObjectDataManagerMixin, BaseTable):
             },
             'tr': {
                 'id': lambda row, col: self.get_row_id(row),
-                'data-ams-element-name': lambda row, col: get_row_name(row),
+                'data-ams-element-name': lambda row, col: get_name(row),
                 'data-ams-url': lambda row, col: getattr(get_row_editor(self, row), 'href', None),
                 'data-toggle':
                     lambda row, col: 'modal' if getattr(get_row_editor(self, row),
@@ -177,7 +177,7 @@ class Table(ObjectDataManagerMixin, BaseTable):
                     else None
             },
             'th': {
-                'data-ams-column-name': lambda row, col: row.__name__,
+                'data-ams-column-name': lambda row, col: get_name(row),
                 'data-ams-sortable': get_column_sort,
                 'data-ams-type': get_column_type
             }
