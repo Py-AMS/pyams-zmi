@@ -82,6 +82,11 @@ class UserProfileEditFormRenderer(AJAXFormRenderer):
 class UserProfileTableAttributesAdapter(ContextRequestViewAdapter):
     """User profile table attributes adapter"""
 
+    def __new__(cls, context, request, view):
+        if getattr(request, 'principal', None) is None:
+            return None
+        return ContextRequestViewAdapter.__new__(cls)
+
     def update_attributes(self, source: dict):
         """Update source attributes with selected profile length"""
         profile = IUserProfile(self.request, None)
