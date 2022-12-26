@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.12.0
+------
+ - added interface to handle custom table data attributes adapters
+ - added default tables length in user profile
+ - added support for Python 3.10 and 3.11
+
 1.11.4
 ------
  - updated translation handler in tables templates

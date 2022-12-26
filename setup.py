@@ -20,10 +20,10 @@ from setuptools import setup, find_packages
 DOCS = os.path.join(os.path.dirname(__file__),
                     'docs')
 
-README = os.path.join(DOCS, 'README.txt')
-HISTORY = os.path.join(DOCS, 'HISTORY.txt')
+README = os.path.join(DOCS, 'README.rst')
+HISTORY = os.path.join(DOCS, 'HISTORY.rst')
 
-version = '1.11.4'
+version = '1.12.0'
 long_description = open(README).read() + '\n\n' + open(HISTORY).read()
 
 tests_require = [
@@ -72,7 +72,7 @@ setup(name='pyams_zmi',
           'pyams_security >= 1.8.1',
           'pyams_site',
           'pyams_skin',
-          'pyams_table',
+          'pyams_table >= 1.3.1',
           'pyams_template',
           'pyams_utils',
           'pyams_viewlet',
