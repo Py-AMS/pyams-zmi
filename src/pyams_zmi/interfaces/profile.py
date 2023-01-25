@@ -20,12 +20,12 @@ from zope.annotation import IAttributeAnnotatable
 from zope.schema import Choice
 
 from pyams_file.schema import ThumbnailImageField
+from pyams_zmi.interfaces.configuration import USER_BUNDLES_VOCABULARY
 
 
 __docformat__ = 'restructuredtext'
 
 from pyams_zmi import _
-from pyams_zmi.interfaces.configuration import USER_BUNDLES_VOCABULARY
 
 
 USER_PROFILE_KEY = 'pyams_zmi.profile'
@@ -46,7 +46,8 @@ class IUserProfile(IAttributeAnnotatable):
                         required=False)
 
     tables_length = Choice(title=_("Default tables length"),
-                           description=_("Default length of tables displayed by management interface"),
+                           description=_("Default length of tables displayed by management "
+                                         "interface"),
                            values=(10, 25, 50, 100),
                            default=10)
 

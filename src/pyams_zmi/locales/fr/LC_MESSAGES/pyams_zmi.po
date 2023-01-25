@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2022-03-04 22:24+0100\n"
+"POT-Creation-Date: 2023-01-20 17:39+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,33 +19,37 @@ msgstr ""
 msgid "PyAMS management skin"
 msgstr "PyAMS: skin MyAMS"
 
-#: src/pyams_zmi/table.py:359 src/pyams_zmi/zmi/registry.py:95
+#: src/pyams_zmi/table.py:405 src/pyams_zmi/zmi/registry.py:95
 msgid "Name"
 msgstr "Nom"
 
-#: src/pyams_zmi/table.py:551
+#: src/pyams_zmi/table.py:597
 msgid "Click to show/hide item"
 msgstr "Cliquez pour afficher/masquer cet élément"
 
-#: src/pyams_zmi/table.py:553
+#: src/pyams_zmi/table.py:599
 msgid "This element is visible"
 msgstr "Cet élément est visible"
 
-#: src/pyams_zmi/table.py:555
+#: src/pyams_zmi/table.py:601
 msgid "This element is not visible"
 msgstr "Cet élément n'est pas visible"
 
-#: src/pyams_zmi/table.py:562
+#: src/pyams_zmi/table.py:608
 msgid "Delete element"
 msgstr "Supprimer cet élément"
 
-#: src/pyams_zmi/search.py:42
+#: src/pyams_zmi/search.py:43
 msgid "Search form"
 msgstr "Rechercher"
 
-#: src/pyams_zmi/search.py:43
+#: src/pyams_zmi/search.py:44
 msgid "Search criteria"
 msgstr "Critères de recherche"
+
+#: src/pyams_zmi/interfaces/table.py:75
+msgid "Switcher legend"
+msgstr "Légende du switch"
 
 #: src/pyams_zmi/interfaces/profile.py:37
 msgid "Profile's avatar"
@@ -68,29 +72,39 @@ msgstr ""
 "Vous pouvez sélectionner un thème graphique parmi ceux qui ont été mis à "
 "votre disposition"
 
-#: src/pyams_zmi/interfaces/form.py:50 src/pyams_zmi/interfaces/form.py:60
+#: src/pyams_zmi/interfaces/profile.py:48
+msgid "Default tables length"
+msgstr "Longueur des tableaux"
+
+#: src/pyams_zmi/interfaces/profile.py:49
+msgid "Default length of tables displayed by management interface"
+msgstr ""
+"Longueur de page par défaut des tableaux affichés dans l'interface "
+"d'administration"
+
+#: src/pyams_zmi/interfaces/form.py:62 src/pyams_zmi/interfaces/form.py:73
 msgid "Add"
 msgstr "Ajouter"
 
-#: src/pyams_zmi/interfaces/form.py:53 src/pyams_zmi/interfaces/form.py:73
-#: src/pyams_zmi/interfaces/form.py:149
+#: src/pyams_zmi/interfaces/form.py:66 src/pyams_zmi/interfaces/form.py:88
+#: src/pyams_zmi/interfaces/form.py:165
 msgid "Reset"
 msgstr "Annuler"
 
-#: src/pyams_zmi/interfaces/form.py:63 src/pyams_zmi/interfaces/form.py:83
-#: src/pyams_zmi/interfaces/form.py:94
+#: src/pyams_zmi/interfaces/form.py:77 src/pyams_zmi/interfaces/form.py:99
+#: src/pyams_zmi/interfaces/form.py:110
 msgid "Cancel"
 msgstr "Annuler"
 
-#: src/pyams_zmi/interfaces/form.py:70 src/pyams_zmi/interfaces/form.py:80
+#: src/pyams_zmi/interfaces/form.py:84 src/pyams_zmi/interfaces/form.py:95
 msgid "Apply"
 msgstr "Enregistrer"
 
-#: src/pyams_zmi/interfaces/form.py:141
+#: src/pyams_zmi/interfaces/form.py:157
 msgid "Search for"
 msgstr "Texte recherché"
 
-#: src/pyams_zmi/interfaces/form.py:147
+#: src/pyams_zmi/interfaces/form.py:163
 msgid "Search"
 msgstr "Chercher"
 
@@ -363,7 +377,7 @@ msgstr "Revenir à la page précédente"
 msgid "This table is empty."
 msgstr "Cette table ne contient aucun élément."
 
-#: src/pyams_zmi/interfaces/templates/inner-table.pt:14
+#: src/pyams_zmi/interfaces/templates/inner-table.pt:15
 #: src/pyams_zmi/interfaces/templates/table.pt:19
 msgid "WARNING: only the first ${length} results are displayed in this table!"
 msgstr ""
@@ -408,39 +422,39 @@ msgstr "Environnement"
 msgid "Application runtime environment"
 msgstr "Environnement de l'application"
 
-#: src/pyams_zmi/zmi/environment.py:96
+#: src/pyams_zmi/zmi/environment.py:89
 msgid "Package name"
 msgstr "Nom du package"
 
-#: src/pyams_zmi/zmi/environment.py:111
+#: src/pyams_zmi/zmi/environment.py:104
 msgid "Version"
 msgstr "Version"
 
-#: src/pyams_zmi/zmi/environment.py:126
+#: src/pyams_zmi/zmi/environment.py:119
 msgid "Path"
 msgstr "Chemin"
 
-#: src/pyams_zmi/zmi/environment.py:142
+#: src/pyams_zmi/zmi/environment.py:135
 msgid "Packages versions"
 msgstr "Packages Python"
 
-#: src/pyams_zmi/zmi/environment.py:182
+#: src/pyams_zmi/zmi/environment.py:168
 msgid "Variable name"
 msgstr "Nom de la variable"
 
-#: src/pyams_zmi/zmi/environment.py:196 src/pyams_zmi/zmi/environment.py:266
+#: src/pyams_zmi/zmi/environment.py:182 src/pyams_zmi/zmi/environment.py:245
 msgid "Value"
 msgstr "Valeur"
 
-#: src/pyams_zmi/zmi/environment.py:212
+#: src/pyams_zmi/zmi/environment.py:198
 msgid "Environment variables"
 msgstr "Variables d'environnement"
 
-#: src/pyams_zmi/zmi/environment.py:252
+#: src/pyams_zmi/zmi/environment.py:231
 msgid "Setting name"
 msgstr "Nom du paramètre"
 
-#: src/pyams_zmi/zmi/environment.py:282
+#: src/pyams_zmi/zmi/environment.py:261
 msgid "Configuration settings"
 msgstr "Paramètres de configuration"
 
@@ -529,13 +543,13 @@ msgstr "Panneau de configuration"
 msgid "Properties"
 msgstr "Propriétés"
 
-#: src/pyams_zmi/zmi/profile.py:43
+#: src/pyams_zmi/zmi/profile.py:45
 #: src/pyams_zmi/zmi/viewlet/templates/user-menu.pt:7
 #: src/pyams_zmi/zmi/viewlet/templates/user-menu.pt:5
 msgid "User profile"
 msgstr "Mon profil"
 
-#: src/pyams_zmi/zmi/profile.py:60
+#: src/pyams_zmi/zmi/profile.py:62
 msgid "Use default theme"
 msgstr "Utiliser le thème par défaut"
 
@@ -555,7 +569,7 @@ msgstr "Ajouter..."
 msgid "Actions"
 msgstr "Actions"
 
-#: src/pyams_zmi/zmi/viewlet/userlinks.py:97
+#: src/pyams_zmi/zmi/viewlet/userlinks.py:96
 msgid "Logout"
 msgstr "Déconnexion"
 
