@@ -16,6 +16,7 @@ This module provides all base form-related classes to be used into PyAMS managem
 interface.
 """
 
+import json
 from pyramid.decorator import reify
 from zope.interface import Interface, implementer
 from zope.schema.fieldproperty import FieldProperty
@@ -28,12 +29,12 @@ from pyams_form.interfaces import DISPLAY_MODE
 from pyams_form.subform import InnerAddForm, InnerDisplayForm, InnerEditForm
 from pyams_i18n.schema import II18nField
 from pyams_skin.interfaces.view import IInnerPage, IModalPage
-from pyams_utils.adapter import query_adapter
+from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config, query_adapter
 from pyams_utils.data import ObjectDataManagerMixin
+from pyams_utils.interfaces.tales import ITALESExtension
 from pyams_zmi.interfaces.form import IAddFormButtons, IDisplayFormButtons, IEditFormButtons, \
     IFormGroupChecker, IFormGroupSwitcher, IFormTitle, IModalAddFormButtons, \
-    IModalDisplayFormButtons, \
-    IModalEditFormButtons
+    IModalDisplayFormButtons, IModalEditFormButtons
 from pyams_zmi.view import AdminView
 
 
@@ -216,6 +217,30 @@ class FormGroupSwitcher(ObjectDataManagerMixin, Group):
                             return 'open'
                 return 'open'
         return 'closed'
+
+
+@adapter_config(name="switch_data",
+                required=(Interface, Interface, Interface),
+                provides=ITALESExtension)
+class FormGroupSwitcherDataTALESExtension(ContextRequestViewAdapter):
+    """Form group switcher data TALES extension
+
+    This helper extension is used in a form group template to check if this group
+    is a form group switcher .
+    """
+
+    def render(self, view=None):
+        """Extension renderer"""
+        if view is None:
+            view = self.view
+        switcher = IFormGroupSwitcher(view, None)
+        if switcher is None:
+            return None
+        return json.dumps({
+            'ams-minus-class': switcher.minus_class,
+            'ams-plus-class': switcher.plus_class,
+            'ams-switcher-state': switcher.state
+        })
 
 
 #

@@ -3,8 +3,12 @@
 	 tal:omit-tag="view.legend">
 	<fieldset class="border"
 			  tal:omit-tag="not:view.legend">
-		<legend tal:condition="view.legend"
-				i18n:translate="">${view.legend}</legend>
+		<tal:if condition="view.legend">
+			<legend tal:define="switch_data tales:switch_data(view)"
+					class="${'switcher' if switch_data else None}"
+					data-ams-data='${switch_data}'
+					i18n:translate="">${view.legend}</legend>
+		</tal:if>
 		<i tal:omit-tag="">${structure:provider:pyams.help}</i>
 		<i tal:omit-tag="">${structure:provider:pyams.prefix}</i>
 		<tal:loop repeat="widget view.widgets.values()">
