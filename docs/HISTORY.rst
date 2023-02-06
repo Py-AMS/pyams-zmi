@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.12.1
+------
+ - added support for group switchers in standard form groups
+
 1.12.0
 ------
  - added interface to handle custom table data attributes adapters
