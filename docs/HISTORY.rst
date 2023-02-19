@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.12.2
+------
+ - added generic properties edit form marker interface
+
 1.12.1
 ------
  - added support for group switchers in standard form groups
