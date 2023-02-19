@@ -40,6 +40,10 @@ override_template(IInnerSubForm, template='templates/form-group.pt', layer=IAdmi
 override_template(IInnerTabForm, template='templates/form-tabform.pt', layer=IAdminLayer)
 
 
+class IPropertiesEditForm(Interface):
+    """Properties edit form marker interface"""
+
+
 class IFormTitle(Interface):
     """Form title getter interface"""
 
