@@ -55,8 +55,10 @@ def site_root_label(context, request, view):
         request.localizer.translate(_("Home"))
 
 
-@viewletmanager_config(name='configuration.menu', context=ISiteRoot, layer=IAdminLayer,
-                       manager=IControlPanelMenu, weight=10, permission=MANAGE_SYSTEM_PERMISSION,
+@viewletmanager_config(name='configuration.menu',
+                       context=ISiteRoot, layer=IAdminLayer,
+                       manager=IControlPanelMenu, weight=10,
+                       permission=MANAGE_SYSTEM_PERMISSION,
                        provides=IConfigurationMenu)
 class ConfigurationMenu(NavigationMenuItem):
     """Configuration menu"""
@@ -65,8 +67,10 @@ class ConfigurationMenu(NavigationMenuItem):
     icon_class = 'fas fa-sliders-h'
 
 
-@viewletmanager_config(name='zmi-configuration.menu', context=ISiteRoot, layer=IAdminLayer,
-                       manager=IConfigurationMenu, weight=10, permission=MANAGE_SYSTEM_PERMISSION)
+@viewletmanager_config(name='zmi-configuration.menu',
+                       context=ISiteRoot, layer=IAdminLayer,
+                       manager=IConfigurationMenu, weight=10,
+                       permission=MANAGE_SYSTEM_PERMISSION)
 class ZMIConfigurationMenu(NavigationMenuItem):
     """ZMI configuration menu"""
 
@@ -75,7 +79,8 @@ class ZMIConfigurationMenu(NavigationMenuItem):
     href = '#zmi-configuration.html'
 
 
-@ajax_form_config(name='zmi-configuration.html', context=ISiteRoot, layer=IPyAMSLayer,
+@ajax_form_config(name='zmi-configuration.html',
+                  context=ISiteRoot, layer=IPyAMSLayer,
                   permission=MANAGE_SYSTEM_PERMISSION)
 class ZMIConfigurationForm(AdminEditForm):
     """ZMI configuration form"""
