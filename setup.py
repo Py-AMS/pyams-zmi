@@ -23,7 +23,7 @@ DOCS = os.path.join(os.path.dirname(__file__),
 README = os.path.join(DOCS, 'README.rst')
 HISTORY = os.path.join(DOCS, 'HISTORY.rst')
 
-version = '1.12.2'
+version = '1.13.0'
 long_description = open(README).read() + '\n\n' + open(HISTORY).read()
 
 tests_require = [
@@ -88,5 +88,8 @@ setup(name='pyams_zmi',
       entry_points={
           'zodbupdate': [
               'renames = pyams_zmi.generations.zodbupdate:RENAMED_CLASSES'
+          ],
+          'fanstatic.libraries': [
+              'pyams_zmi = pyams_zmi.zmi:library'
           ]
       })

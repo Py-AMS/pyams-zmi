@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.13.0
+------
+ - added Swagger-UI plug-in
+
 1.12.2
 ------
  - added generic properties edit form marker interface
