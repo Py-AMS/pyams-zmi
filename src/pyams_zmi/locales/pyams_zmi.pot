@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2023-01-20 17:39+0100\n"
+"POT-Creation-Date: 2023-02-20 17:39+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -77,29 +77,29 @@ msgstr ""
 msgid "Default length of tables displayed by management interface"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/form.py:62 ./src/pyams_zmi/interfaces/form.py:73
+#: ./src/pyams_zmi/interfaces/form.py:66 ./src/pyams_zmi/interfaces/form.py:77
 msgid "Add"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/form.py:66 ./src/pyams_zmi/interfaces/form.py:88
-#: ./src/pyams_zmi/interfaces/form.py:165
+#: ./src/pyams_zmi/interfaces/form.py:70 ./src/pyams_zmi/interfaces/form.py:92
+#: ./src/pyams_zmi/interfaces/form.py:169
 msgid "Reset"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/form.py:77 ./src/pyams_zmi/interfaces/form.py:99
-#: ./src/pyams_zmi/interfaces/form.py:110
+#: ./src/pyams_zmi/interfaces/form.py:81 ./src/pyams_zmi/interfaces/form.py:103
+#: ./src/pyams_zmi/interfaces/form.py:114
 msgid "Cancel"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/form.py:84 ./src/pyams_zmi/interfaces/form.py:95
+#: ./src/pyams_zmi/interfaces/form.py:88 ./src/pyams_zmi/interfaces/form.py:99
 msgid "Apply"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/form.py:157
+#: ./src/pyams_zmi/interfaces/form.py:161
 msgid "Search for"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/form.py:163
+#: ./src/pyams_zmi/interfaces/form.py:167
 msgid "Search"
 msgstr ""
 
@@ -432,6 +432,10 @@ msgstr ""
 
 #: ./src/pyams_zmi/zmi/environment.py:261
 msgid "Configuration settings"
+msgstr ""
+
+#: ./src/pyams_zmi/zmi/swagger.py:44
+msgid "Swagger API"
 msgstr ""
 
 #: ./src/pyams_zmi/zmi/skin.py:46 ./src/pyams_zmi/zmi/skin.py:60

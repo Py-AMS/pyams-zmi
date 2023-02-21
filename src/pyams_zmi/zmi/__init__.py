@@ -15,6 +15,7 @@
 This module defines the global management interface view!
 """
 
+from fanstatic import Library, Resource
 from zope.interface import Interface
 
 from pyams_layer.interfaces import IPyAMSLayer
@@ -26,6 +27,23 @@ from pyams_zmi.view import AdminView
 
 
 __docformat__ = 'restructuredtext'
+
+
+library = Library('pyams_zmi', 'resources')
+
+swagger_css = Resource(library, 'css/swagger-ui.min.css')
+
+swagger_ui = Resource(library, 'js/swagger-ui-bundle.min.js',
+                      bottom=True)
+
+swagger_presets = Resource(library, 'js/swagger-ui-standalone-preset.min.js',
+                           depends=(swagger_ui,),
+                           bottom=True)
+
+swagger_init = Resource(library, 'js/swagger-initializer.js',
+                        minified='js/swagger-initializer.min.js',
+                        depends=(swagger_css, swagger_presets),
+                        bottom=True)
 
 
 @pagelet_config(name='admin', context=Interface, layer=IPyAMSLayer,
