@@ -19,6 +19,7 @@ import json
 
 from pyramid.decorator import reify
 from zope.component import queryMultiAdapter
+from zope.container.interfaces import IContainer
 from zope.interface import implementer
 from zope.schema.fieldproperty import FieldProperty
 
@@ -217,6 +218,20 @@ class Table(ObjectDataManagerMixin, BaseTable):
         return super().render_cell(item, column, colspan) \
             .replace('<td', f"<td {self.get_css_class('td', None, item, column)}") \
             .replace('<td', f"<td {get_attributes(self, 'td', item, column)}")
+
+
+class SortableTable(Table):
+    """Sortable table class"""
+
+    container_class = IContainer
+
+    @property
+    def data_attributes(self):
+        """Attributes getter"""
+        attributes = super().data_attributes
+        container = self.container_class(self.context)
+        get_ordered_data_attributes(attributes, container, self.request)
+        return attributes
 
 
 class InnerTableMixin:
