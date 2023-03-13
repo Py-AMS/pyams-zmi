@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.14.0
+------
+ - added base sortable class
+ - added form legend getter interface
+ - added form errors
+
 1.13.0
 ------
  - added Swagger-UI plug-in
