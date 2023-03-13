@@ -48,6 +48,10 @@ class IFormTitle(Interface):
     """Form title getter interface"""
 
 
+class IFormLegend(Interface):
+    """Form legend getter interface"""
+
+
 def check_submit_button(form):
     """Submit button checker"""
     if form.mode != INPUT_MODE:

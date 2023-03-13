@@ -33,7 +33,7 @@ from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config, query
 from pyams_utils.data import ObjectDataManagerMixin
 from pyams_utils.interfaces.tales import ITALESExtension
 from pyams_zmi.interfaces.form import IAddFormButtons, IDisplayFormButtons, IEditFormButtons, \
-    IFormGroupChecker, IFormGroupSwitcher, IFormTitle, IModalAddFormButtons, \
+    IFormGroupChecker, IFormGroupSwitcher, IFormLegend, IFormTitle, IModalAddFormButtons, \
     IModalDisplayFormButtons, IModalEditFormButtons
 from pyams_zmi.view import AdminView
 
@@ -49,6 +49,21 @@ class BaseFormMixin:
         """Title getter"""
         title = query_adapter(IFormTitle, self.request, self.context, self)
         return title or super().title
+
+    _legend = None
+
+    @property
+    def legend(self):
+        """Legend getter"""
+        if self._legend is not None:
+            return self._legend
+        legend = query_adapter(IFormLegend, self.request, self.context, self)
+        return legend or super().legend
+
+    @legend.setter
+    def legend(self, value):
+        """Legend setter"""
+        self._legend = value
 
 
 #
