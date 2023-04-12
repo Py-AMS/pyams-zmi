@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.14.1
+------
+ - moved Swagger specifications and Swagger-UI view from PyAMS_utils package
+
 1.14.0
 ------
  - added base sortable class
@@ -23,7 +27,7 @@ Changelog
 ------
  - added interface to handle custom table data attributes adapters
  - added default tables length in user profile
- - added support for Python 3.10 and 3.11
+ - added support for Python 3.11
 
 1.11.4
 ------
