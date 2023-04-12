@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2023-02-20 17:39+0100\n"
+"POT-Creation-Date: 2023-04-12 16:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,23 +20,23 @@ msgstr ""
 msgid "PyAMS management skin"
 msgstr ""
 
-#: ./src/pyams_zmi/table.py:405 ./src/pyams_zmi/zmi/registry.py:95
+#: ./src/pyams_zmi/table.py:420 ./src/pyams_zmi/zmi/registry.py:95
 msgid "Name"
 msgstr ""
 
-#: ./src/pyams_zmi/table.py:597
+#: ./src/pyams_zmi/table.py:612
 msgid "Click to show/hide item"
 msgstr ""
 
-#: ./src/pyams_zmi/table.py:599
+#: ./src/pyams_zmi/table.py:614
 msgid "This element is visible"
 msgstr ""
 
-#: ./src/pyams_zmi/table.py:601
+#: ./src/pyams_zmi/table.py:616
 msgid "This element is not visible"
 msgstr ""
 
-#: ./src/pyams_zmi/table.py:608
+#: ./src/pyams_zmi/table.py:623
 msgid "Delete element"
 msgstr ""
 
@@ -77,29 +77,29 @@ msgstr ""
 msgid "Default length of tables displayed by management interface"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/form.py:66 ./src/pyams_zmi/interfaces/form.py:77
+#: ./src/pyams_zmi/interfaces/form.py:70 ./src/pyams_zmi/interfaces/form.py:81
 msgid "Add"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/form.py:70 ./src/pyams_zmi/interfaces/form.py:92
-#: ./src/pyams_zmi/interfaces/form.py:169
+#: ./src/pyams_zmi/interfaces/form.py:74 ./src/pyams_zmi/interfaces/form.py:96
+#: ./src/pyams_zmi/interfaces/form.py:173
 msgid "Reset"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/form.py:81 ./src/pyams_zmi/interfaces/form.py:103
-#: ./src/pyams_zmi/interfaces/form.py:114
+#: ./src/pyams_zmi/interfaces/form.py:85 ./src/pyams_zmi/interfaces/form.py:107
+#: ./src/pyams_zmi/interfaces/form.py:118
 msgid "Cancel"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/form.py:88 ./src/pyams_zmi/interfaces/form.py:99
+#: ./src/pyams_zmi/interfaces/form.py:92 ./src/pyams_zmi/interfaces/form.py:103
 msgid "Apply"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/form.py:161
+#: ./src/pyams_zmi/interfaces/form.py:165
 msgid "Search for"
 msgstr ""
 
-#: ./src/pyams_zmi/interfaces/form.py:167
+#: ./src/pyams_zmi/interfaces/form.py:171
 msgid "Search"
 msgstr ""
 
@@ -364,28 +364,28 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
-#: ./src/pyams_zmi/zmi/configuration.py:64
+#: ./src/pyams_zmi/zmi/configuration.py:66
 msgid "Configuration"
 msgstr ""
 
-#: ./src/pyams_zmi/zmi/configuration.py:73
-#: ./src/pyams_zmi/zmi/configuration.py:83
+#: ./src/pyams_zmi/zmi/configuration.py:77
+#: ./src/pyams_zmi/zmi/configuration.py:88
 msgid "ZMI configuration"
 msgstr ""
 
-#: ./src/pyams_zmi/zmi/configuration.py:84
+#: ./src/pyams_zmi/zmi/configuration.py:89
 msgid "Interface configuration"
 msgstr ""
 
-#: ./src/pyams_zmi/zmi/configuration.py:170
+#: ./src/pyams_zmi/zmi/configuration.py:175
 msgid "Warning!"
 msgstr ""
 
-#: ./src/pyams_zmi/zmi/configuration.py:171
+#: ./src/pyams_zmi/zmi/configuration.py:176
 msgid "Removing navigation menus will also remove access to this form..."
 msgstr ""
 
-#: ./src/pyams_zmi/zmi/configuration.py:192
+#: ./src/pyams_zmi/zmi/configuration.py:197
 msgid "Custom extensions"
 msgstr ""
 
