@@ -62,6 +62,8 @@ setup(name='pyams_zmi',
       install_requires=[
           'setuptools',
           # -*- Extra requirements: -*-
+          'cornice',
+          'cornice_swagger',
           'myams_js',
           'persistent',
           'pyams_file',
