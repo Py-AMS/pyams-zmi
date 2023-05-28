@@ -14,7 +14,7 @@
 
 """
 
-from pyams_skin.viewlet.breadcrumb import BreadcrumbsAdapter
+from pyams_skin.viewlet.breadcrumb import LocationBreadcrumbs
 from pyams_template.template import override_template
 from pyams_zmi.interfaces import IAdminLayer
 
@@ -22,5 +22,5 @@ from pyams_zmi.interfaces import IAdminLayer
 __docformat__ = 'restructuredtext'
 
 
-override_template(BreadcrumbsAdapter,
+override_template(LocationBreadcrumbs,
                   template='templates/breadcrumbs.pt', layer=IAdminLayer)
