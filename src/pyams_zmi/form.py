@@ -18,6 +18,7 @@ interface.
 
 import json
 from pyramid.decorator import reify
+from zope.container.interfaces import IContainer
 from zope.interface import Interface, implementer
 from zope.schema.fieldproperty import FieldProperty
 
@@ -32,6 +33,8 @@ from pyams_skin.interfaces.view import IInnerPage, IModalPage
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config, query_adapter
 from pyams_utils.data import ObjectDataManagerMixin
 from pyams_utils.interfaces.tales import ITALESExtension
+from pyams_utils.traversing import get_parent
+from pyams_zmi.helper.event import get_json_table_row_add_callback, get_json_table_row_refresh_callback
 from pyams_zmi.interfaces.form import IAddFormButtons, IDisplayFormButtons, IEditFormButtons, \
     IFormGroupChecker, IFormGroupSwitcher, IFormLegend, IFormTitle, IModalAddFormButtons, \
     IModalDisplayFormButtons, IModalEditFormButtons
@@ -289,3 +292,45 @@ class FormGroupChecker(ObjectDataManagerMixin, Group):
     def checker_state(self):
         """Checker state getter"""
         return 'on' if 'selected' in self.checker_widget.value else 'off'
+
+
+#
+# Simple form renderers
+#
+
+class SimpleAddFormRenderer(ContextRequestViewAdapter):
+    """Simple add form renderer"""
+
+    table_factory = None
+
+    def render(self, changes):
+        """AJAX form renderer"""
+        if changes is None:
+            return None
+        return {
+            'status': 'success',
+            'callbacks': [
+                get_json_table_row_add_callback(self.context, self.request,
+                                                self.table_factory, changes)
+            ]
+        }
+
+
+class SimpleEditFormRenderer(ContextRequestViewAdapter):
+    """Simple edit form renderer"""
+
+    parent_interface = IContainer
+    table_factory = None
+
+    def render(self, changes):
+        """AJAX form renderer"""
+        if not changes:
+            return None
+        target = get_parent(self.context, self.parent_interface)
+        return {
+            'status': 'success',
+            'callbacks': [
+                get_json_table_row_refresh_callback(target, self.request,
+                                                    self.table_factory, self.context)
+            ]
+        }
