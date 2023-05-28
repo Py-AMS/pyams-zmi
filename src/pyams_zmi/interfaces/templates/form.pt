@@ -1,4 +1,5 @@
-<section class="rounded-lg"
+<section class="rounded-lg ${getattr(view, 'section_class', '')}"
+         tal:omit-tag="getattr(view, 'hide_section', False)"
 		 data-ams-modules="form plugins"
 		 i18n:domain="pyams_zmi">
 	<h2 class="bg-secondary-modal d-flex flex-wrap pl-3 py-2-modal"
