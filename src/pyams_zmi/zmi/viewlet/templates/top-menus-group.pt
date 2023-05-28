@@ -4,13 +4,15 @@
 	<ul class="nav nav-tabs flex-nowrap">
 		<li class="nav-item"
 			tal:repeat="menu view.viewlets">
-			<a href="#" class="nav-link dropdown-toggle px-2 py-1 bg-white" data-toggle="dropdown"
-			   aria-expanded="false">${menu.label}</a>
-			<span class="dropdown-menu">
-				<tal:loop repeat="item menu.viewlets">
-					${structure:item.render()}
-				</tal:loop>
-			</span>
+            <tal:if condition="menu.viewlets">
+                <a href="#" class="nav-link dropdown-toggle px-2 py-1 bg-white" data-toggle="dropdown"
+                   aria-expanded="false">${menu.label}</a>
+                <span class="dropdown-menu">
+                    <tal:loop repeat="item menu.viewlets">
+                        ${structure:item.render()}
+                    </tal:loop>
+                </span>
+            </tal:if>
 		</li>
 	</ul>
 </div>
