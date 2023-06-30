@@ -19,7 +19,7 @@ from zope.interface import Interface, alsoProvides, implementer
 
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
-from pyams_form.interfaces.form import IAJAXFormRenderer, IForm, IGroup, IInnerSubForm
+from pyams_form.interfaces.form import IAJAXFormRenderer, IGroup, IInnerSubForm
 from pyams_form.subform import InnerEditForm
 from pyams_layer.interfaces import IPyAMSLayer, ISkinnable, IUserSkinnable, MANAGE_SKIN_PERMISSION
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
@@ -28,8 +28,7 @@ from pyams_zmi.form import AdminEditForm, FormGroupChecker
 from pyams_zmi.helper.event import get_json_widget_refresh_callback
 from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.viewlet import IPropertiesMenu
-from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
-
+from pyams_zmi.zmi.viewlet.menu import NavigationMenuDivider, NavigationMenuItem
 
 __docformat__ = 'restructuredtext'
 
@@ -38,13 +37,21 @@ from pyams_zmi import _
 
 @viewlet_config(name='user-skin-properties.menu',
                 context=IUserSkinnable, layer=IAdminLayer,
-                manager=IPropertiesMenu, weight=500,
+                manager=IPropertiesMenu, weight=5,
                 permission=MANAGE_SKIN_PERMISSION)
 class UserSkinnablePropertiesMenuItem(NavigationMenuItem):
     """User skin properties menu"""
 
     label = _("Graphic theme")
     href = '#user-skin-properties.html'
+
+
+@viewlet_config(name='user-skin-properties.divider',
+                context=IUserSkinnable, layer=IAdminLayer,
+                manager=IPropertiesMenu, weight=6,
+                permission=MANAGE_SKIN_PERMISSION)
+class UserSkinnablePropertiesMenuDivider(NavigationMenuDivider):
+    """User skin properties menu divider"""
 
 
 class IUserSkinPropertiesForm(Interface):
