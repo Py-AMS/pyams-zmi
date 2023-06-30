@@ -119,5 +119,9 @@ class IContextAddingsViewletManager(IDropdownMenu):
     """Context addings viewlet manager"""
 
 
-class IActionsViewletManager(IViewletManager):
+class IContextActionsDropdownMenu(IViewletManager):
     """Custom actions menu viewlet manager"""
+
+
+class ISecondaryActionsViewletManager(IViewletManager):
+    """Custom secondary actions viewlet manager"""
