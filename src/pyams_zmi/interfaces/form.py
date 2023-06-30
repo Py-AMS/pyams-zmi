@@ -123,10 +123,10 @@ class IFormGroupSwitcher(IGroup):
     """Form group switcher interface"""
 
     minus_class = TextLine(title="Expanded switcher FontAwesome CSS class (without prefix)",
-                           default='minus')
+                           default='chevron-down')
 
     plus_class = TextLine(title="Reduced switcher FontAwesome CSS class (without prefix)",
-                          default='plus')
+                          default='chevron-right')
 
     switcher_mode = Choice(title="Switcher display mode",
                            values=('always', 'never', 'auto'),
