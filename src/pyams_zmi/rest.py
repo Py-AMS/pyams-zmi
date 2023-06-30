@@ -10,8 +10,9 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-"""PyAMS_*** module
+"""PyAMS_zmi.rest module
 
+This module defines PyAMS API documentation service.
 """
 
 from cornice import Service
