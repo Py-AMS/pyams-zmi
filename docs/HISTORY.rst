@@ -1,6 +1,13 @@
 Changelog
 =========
 
+1.15.0
+------
+ - added support for permissions on menus
+ - added simple add and edit forms renderers
+ - added secondary context actions viewlet
+ - updated group and table switcher button style
+
 1.14.1
 ------
  - moved Swagger specifications and Swagger-UI view from PyAMS_utils package
