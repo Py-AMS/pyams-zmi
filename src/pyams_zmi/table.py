@@ -20,16 +20,18 @@ import json
 from pyramid.decorator import reify
 from zope.component import queryMultiAdapter
 from zope.container.interfaces import IContainer
-from zope.interface import implementer
+from zope.interface import Interface, implementer
 from zope.schema.fieldproperty import FieldProperty
 
 from pyams_security.interfaces import ISecurityContext
 from pyams_security.permission import get_edit_permission, get_permission_checker
 from pyams_security.security import ProtectedViewObjectMixin
+from pyams_skin.viewlet.menu import DropdownMenu
 from pyams_table.column import Column, GetAttrColumn
+from pyams_table.interfaces import IColumn
 from pyams_table.table import Table as BaseTable, get_weight
 from pyams_template.template import get_view_template
-from pyams_utils.adapter import ContextRequestViewAdapter
+from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
 from pyams_utils.data import ObjectDataManagerMixin
 from pyams_utils.date import SH_DATE_FORMAT, format_datetime
 from pyams_utils.factory import get_object_factory
@@ -37,20 +39,18 @@ from pyams_utils.interfaces import ICacheKeyValue
 from pyams_utils.interfaces.data import IObjectData
 from pyams_utils.list import boolean_iter
 from pyams_utils.url import absolute_url
+from pyams_viewlet.interfaces import IViewletManager
+from pyams_viewlet.manager import viewletmanager_config
 from pyams_viewlet.viewlet import ViewContentProvider
-from pyams_zmi.interfaces.table import IInnerTable, IMultipleTableView, IReorderColumn, \
-    ITableAdminView, ITableElementEditor, ITableGroupSwitcher, ITableView, ITableAttributes
-from pyams_zmi.utils import get_object_hint, get_object_icon, get_object_label
+from pyams_zmi.interfaces import IAdminLayer
+from pyams_zmi.interfaces.table import IInnerTable, IMultipleTableView, IReorderColumn, ITableActionsColumnMenu, \
+    ITableAdminView, ITableAttributes, ITableElementEditor, ITableGroupSwitcher, ITableView, ITableWithActions
+from pyams_zmi.utils import get_object_hint, get_object_icon, get_object_label, get_object_name
 from pyams_zmi.view import InnerAdminView
 
 __docformat__ = 'restructuredtext'
 
 from pyams_zmi import _  # pylint: disable=ungrouped-imports
-
-
-def get_name(element):
-    """Element name getter"""
-    return getattr(element, '__name__', None)
 
 
 def get_table_id(table, context=None):
@@ -75,6 +75,11 @@ def get_row_id(table, element, context=None):
     return f'{table.id}::{ICacheKeyValue(element)}'
 
 
+def get_row_name(table, element, view=None):
+    """Element name getter"""
+    return get_object_name(element, table.request, view)
+
+
 def get_row_editor(table, element):
     """Row editor getter"""
     return queryMultiAdapter((element, table.request, table), ITableElementEditor)
@@ -87,7 +92,7 @@ def check_attribute(attribute, source, column=None):
     return str(attribute)
 
 
-def get_attributes(table, element, source, column=None):
+def get_data_attributes(table, element, source, column=None):
     """Get table data attributes"""
     result = ''
     attrs = getattr(table, 'data_attributes', {}).get(element, {})
@@ -98,7 +103,7 @@ def get_attributes(table, element, source, column=None):
     return result
 
 
-def get_data_attributes(element):
+def get_object_data_attributes(element):
     """Get object data attributes"""
     data = IObjectData(element, None)
     if data and data.object_data:
@@ -109,7 +114,7 @@ def get_data_attributes(element):
     return ''
 
 
-def get_ordered_data_attributes(source, container, request, target='reorder.json'):
+def get_ordered_data_attributes(table, source, container, request, target='reorder.json'):
     """Get object data attributes for ordered table"""
     source.setdefault('table', {}).update({
         'data-searching': 'false',
@@ -128,7 +133,7 @@ def get_ordered_data_attributes(source, container, request, target='reorder.json
             'data-ams-reorder-url': target
         })
         source.setdefault('tr', {}).update({
-            'data-ams-row-value': lambda row, col: get_name(row)
+            'data-ams-row-value': lambda row, col: get_row_name(table, row)
         })
         source.setdefault('td', {}).update({
             'data-order': lambda x, col: list(container.keys()).index(x.__name__)
@@ -156,11 +161,11 @@ class Table(ObjectDataManagerMixin, BaseTable):
         'auto-width': False
     }
 
-    @property
+    @reify
     def data_attributes(self):
         """Table data attributes getter
 
-        These attributes are to be use with DataTables plug-in, and can be overridden in
+        These attributes are to be used with DataTables plug-in, and can be overridden in
         subclasses.
         """
         result = {
@@ -170,7 +175,7 @@ class Table(ObjectDataManagerMixin, BaseTable):
             },
             'tr': {
                 'id': lambda row, col: self.get_row_id(row),
-                'data-ams-element-name': lambda row, col: get_name(row),
+                'data-ams-element-name': lambda row, col: self.get_row_name(row),
                 'data-ams-url': lambda row, col: getattr(get_row_editor(self, row), 'href', None),
                 'data-toggle':
                     lambda row, col: 'modal' if getattr(get_row_editor(self, row),
@@ -178,7 +183,7 @@ class Table(ObjectDataManagerMixin, BaseTable):
                     else None
             },
             'th': {
-                'data-ams-column-name': lambda row, col: get_name(row),
+                'data-ams-column-name': lambda row, col: self.get_row_name(row),
                 'data-ams-sortable': get_column_sort,
                 'data-ams-type': get_column_type
             }
@@ -192,6 +197,10 @@ class Table(ObjectDataManagerMixin, BaseTable):
         """Row ID getter"""
         return get_row_id(self, row)
 
+    def get_row_name(self, row):
+        """Row name getter"""
+        return get_row_name(self, row)
+
     def get_selected_row_class(self, row, css_class=None):
         """Get selected row class"""
         klass = self.css_classes.get('tr.selected')
@@ -201,23 +210,23 @@ class Table(ObjectDataManagerMixin, BaseTable):
 
     def render_table(self):
         return super().render_table() \
-            .replace('<table', f"<table {get_attributes(self, 'table', self)}") \
-            .replace('<table', f"<table {get_data_attributes(self)}")
+            .replace('<table', f"<table {get_data_attributes(self, 'table', self)}") \
+            .replace('<table', f"<table {get_object_data_attributes(self)}")
 
     def render_row(self, row, css_class=None):
         css_class = self.get_selected_row_class(row[0], css_class)
         return super().render_row(row, css_class) \
-            .replace('<tr', f"<tr {get_attributes(self, 'tr', row[0][0])}")
+            .replace('<tr', f"<tr {get_data_attributes(self, 'tr', row[0][0])}")
 
     def render_head_cell(self, column):
         return super().render_head_cell(column) \
-            .replace('<th', f"<th {get_attributes(self, 'th', column)}") \
-            .replace('<th', f"<th {get_data_attributes(column)}")
+            .replace('<th', f"<th {get_data_attributes(self, 'th', column)}") \
+            .replace('<th', f"<th {get_object_data_attributes(column)}")
 
     def render_cell(self, item, column, colspan=0):
         return super().render_cell(item, column, colspan) \
             .replace('<td', f"<td {self.get_css_class('td', None, item, column)}") \
-            .replace('<td', f"<td {get_attributes(self, 'td', item, column)}")
+            .replace('<td', f"<td {get_data_attributes(self, 'td', item, column)}")
 
 
 class SortableTable(Table):
@@ -225,12 +234,12 @@ class SortableTable(Table):
 
     container_class = IContainer
 
-    @property
+    @reify
     def data_attributes(self):
         """Attributes getter"""
         attributes = super().data_attributes
         container = self.container_class(self.context)
-        get_ordered_data_attributes(attributes, container, self.request)
+        get_ordered_data_attributes(self, attributes, container, self.request)
         return attributes
 
 
@@ -668,3 +677,37 @@ class TableElementEditor(ContextRequestViewAdapter):
     def href(self):
         """Table element editor getter"""
         return absolute_url(self.context, self.request, self.view_name)
+
+
+@adapter_config(name='actions',
+                required=(Interface, IAdminLayer, ITableWithActions),
+                provides=IColumn)
+class TableActionsColumn(I18nColumnMixin, Column):
+    """Table actions column"""
+
+    i18n_header = _("Actions")
+    css_classes = {
+        'th': 'action'
+    }
+    weight = 900
+
+    def render_cell(self, item):
+        """Cell renderer"""
+        registry = self.request.registry
+        viewlet = registry.queryMultiAdapter((item, self.request, self.table),
+                                             IViewletManager,
+                                             name='pyams.table_actions')
+        if viewlet is None:
+            return ''
+        viewlet.update()
+        return viewlet.render()
+
+
+@viewletmanager_config(name='pyams.table_actions',
+                       view=ITableWithActions, layer=IAdminLayer,
+                       provides=ITableActionsColumnMenu)
+class TableItemColumnActionsMenu(DropdownMenu):
+    """Table item actions menu"""
+
+    label = _("Actions...")
+    css_class = 'btn-sm px-2 py-0'

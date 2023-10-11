@@ -16,6 +16,7 @@ This module defines views and content providers which are used to get access to 
 site manager contents view.
 """
 
+from pyramid.decorator import reify
 from zope.interface import Interface, implementer
 from zope.intid import IIntIds
 from zope.principalannotation.interfaces import IPrincipalAnnotationUtility
@@ -88,7 +89,7 @@ class UtilitiesMenuItem(NavigationMenuItem):
 class UtilitiesTable(Table):
     """Utilities table list"""
 
-    @property
+    @reify
     def data_attributes(self):
         attributes = super().data_attributes
         attributes.setdefault('table', {}).setdefault('data-page-length', 25)
