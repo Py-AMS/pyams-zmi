@@ -15,47 +15,62 @@
 This module provides a small set of generic components.
 """
 
-from zope.component import queryAdapter, queryMultiAdapter
 from zope.location import ILocation
 
-from pyams_utils.adapter import adapter_config
-from pyams_zmi.interfaces import IObjectHint, IObjectIcon, IObjectLabel
-
+from pyams_utils.adapter import adapter_config, query_adapter
+from pyams_zmi.interfaces import IObjectHint, IObjectIcon, IObjectLabel, IObjectName
 
 __docformat__ = 'restructuredtext'
 
 
-@adapter_config(required=ILocation, provides=IObjectLabel)
+@adapter_config(required=ILocation,
+                provides=IObjectName)
+def location_name(context):
+    """Basic location name factory"""
+    return context.__name__
+
+
+def get_object_name(context, request, view=None, name=''):
+    """Get object name"""
+    adapter = query_adapter(IObjectName, request, context, view, name)
+    if name and (adapter is None):
+        adapter = query_adapter(IObjectName, request, context, view)
+    return adapter
+
+
+@adapter_config(required=ILocation,
+                provides=IObjectLabel)
 def location_label(context):
     """Basic location name factory"""
     return context.__name__
 
 
-def get_object_label(context, request, view=None):
+def get_object_label(context, request, view=None, name=''):
     """Get object label"""
-    adapter = queryMultiAdapter((context, request, view), IObjectLabel)
-    if adapter is None:
-        adapter = queryAdapter(context, IObjectLabel)
+    adapter = query_adapter(IObjectLabel, request, context, view, name)
+    if name and (adapter is None):
+        adapter = query_adapter(IObjectLabel, request, context, view)
     return adapter
 
 
-@adapter_config(required=ILocation, provides=IObjectIcon)
+@adapter_config(required=ILocation,
+                provides=IObjectIcon)
 def location_icon(context):  # pylint: disable=unused-argument
     """Basic location icon factory"""
     return 'far fa-square'
 
 
-def get_object_icon(context, request, view=None):
+def get_object_icon(context, request, view=None, name=''):
     """Get object icon"""
-    adapter = queryMultiAdapter((context, request, view), IObjectIcon)
-    if adapter is None:
-        adapter = queryAdapter(context, IObjectIcon)
+    adapter = query_adapter(IObjectIcon, request, context, view, name)
+    if name and (adapter is None):
+        adapter = query_adapter(IObjectIcon, request, context, view)
     return adapter
 
 
-def get_object_hint(context, request, view=None):
+def get_object_hint(context, request, view=None, name=''):
     """Get object hint"""
-    adapter = queryMultiAdapter((context, request, view), IObjectHint)
-    if adapter is None:
-        adapter = queryAdapter(context, IObjectHint)
+    adapter = query_adapter(IObjectHint, request, context, view, name)
+    if name and (adapter is None):
+        adapter = query_adapter(IObjectHint, request, context, view)
     return adapter
