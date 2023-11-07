@@ -19,9 +19,9 @@ from zope.contentprovider.interfaces import IContentProvider
 from zope.interface import Attribute, Interface
 from zope.schema import Bool, Choice, TextLine
 
+from pyams_skin.interfaces.viewlet import IDropdownMenu
 from pyams_template.template import template_config
 from pyams_zmi.interfaces import IInnerAdminView
-
 
 __docformat__ = 'restructuredtext'
 
@@ -66,6 +66,10 @@ class IMultipleTableView(IInnerAdminView):
 
 class ITableWithActions(Interface):
     """Marker interface for table with inner actions menu"""
+
+
+class ITableActionsColumnMenu(IDropdownMenu):
+    """Table item actions menu"""
 
 
 @template_config(template='templates/table-switcher.pt')
