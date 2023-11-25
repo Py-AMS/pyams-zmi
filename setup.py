@@ -13,6 +13,7 @@
 """
 This module contains PyAMS_zmi package
 """
+
 import os
 from setuptools import setup, find_packages
 
@@ -23,7 +24,7 @@ DOCS = os.path.join(os.path.dirname(__file__),
 README = os.path.join(DOCS, 'README.rst')
 HISTORY = os.path.join(DOCS, 'HISTORY.rst')
 
-version = '1.15.0'
+version = '2.0.0'
 long_description = open(README).read() + '\n\n' + open(HISTORY).read()
 
 tests_require = [
@@ -54,6 +55,7 @@ setup(name='pyams_zmi',
       include_package_data=True,
       package_data={'': ['*.zcml', '*.txt', '*.pt', '*.pot', '*.po', '*.mo',
                          '*.png', '*.gif', '*.jpeg', '*.jpg', '*.css', '*.js']},
+      python_requires='>=3.7',
       zip_safe=False,
       # uncomment this to be able to run tests with setup.py
       test_suite="pyams_zmi.tests.test_utilsdocs.test_suite",
@@ -64,6 +66,7 @@ setup(name='pyams_zmi',
           # -*- Extra requirements: -*-
           'cornice',
           'cornice_swagger',
+          'importlib_metadata; python_version < "3.8"',
           'myams_js',
           'persistent',
           'pyams_file',
@@ -78,7 +81,7 @@ setup(name='pyams_zmi',
           'pyams_template',
           'pyams_utils',
           'pyams_viewlet',
-          'pyramid',
+          'pyramid >= 2.0.0',
           'zope.component',
           'zope.container',
           'zope.contentprovider',
