@@ -17,7 +17,13 @@ This module is used to display running version of all installed packages.
 
 import os
 
-from pkg_resources import Environment
+from pyams_utils.list import unique
+
+try:
+    from importlib.metadata import distributions
+except ImportError:
+    from importlib_metadata import distributions
+
 from pyramid.decorator import reify
 
 from pyams_layer.interfaces import IPyAMSLayer
@@ -68,8 +74,11 @@ class PackagesVersionsTable(Table):
 
     def __init__(self, context, request):
         super().__init__(context, request)
-        environment = self.environment = Environment()
-        environment.scan()
+        if distributions is not None:
+            self.distributions = distributions()
+        else:
+            environment = self.environment = Environment()
+            environment.scan()
 
     @reify
     def id(self):
@@ -77,6 +86,9 @@ class PackagesVersionsTable(Table):
 
     @reify
     def values(self):
+        if distributions is not None:
+            return unique(self.distributions,
+                          key=lambda x: x.name)
         return self.environment
 
 
@@ -91,6 +103,8 @@ class PackagesNameColumn(NameColumn):
 
     def get_value(self, obj):
         """Value getter"""
+        if distributions is not None:
+            return obj.name
         environment = self.table.values
         return environment[obj][0].project_name
 
@@ -106,8 +120,7 @@ class PackageVersionColumn(NameColumn):
 
     def get_value(self, obj):
         """Value getter"""
-        environment = self.table.values
-        return environment[obj][0].version
+        return obj.version
 
 
 @adapter_config(name='package-path',
@@ -121,6 +134,8 @@ class PackagePathColumn(NameColumn):
 
     def get_value(self, obj):
         """Value getter"""
+        if distributions is not None:
+            return str(obj.locate_file(''))
         environment = self.table.values
         return environment[obj][0].location
 
