@@ -18,7 +18,7 @@ This module provides custom ZMI-related user settings.
 __docformat__ = 'restructuredtext'
 
 from persistent import Persistent
-from pyramid.security import ALL_PERMISSIONS, Allow, Everyone
+from pyramid.authorization import ALL_PERMISSIONS, Allow, Everyone
 from pyramid.threadlocal import get_current_request
 from zope.container.contained import Contained
 from zope.interface import Interface
