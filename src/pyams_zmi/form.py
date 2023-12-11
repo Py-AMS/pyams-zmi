@@ -17,6 +17,7 @@ interface.
 """
 
 import json
+
 from pyramid.decorator import reify
 from zope.container.interfaces import IContainer
 from zope.interface import Interface, implementer
@@ -27,19 +28,22 @@ from pyams_form.button import Buttons, handler
 from pyams_form.form import AddForm, DisplayForm, EditForm
 from pyams_form.group import Group, GroupForm, GroupManager
 from pyams_form.interfaces import DISPLAY_MODE
+from pyams_form.interfaces.form import IForm
 from pyams_form.subform import InnerAddForm, InnerDisplayForm, InnerEditForm
 from pyams_i18n.schema import II18nField
-from pyams_skin.interfaces.view import IInnerPage, IModalPage
+from pyams_skin.interfaces.view import IInnerPage, IModalAddForm, IModalDisplayForm, IModalEditForm, IModalPage
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config, query_adapter
 from pyams_utils.data import ObjectDataManagerMixin
+from pyams_utils.interfaces import MISSING_INFO
 from pyams_utils.interfaces.tales import ITALESExtension
 from pyams_utils.traversing import get_parent
 from pyams_zmi.helper.event import get_json_table_row_add_callback, get_json_table_row_refresh_callback
+from pyams_zmi.interfaces import IAdminLayer, TITLE_SPAN_BREAK
 from pyams_zmi.interfaces.form import IAddFormButtons, IDisplayFormButtons, IEditFormButtons, \
     IFormGroupChecker, IFormGroupSwitcher, IFormLegend, IFormTitle, IModalAddFormButtons, \
     IModalDisplayFormButtons, IModalEditFormButtons
+from pyams_zmi.utils import get_object_hint, get_object_label
 from pyams_zmi.view import AdminView
-
 
 __docformat__ = 'restructuredtext'
 
@@ -47,11 +51,22 @@ __docformat__ = 'restructuredtext'
 class BaseFormMixin:
     """Base form mixin class"""
 
-    @property
+    @reify
     def title(self):
         """Title getter"""
         title = query_adapter(IFormTitle, self.request, self.context, self)
-        return title or super().title
+        if not title:
+            title = super().title or MISSING_INFO
+        subtitle = getattr(self, 'subtitle', None)
+        if subtitle:
+            translate = self.request.localizer.translate
+            if '<br />' in title:
+                title += f'<br /><div class="small pt-2">{translate(subtitle)}</div>'
+            elif title.startswith('<'):
+                title += f'<br />{translate(subtitle)}'
+            else:
+                title = TITLE_SPAN_BREAK.format(title, translate(subtitle))
+        return title
 
     _legend = None
 
@@ -67,6 +82,17 @@ class BaseFormMixin:
     def legend(self, value):
         """Legend setter"""
         self._legend = value
+
+
+@adapter_config(required=(Interface, IAdminLayer, IForm),
+                provides=IFormTitle)
+def get_form_title(context, request, form):
+    """Default form title getter"""
+    hint = get_object_hint(context, request, form)
+    label = get_object_label(context, request, form, name='form-title')
+    if hint and label:
+        return TITLE_SPAN_BREAK.format(hint, label)
+    return label or MISSING_INFO
 
 
 #
@@ -92,7 +118,7 @@ class AdminAddForm(ObjectDataManagerMixin, BaseFormMixin,
         super().handle_add(self, action)  # pylint: disable=too-many-function-args
 
 
-@implementer(IModalPage)
+@implementer(IModalAddForm)
 class AdminModalAddForm(AdminAddForm):
     """Modal management add form"""
 
@@ -139,7 +165,7 @@ class AdminEditForm(ObjectDataManagerMixin, BaseFormMixin,
         super().handle_apply(self, action)  # pylint: disable=too-many-function-args
 
 
-@implementer(IModalPage)
+@implementer(IModalEditForm)
 class AdminModalEditForm(AdminEditForm):
     """Modal management edit form"""
 
@@ -177,7 +203,7 @@ class AdminDisplayForm(ObjectDataManagerMixin, BaseFormMixin,
     buttons = Buttons(IDisplayFormButtons)
 
 
-@implementer(IModalPage)
+@implementer(IModalDisplayForm)
 class AdminModalDisplayForm(AdminDisplayForm):
     """Modal management display form"""
 
