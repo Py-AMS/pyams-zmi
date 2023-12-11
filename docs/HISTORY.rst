@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.1.0
+-----
+ - updated form title management
+
 2.0.1
 -----
  - updated Buildout configuration
