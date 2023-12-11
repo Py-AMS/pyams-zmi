@@ -1,7 +1,7 @@
-<section class="rounded-lg"
-		 data-ams-modules="form plugins"
+<section tal:omit-tag="getattr(view, 'hide_section', False)"
+		 class="rounded-lg ${getattr(view, 'section_class', '')}"
 		 i18n:domain="pyams_zmi">
-	<h2 class="bg-secondary-modal d-flex flex-wrap pl-3 py-2-modal"
+	<h2 class="hidden-modal d-flex flex-wrap pl-3"
 		tal:define="title view.title"
 		tal:condition="title">
 		<a tal:define="back_url view.back_url | nothing"
@@ -19,6 +19,7 @@
 		<i tal:omit-tag="">${structure:provider:pyams.toolbar}</i>
 	</h2>
 	<div class="ams-form ${view.css_class | ''}"
+		 data-ams-modules="form plugins"
 		 data-ams-data='${tales:object_data(view)}'>
 		<fieldset tal:define="help provider:pyams.help;
 						 	  prefix provider:pyams.prefix;

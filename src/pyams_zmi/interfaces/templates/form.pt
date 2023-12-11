@@ -1,8 +1,7 @@
-<section class="rounded-lg ${getattr(view, 'section_class', '')}"
-         tal:omit-tag="getattr(view, 'hide_section', False)"
-		 data-ams-modules="form plugins"
+<section tal:omit-tag="getattr(view, 'hide_section', False)"
+		 class="rounded-lg ${getattr(view, 'section_class', '')}"
 		 i18n:domain="pyams_zmi">
-	<h2 class="bg-secondary-modal d-flex flex-wrap pl-3 py-2-modal"
+	<h2 class="hidden-modal d-flex flex-wrap pl-3"
 		tal:define="title view.title"
 		tal:condition="title">
 		<a tal:define="back_url view.back_url | nothing"
@@ -27,6 +26,7 @@
 		  autocomplete="${view.autocomplete}"
 		  data-ams-form-submit-target="${view.ajax_form_target}"
 		  data-async
+		  data-ams-modules="form plugins"
 		  data-ams-data='${tales:object_data(view)}'>
 		<i tal:omit-tag="">${structure:provider:pyams.form_errors}</i>
 		<i tal:omit-tag="">${structure:provider:pyams.form_header}</i>
