@@ -22,15 +22,12 @@ from zope.schema import Bool, Choice, List, TextLine
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
 from myams_js import darkmode_core_bundle, darkmode_core_svg_bundle, darkmode_full_bundle, \
-    darkmode_mini_bundle, \
-    darkmode_mini_svg_bundle, \
-    emerald_core_bundle, emerald_core_svg_bundle, emerald_full_bundle, emerald_mini_bundle, \
-    emerald_mini_svg_bundle, \
-    myams_core_bundle, myams_core_svg_bundle, \
-    myams_full_bundle, myams_mini_bundle, myams_mini_svg_bundle
+    darkmode_mini_bundle, darkmode_mini_svg_bundle, emerald_core_bundle, emerald_core_svg_bundle, emerald_full_bundle, \
+    emerald_mini_bundle, emerald_mini_svg_bundle, lightmode_core_bundle, lightmode_core_svg_bundle, \
+    lightmode_full_bundle, lightmode_mini_bundle, lightmode_mini_svg_bundle, myams_core_bundle, \
+    myams_core_svg_bundle, myams_full_bundle, myams_mini_bundle, myams_mini_svg_bundle
 from pyams_file.schema import FileField, ImageField
 from pyams_i18n.schema import I18nTextLineField
-
 
 __docformat__ = 'restructuredtext'
 
@@ -52,11 +49,18 @@ MYAMS_BUNDLES = OrderedDict((
     ('darkmode-mini', (darkmode_mini_bundle, _("Dark mode mini bundle (with CSS icons)"))),
     ('darkmode-mini-svg', (darkmode_mini_svg_bundle, _("Dark mode mini bundle (with SVG icons)"))),
     ('darkmode-core', (darkmode_core_bundle, _("Dark mode core bundle (with CSS icons)"))),
-    ('darkmode-core-svg', (darkmode_core_svg_bundle, _("Dark mode core bundle (with SVG icons)")))
+    ('darkmode-core-svg', (darkmode_core_svg_bundle, _("Dark mode core bundle (with SVG icons)"))),
+    ('lightmode', (lightmode_full_bundle, _("Light mode full bundle"))),
+    ('lightmode-mini', (lightmode_mini_bundle, _("Light mode mini bundle (with CSS icons)"))),
+    ('lightmode-mini-svg', (lightmode_mini_svg_bundle, _("Light mode mini bundle (with SVG icons)"))),
+    ('lightmode-core', (lightmode_core_bundle, _("Light mode core bundle (with CSS icons)"))),
+    ('lightmode-core-svg', (lightmode_core_svg_bundle, _("Light mode core bundle (with SVG icons)")))
 ))
 
-MYAMS_BUNDLES_VOCABULARY = SimpleVocabulary(
-    [SimpleTerm(k, title=v[1]) for k, v in MYAMS_BUNDLES.items()])
+MYAMS_BUNDLES_VOCABULARY = SimpleVocabulary([
+    SimpleTerm(k, title=v[1])
+    for k, v in MYAMS_BUNDLES.items()
+])
 
 USER_BUNDLES_VOCABULARY = 'pyams_zmi.profile.bundles'
 
