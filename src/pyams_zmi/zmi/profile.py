@@ -26,6 +26,7 @@ from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
 from pyams_zmi.form import AdminModalEditForm
 from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.configuration import IZMIConfiguration
+from pyams_zmi.interfaces.form import IFormTitle
 from pyams_zmi.interfaces.profile import IUserProfile
 from pyams_zmi.interfaces.table import ITableAdminView, ITableAttributes
 from pyams_zmi.zmi.interfaces import IUserProfileEditForm
@@ -42,7 +43,8 @@ from pyams_zmi import _
 class UserProfileEditForm(AdminModalEditForm):
     """User profile edit form"""
 
-    legend = _("User profile")
+    subtitle = _("User profile")
+    legend = _("My user profile")
     modal_class = 'modal-xl'
 
     @property
@@ -60,6 +62,13 @@ class UserProfileEditForm(AdminModalEditForm):
         bundle = self.widgets.get('zmi_bundle')
         if bundle is not None:
             bundle.no_value_message = _("Use default theme")
+
+
+@adapter_config(required=(Interface, IAdminLayer, UserProfileEditForm),
+                provides=IFormTitle)
+def user_profile_edit_form_title(context, request, form):
+    """User profile edit form title"""
+    return request.principal.title
 
 
 @adapter_config(required=(Interface, IAdminLayer, IUserProfileEditForm),
