@@ -213,6 +213,14 @@ class Table(ObjectDataManagerMixin, BaseTable):
             .replace('<table', f"<table {get_data_attributes(self, 'table', self)}") \
             .replace('<table', f"<table {get_object_data_attributes(self)}")
 
+    def render_head(self):
+        return super().render_head() \
+            .replace('<thead', f"<thead {get_data_attributes(self, 'thead', self)}")
+
+    def render_head_row(self):
+        return super().render_head_row() \
+            .replace('<tr', f"<tr {get_data_attributes(self, 'tr.head', self)}")
+
     def render_row(self, row, css_class=None):
         css_class = self.get_selected_row_class(row[0], css_class)
         return super().render_row(row, css_class) \
