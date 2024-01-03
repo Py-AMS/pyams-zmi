@@ -21,6 +21,7 @@ from zope.interface import Interface
 from zope.location import ILocation
 
 from pyams_i18n.interfaces import II18n
+from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
 from pyams_site.interfaces import ISiteRoot
 from pyams_skin.interfaces.viewlet import IBreadcrumbItem
 from pyams_skin.viewlet.breadcrumb import BreadcrumbItem
@@ -32,7 +33,7 @@ from pyams_zmi.interfaces.configuration import IZMIConfiguration
 @adapter_config(required=(ILocation, IAdminLayer, Interface),
                 provides=IBreadcrumbItem)
 class AdminLayerBreadcrumbItem(BreadcrumbItem):
-    """Admin layer breadcrumb ietm adapter"""
+    """Admin layer breadcrumb item adapter"""
 
     view_name = 'admin'
 
@@ -50,3 +51,9 @@ class SiteRootBreadcrumbItem(AdminLayerBreadcrumbItem):
             configuration.site_name
 
     css_class = 'breadcrumb-item persistent'
+
+    @property
+    def view_name(self):
+        if not self.request.has_permission(VIEW_SYSTEM_PERMISSION, context=self.context):
+            return None
+        return super().view_name
