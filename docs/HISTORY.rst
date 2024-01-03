@@ -1,6 +1,13 @@
 Changelog
 =========
 
+2.2.0
+-----
+ - include MyAMS LightMode theme
+ - added table head CSS styles renderers
+ - added permission check on home breadcrumb menu
+ - update user profile edit form title
+
 2.1.0
 -----
  - updated form title management
