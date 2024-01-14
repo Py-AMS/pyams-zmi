@@ -18,6 +18,7 @@ This module provides a small set of generic components.
 from zope.location import ILocation
 
 from pyams_utils.adapter import adapter_config, query_adapter
+from pyams_utils.interfaces import MISSING_INFO
 from pyams_zmi.interfaces import IObjectHint, IObjectIcon, IObjectLabel, IObjectName
 
 __docformat__ = 'restructuredtext'
@@ -42,7 +43,7 @@ def get_object_name(context, request, view=None, name=''):
                 provides=IObjectLabel)
 def location_label(context):
     """Basic location name factory"""
-    return context.__name__
+    return MISSING_INFO
 
 
 def get_object_label(context, request, view=None, name=''):
