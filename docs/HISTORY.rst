@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.2.1
+-----
+ - updated default label getter
+
 2.2.0
 -----
  - include MyAMS LightMode theme
