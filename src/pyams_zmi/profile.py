@@ -35,7 +35,7 @@ from pyams_utils.adapter import ContextRequestAdapter, adapter_config, get_annot
 from pyams_utils.factory import factory_config
 from pyams_utils.interfaces.tales import ITALESExtension
 from pyams_utils.registry import get_utility
-from pyams_utils.request import check_request, query_request
+from pyams_utils.request import check_request
 from pyams_zmi.interfaces.profile import IUserProfile, USER_PROFILE_KEY
 
 
@@ -43,18 +43,18 @@ from pyams_zmi.interfaces.profile import IUserProfile, USER_PROFILE_KEY
 class UserProfile(Persistent, Contained):
     """User profile persistent class"""
 
+    principal_id = None
+
     avatar = FileProperty(IUserProfile['avatar'])
     zmi_bundle = FieldProperty(IUserProfile['zmi_bundle'])
     tables_length = FieldProperty(IUserProfile['tables_length'])
 
-    @staticmethod
-    def __acl__():
-        result = [(Allow, ADMIN_USER_ID, ALL_PERMISSIONS)]
-        request = query_request()
-        if request is not None:
-            result.append((Allow, request.principal.id, ALL_PERMISSIONS))
-        result.append((Allow, Everyone, PUBLIC_PERMISSION))
-        return result
+    def __acl__(self):
+        return [
+            (Allow, ADMIN_USER_ID, ALL_PERMISSIONS),
+            (Allow, self.principal_id, ALL_PERMISSIONS),
+            (Allow, Everyone, PUBLIC_PERMISSION)
+        ]
 
     def get_avatar(self, selection='square', size='32x32', request=None):
         """Avatar URL getter"""
@@ -69,6 +69,7 @@ def principal_user_profile_factory(principal):
     """Principal user profile factory adapter"""
 
     def user_profile_callback(profile):
+        profile.principal_id = principal.id
         request = get_current_request()
         if request is not None:
             root = request.root
