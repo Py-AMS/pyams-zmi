@@ -9133,7 +9133,7 @@
 }
 
 .swagger-ui .opblock {
-    border: 1px solid var(--body)
+    border: 1px solid var(--body);
     border-radius: 4px;
     box-shadow: 0 0 3px rgba(0, 0, 0, .19);
     margin: 0 0 15px
@@ -9204,7 +9204,7 @@
 }
 
 .swagger-ui .opblock .opblock-summary-method {
-    background: var(--body)
+    background: var(--body);
     border-radius: 3px;
     color: var(--body-bg);
     font-family: sans-serif;
@@ -11122,7 +11122,7 @@
 
 .swagger-ui .markdown pre, .swagger-ui .renderedMarkdown pre {
     background: none;
-    color: var(--body)
+    color: var(--body);
     font-weight: 400;
     padding: 0;
     white-space: pre-wrap
@@ -11139,7 +11139,7 @@
 }
 
 .swagger-ui .markdown pre > code, .swagger-ui .renderedMarkdown pre > code {
-    display: block
+    display: block;
 }
 
 /*# sourceMappingURL=swagger-ui.css.map*/
