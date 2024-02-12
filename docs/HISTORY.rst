@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.2.2
+-----
+ - updated user profile ACL
+ - updated CSS syntax
+
 2.2.1
 -----
  - updated default label getter
