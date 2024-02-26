@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.2.3
+-----
+ - updated Swagger-UI bundle
+
 2.2.2
 -----
  - updated user profile ACL
