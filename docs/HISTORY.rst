@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.2.4
+-----
+ - added profile edit form content getter
+
 2.2.3
 -----
  - updated Swagger-UI bundle
