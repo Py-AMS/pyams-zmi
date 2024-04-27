@@ -33,6 +33,9 @@ PYAMS_ADMIN_SKIN_NAME = 'PyAMS admin skin'
 TITLE_SPAN = '<span class="tiny">{}</span>'
 TITLE_SPAN_BREAK = '<span class="tiny">{}</span><br />{}'
 
+SMALL_TITLE_SPAN = '<span class="small">{}</span>'
+SMALL_TITLE_SPAN_BREAK = '<span class="small">{}</span><br />{}'
+
 
 @layout_config(template='templates/admin-layout.pt')
 class IAdminView(IFullPage):
