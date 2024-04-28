@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.2.5
+-----
+ - added formatting strings constants
+
 2.2.4
 -----
  - added profile edit form content getter
