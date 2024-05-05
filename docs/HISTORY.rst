@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.3.0
+-----
+ - added support for custom modal content class
+
 2.2.5
 -----
  - added formatting strings constants
