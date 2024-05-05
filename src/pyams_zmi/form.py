@@ -129,6 +129,8 @@ class AdminModalAddForm(AdminAddForm):
         return Buttons(IModalAddFormButtons)
 
     modal_class = FieldProperty(IModalPage['modal_class'])
+    modal_content_class = FieldProperty(IModalPage['modal_content_class'])
+
     ajax_form_target = None
 
     @handler(IModalAddFormButtons['add'])
@@ -176,6 +178,8 @@ class AdminModalEditForm(AdminEditForm):
         return Buttons(IModalEditFormButtons)
 
     modal_class = FieldProperty(IModalPage['modal_class'])
+    modal_content_class = FieldProperty(IModalPage['modal_content_class'])
+
     ajax_form_target = None
 
     @handler(IModalEditFormButtons['apply'])
@@ -210,6 +214,7 @@ class AdminModalDisplayForm(AdminDisplayForm):
     buttons = Buttons(IModalDisplayFormButtons)
 
     modal_class = FieldProperty(IModalPage['modal_class'])
+    modal_content_class = FieldProperty(IModalPage['modal_content_class'])
 
 
 @implementer(IInnerPage)
