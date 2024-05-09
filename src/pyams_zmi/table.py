@@ -70,6 +70,11 @@ def get_column_type(column, ignored=None):  # pylint: disable=unused-argument
     return getattr(column, 'sort_type', None)
 
 
+def get_column_priority(column, ignored=None):  # pylint: disable=unused-argument
+    """Get column responsive priority attribute"""
+    return getattr(column, 'responsive_priority', None)
+
+
 def get_row_id(table, element, context=None):
     """Row ID getter"""
     return f'{table.id}::{ICacheKeyValue(element)}'
@@ -185,7 +190,8 @@ class Table(ObjectDataManagerMixin, BaseTable):
             'th': {
                 'data-ams-column-name': lambda row, col: self.get_row_name(row),
                 'data-ams-sortable': get_column_sort,
-                'data-ams-type': get_column_type
+                'data-ams-type': get_column_type,
+                'data-priority': get_column_priority
             }
         }
         for name, adapter in self.request.registry.getAdapters((self.context, self.request, self),
@@ -436,6 +442,7 @@ class NameColumn(I18nColumnMixin, GetAttrColumn):
 
     i18n_header = _("Name")
     weight = 10
+    responsive_priority = 10
 
     def get_value(self, obj):
         return get_object_label(obj, self.request, self.table)
@@ -698,6 +705,7 @@ class TableActionsColumn(I18nColumnMixin, Column):
         'th': 'action'
     }
     weight = 900
+    responsive_priority = 900
 
     def render_cell(self, item):
         """Cell renderer"""
