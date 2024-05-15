@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.3.1
+-----
+ - added column priority getter for use in responsive tables
+
 2.3.0
 -----
  - added support for custom modal content class
