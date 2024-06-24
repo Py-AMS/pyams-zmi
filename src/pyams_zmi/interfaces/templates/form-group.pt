@@ -1,4 +1,4 @@
-<i tal:omit-tag="">${structure:provider:pyams.header}</i>
+<i tal:omit-tag="">${structure:provider:pyams.header(context=view.form_content)}</i>
 <div class="${getattr(view, 'border_class', 'border')} px-1 py-2"
 	 tal:omit-tag="view.legend">
 	<fieldset class="border"
@@ -10,11 +10,11 @@
 					i18n:translate="">${view.legend}</legend>
 		</tal:if>
 		<i tal:omit-tag="">${structure:provider:pyams.help}</i>
-		<i tal:omit-tag="">${structure:provider:pyams.prefix}</i>
+		<i tal:omit-tag="">${structure:provider:pyams.prefix(context=view.form_content)}</i>
 		<tal:loop repeat="widget view.widgets.values()">
 			<i tal:omit-tag="">${structure:provider:pyams.widget(view=widget)}</i>
 		</tal:loop>
-		<i tal:omit-tag="">${structure:provider:pyams.suffix}</i>
+		<i tal:omit-tag="">${structure:provider:pyams.suffix(context=view.form_content)}</i>
 		<tal:loop condition="view.groups | nothing"
 				  repeat="group view.groups">
 			<i tal:omit-tag="">${structure:group.render()}</i>
@@ -44,4 +44,4 @@
 		</div>
 	</fieldset>
 </div>
-<i tal:omit-tag="">${structure:provider:pyams.footer}</i>
+<i tal:omit-tag="">${structure:provider:pyams.footer(context=view.form_content)}</i>
