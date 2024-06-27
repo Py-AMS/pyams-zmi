@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.3.2
+-----
+ - updated forms templates
+
 2.3.1
 -----
  - added column priority getter for use in responsive tables
