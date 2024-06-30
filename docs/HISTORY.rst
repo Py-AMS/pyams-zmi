@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.3.3
+-----
+ - updated display form template
+
 2.3.2
 -----
  - updated forms templates
