@@ -16,7 +16,7 @@ This module provides a few set of helpers which can be used to render JSON resul
 can be used by MyAMS to refresh elements.
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 
 from zope.component import getMultiAdapter
 from zope.dublincore.interfaces import IZopeDublinCore
@@ -36,7 +36,7 @@ def get_json_image_refresh_callback(image, image_id, request):
     """Get image refresh callback settings"""
     dc = IZopeDublinCore(image, None)  # pylint: disable=invalid-name
     if dc is None:
-        timestamp = datetime.utcnow().timestamp()
+        timestamp = datetime.now(timezone.utc).timestamp()
     else:
         timestamp = dc.modified.timestamp()  # pylint: disable=no-member
     return {
