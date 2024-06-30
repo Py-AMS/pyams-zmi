@@ -24,10 +24,12 @@
 		<i tal:omit-tag="">${structure:provider:pyams.form_header(context=view.form_content)}</i>
 		<tal:var define="help provider:pyams.help;
 						 prefix provider:pyams.prefix(context=view.form_content);
-						 suffix provider:pyams.suffix(context=view.form_content);">
-			<fieldset tal:omit-tag="not:help or prefix or view.widgets or suffix"
-					  class="${'border' if view.legend else ''}">
-				<legend tal:condition="view.legend and (help or prefix or view.widgets)"
+						 suffix provider:pyams.suffix(context=view.form_content);
+						 has_widgets tuple(filter(lambda x: x.mode != 'hidden', view.widgets.values()));
+						 has_border has_widgets or getattr(view, 'has_border', False);">
+			<fieldset tal:omit-tag="not:prefix or has_widgets or has_border"
+					  class="${'border' if has_border else ''}">
+				<legend tal:condition="view.legend and (help or prefix or has_widgets)"
 						i18n:translate="">${view.legend}</legend>
 				<i tal:omit-tag="">${structure:help}</i>
 				<i tal:omit-tag="">${structure:prefix}</i>
