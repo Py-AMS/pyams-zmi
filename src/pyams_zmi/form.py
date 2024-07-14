@@ -259,7 +259,7 @@ class FormGroupSwitcher(ObjectDataManagerMixin, Group):
                 context = widget.context
                 name = field.getName()
                 value = getattr(field.interface(context), name, None)
-            if value and (value != field.default):
+            if value != field.default:
                 if II18nField.providedBy(field):  # pylint: disable=no-value-for-parameter
                     for i18n_value in value.values():
                         if i18n_value:
