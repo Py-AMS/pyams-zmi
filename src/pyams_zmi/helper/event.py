@@ -86,9 +86,9 @@ def get_json_table_refresh_callback(context, request, table_factory):
     table.update()
     return {
         'module': 'helpers',
-        'callback': 'MyAMS.helpers.refreshElement',
+        'callback': 'MyAMS.helpers.refreshTable',
         'options': {
-            'object_id': get_table_id(table),
+            'table_id': get_table_id(table),
             'content': table.render()
         }
     }
