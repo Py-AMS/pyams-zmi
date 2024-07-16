@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.3.4
+-----
+ - updated form group switcher widgets values checker
+ - updated table refresh callback
+
 2.3.3
 -----
  - updated display form template

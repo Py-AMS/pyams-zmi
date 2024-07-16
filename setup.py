@@ -24,7 +24,7 @@ DOCS = os.path.join(os.path.dirname(__file__),
 README = os.path.join(DOCS, 'README.rst')
 HISTORY = os.path.join(DOCS, 'HISTORY.rst')
 
-version = '2.3.3'
+version = '2.3.4'
 long_description = open(README).read() + '\n\n' + open(HISTORY).read()
 
 tests_require = [
@@ -67,7 +67,7 @@ setup(name='pyams_zmi',
           'cornice',
           'cornice_swagger',
           'importlib_metadata; python_version < "3.8"',
-          'myams_js',
+          'myams_js >= 2.5.0',
           'persistent',
           'pyams_file',
           'pyams_form >= 2.1.0',
