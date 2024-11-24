@@ -453,7 +453,7 @@ class IconColumn(Column):
 
     header = ''
     css_classes = {
-        'th': 'action'
+        'th': 'action no-export'
     }
     sortable = 'false'
 
@@ -508,7 +508,7 @@ class BaseActionColumn(IconColumn):
     permission = None
 
     css_classes = {
-        'th': 'action',
+        'th': 'action no-export',
         'td': 'action'
     }
 
@@ -644,6 +644,9 @@ class VisibilityColumn(AttributeSwitcherColumn):
 class TrashColumn(ObjectDataManagerMixin, JsActionColumn):
     """Trash column"""
 
+    css_classes = {
+        'th': 'action no-export'
+    }
     hint = _("Delete element")
     icon_class = 'fa fa-trash-alt'
 
@@ -697,12 +700,16 @@ class TableElementEditor(ContextRequestViewAdapter):
 @adapter_config(name='actions',
                 required=(Interface, IAdminLayer, ITableWithActions),
                 provides=IColumn)
+@implementer(IObjectData)
 class TableActionsColumn(I18nColumnMixin, Column):
     """Table actions column"""
 
     i18n_header = _("Actions")
+    object_data = {
+        'sortable': False
+    }
     css_classes = {
-        'th': 'action'
+        'th': 'action no-export'
     }
     weight = 900
     responsive_priority = 900
