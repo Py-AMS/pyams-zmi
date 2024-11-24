@@ -158,7 +158,7 @@ class Table(ObjectDataManagerMixin, BaseTable):
     start_batching_at = 500
 
     css_classes = {
-        'table': 'table table-striped table-hover table-sm datatable'
+        'table': 'table table-striped table-hover table-sm datatable w-100'
     }
 
     object_data = {
