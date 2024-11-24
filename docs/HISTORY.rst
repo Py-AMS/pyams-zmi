@@ -1,6 +1,12 @@
 Changelog
 =========
 
+2.3.5
+-----
+ - force table width to 100%
+ - added support for non exportable columns in MyAMS.js
+ - added support for Python 3.12
+
 2.3.4
 -----
  - updated form group switcher widgets values checker
