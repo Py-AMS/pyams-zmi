@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.4.1
+-----
+ - packaging issue
+
 2.4.0
 -----
  - added JSON table row delete callback helper
