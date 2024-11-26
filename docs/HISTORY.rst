@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.4.0
+-----
+ - added JSON table row delete callback helper
+
 2.3.5
 -----
  - force table width to 100%
