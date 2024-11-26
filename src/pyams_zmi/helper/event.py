@@ -125,3 +125,17 @@ def get_json_table_row_refresh_callback(context, request, table_factory, item):
             'data': table.render_row(row)
         }
     }
+
+
+def get_json_table_row_delete_callback(context, request, table_factory, item):
+    """Get table row delete callback settings"""
+    factory = get_object_factory(table_factory)
+    table = factory(context, request)
+    table.update()
+    return {
+        'module': 'helpers',
+        'callback': 'MyAMS.helpers.deleteTableRow',
+        'options': {
+            'row_id': table.get_row_id(item)
+        }
+    }
