@@ -17,10 +17,12 @@
 			<i tal:omit-tag="">${structure:provider:pyams.widget(view=widget)}</i>
 		</tal:if>
 	</tal:loop>
-	<tal:loop condition="view.groups | nothing"
-			  repeat="group view.groups">
-		<i tal:omit-tag="">${structure:group.render()}</i>
-	</tal:loop>
+	<tal:if define="groups view.groups | nothing"
+	        condition="groups">
+		<tal:loop repeat="group groups">
+			<i tal:omit-tag="">${structure:group.render()}</i>
+		</tal:loop>
+	</tal:if>
 	<tal:loop repeat="subform view.subforms">
 		<i tal:omit-tag="">${structure:subform.render()}</i>
 	</tal:loop>

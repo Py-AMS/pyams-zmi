@@ -5,9 +5,8 @@
 			data-ams-minus-class="${view.minus_class}"
 			data-ams-plus-class="${view.plus_class}"
 			data-ams-switcher-state="${view.state}"
-			data-ams-data='${tales:object_data(view)}'>
-		<i tal:omit-tag="" i18n:translate="">${view.legend}</i>
-	</legend>
+			data-ams-data='${tales:object_data(view)}'><i
+		tal:omit-tag="" i18n:translate="">${view.legend}</i></legend>
 	<div class="actions-container position-absolute">
 		<i tal:omit-tag="">${structure:provider:pyams.toolbar(view=view.table)}</i>
 	</div>
