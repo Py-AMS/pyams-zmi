@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.4.2
+-----
+ - small updates in forms templates
+
 2.4.1
 -----
  - packaging issue
