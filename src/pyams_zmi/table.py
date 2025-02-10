@@ -43,8 +43,9 @@ from pyams_viewlet.interfaces import IViewletManager
 from pyams_viewlet.manager import viewletmanager_config
 from pyams_viewlet.viewlet import ViewContentProvider
 from pyams_zmi.interfaces import IAdminLayer
-from pyams_zmi.interfaces.table import IInnerTable, IMultipleTableView, IReorderColumn, ITableActionsColumnMenu, \
-    ITableAdminView, ITableAttributes, ITableElementEditor, ITableGroupSwitcher, ITableView, ITableWithActions
+from pyams_zmi.interfaces.table import IColumnSortData, IInnerTable, IMultipleTableView, IReorderColumn, \
+    ITableActionsColumnMenu, ITableAdminView, ITableAttributes, ITableElementEditor, ITableGroupSwitcher, ITableView, \
+    ITableWithActions
 from pyams_zmi.utils import get_object_hint, get_object_icon, get_object_label, get_object_name
 from pyams_zmi.view import InnerAdminView
 
@@ -192,6 +193,10 @@ class Table(ObjectDataManagerMixin, BaseTable):
                 'data-ams-sortable': get_column_sort,
                 'data-ams-type': get_column_type,
                 'data-priority': get_column_priority
+            },
+            'td': {
+                'data-sort': lambda item, col: col.get_sort_value(item)
+                    if IColumnSortData.providedBy(col) else None
             }
         }
         for name, adapter in self.request.registry.getAdapters((self.context, self.request, self),

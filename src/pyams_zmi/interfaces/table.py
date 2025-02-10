@@ -107,3 +107,10 @@ class ITableElementEditor(Interface):
 
 class IReorderColumn(Interface):
     """Reorder column marker interface"""
+
+
+class IColumnSortData(Interface):
+    """Column with custom sorting data interface"""
+    
+    def get_sort_value(self, item):
+        """Get sort value from line item"""
