@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.5.0
+-----
+ - added interface to handle tables columns with custom sorting values
+
 2.4.2
 -----
  - small updates in forms templates
