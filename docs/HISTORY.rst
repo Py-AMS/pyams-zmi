@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.6.0
+-----
+ - added table marker interface and custom viewlet manager to hide toolbar on specific views or tables
+ - updated Gitlab-CI for Python 3.12
+
 2.5.0
 -----
  - added interface to handle tables columns with custom sorting values
