@@ -24,9 +24,10 @@ from pyams_skin.viewlet.menu import DropdownMenu
 from pyams_template.template import template_config
 from pyams_viewlet.manager import TemplateBasedViewletManager, WeightOrderedViewletManager, \
     viewletmanager_config
+from pyams_viewlet.viewlet import EmptyContentProvider
 from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.viewlet import IContextActionsDropdownMenu, IContextAddingsViewletManager, \
-    ISecondaryActionsViewletManager, IToolbarViewletManager
+    IViewWithoutToolbar, ISecondaryActionsViewletManager, IToolbarViewletManager
 
 
 __docformat__ = 'restructuredtext'
@@ -50,7 +51,14 @@ class ModalToolbarViewletManager(ToolbarViewletManager):
 
     def _get_viewlets(self):
         return ()
-
+    
+    
+@viewletmanager_config(name='pyams.toolbar',
+                       layer=IAdminLayer, view=IViewWithoutToolbar,
+                       provides=IToolbarViewletManager)
+class MissingToolbarViewletManager(EmptyContentProvider):
+    """Missing toolbar viewlet manager"""
+    
 
 @viewletmanager_config(name='pyams.context_addings',
                        layer=IAdminLayer, view=Interface,

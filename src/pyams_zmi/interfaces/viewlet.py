@@ -111,6 +111,10 @@ class INavigationMenuItem(IViewletManager):
                         default=False)
 
 
+class IViewWithoutToolbar(Interface):
+    """View without toolbar marker interface"""
+    
+    
 class IToolbarViewletManager(IViewletManager):
     """Toolbar viewlet manager"""
 
