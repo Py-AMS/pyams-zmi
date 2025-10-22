@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.6.1
+-----
+ - updated table view interface
+ - added optional condition to display PyAMS toolbar viewlet in forms and tables
+
 2.6.0
 -----
  - added table marker interface and custom viewlet manager to hide toolbar on specific views or tables
