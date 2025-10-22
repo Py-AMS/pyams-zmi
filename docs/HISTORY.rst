@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.6.2
+-----
+ - updated Gitlab CI
+
 2.6.1
 -----
  - updated table view interface
