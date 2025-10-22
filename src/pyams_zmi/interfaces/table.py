@@ -33,6 +33,8 @@ from pyams_zmi import _
 class ITableView(Interface):
     """Table view interface"""
 
+    table = Attribute("Inner table instance")
+
 
 class ITableAdminView(ITableView, IInnerAdminView):
     """Admin table view interface"""
