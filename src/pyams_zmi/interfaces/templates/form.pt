@@ -16,7 +16,9 @@
 			  class="flex-grow-1">${structure:title}</span>
 		<span tal:condition="not:title.startswith('<')"
 			  class="flex-grow-1" i18n:translate="">${title}</span>
-		<i tal:omit-tag="">${structure:provider:pyams.toolbar}</i>
+		<tal:if condition="not:getattr(view, 'hide_toolbar', False)">
+			<i tal:omit-tag="">${structure:provider:pyams.toolbar}</i>
+		</tal:if>
 	</h2>
 	<form class="ams-form ${view.css_class | ''}"
 		  id="${view.id}"
