@@ -14,6 +14,8 @@ API:
 
     >>> from cornice import includeme as include_cornice
     >>> include_cornice(config)
+    >>> from cornice_swagger import includeme as include_swagger
+    >>> include_swagger(config)
     >>> from pyams_utils import includeme as include_utils
     >>> include_utils(config)
 
@@ -21,14 +23,17 @@ API:
     >>> from pyams_zmi.rest import openapi_specification
 
     >>> from pprint import pprint
-    >>> pprint(openapi_specification(request))
-    {'basePath': '/',
-     'info': {'title': 'PyAMS', 'version': '1.0'},
-     'paths': {'/__api__': {'get': {'produces': ['application/json'],
-                                    'responses': {'default': {'description': 'UNDOCUMENTED '
-                                                                             'RESPONSE'}},
-                                    'summary': 'OpenAPI specification'}}},
-     'swagger': '2.0'}
+    >>> specs = openapi_specification(request)
+    >>> sorted(specs.keys())
+    ['basePath', 'info', 'paths', 'swagger']
+    >>> specs['basePath']
+    '/'
+    >>> specs['info']
+    {'title': 'PyAMS', 'version': '1.0'}
+    >>> specs['swagger']
+    '2.0'
+    >>> sorted(specs['paths'].keys())
+    ['/__api__', '/api/rest/monitor']
 
 
 The module also provides a custom handler for OPTIONS verb:
