@@ -241,6 +241,9 @@ class FormGroupSwitcher(ObjectDataManagerMixin, Group):
     plus_class = FieldProperty(IFormGroupSwitcher['plus_class'])
     switcher_mode = FieldProperty(IFormGroupSwitcher['switcher_mode'])
 
+    hint = FieldProperty(IFormGroupSwitcher['hint'])
+    hint_icon_class = FieldProperty(IFormGroupSwitcher['hint_icon_class'])
+
     @property
     def state(self):
         """Current state getter"""
@@ -285,11 +288,15 @@ class FormGroupSwitcherDataTALESExtension(ContextRequestViewAdapter):
         switcher = IFormGroupSwitcher(view, None)
         if switcher is None:
             return None
-        return json.dumps({
+        result = {
             'ams-minus-class': switcher.minus_class,
             'ams-plus-class': switcher.plus_class,
             'ams-switcher-state': switcher.state
-        })
+        }
+        if switcher.hint:
+            result['ams-hint'] = switcher.hint
+            result['ams-hint-icon-class'] = switcher.hint_icon_class
+        return json.dumps(result)
 
 
 #

@@ -134,6 +134,11 @@ class IFormGroupSwitcher(IGroup):
 
     state = Attribute("Initial switcher state")
 
+    hint = TextLine(title="Switcher hint")
+
+    hint_icon_class = TextLine(title="Switcher hint icon CSS class (without prefix)",
+                               default='info-circle')
+
 
 @template_config(template='templates/form-checker.pt', layer=IAdminLayer)
 class IFormGroupChecker(IGroup):
