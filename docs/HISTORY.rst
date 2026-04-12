@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.7.0
+-----
+ - added support for hints with custom icon in fields switchers
+
 2.6.2
 -----
  - updated Gitlab CI
