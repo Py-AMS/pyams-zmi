@@ -15,6 +15,7 @@
 This module provides "pyams.toplinks" viewlet manager and a small set of components which are
 used to display tabs and links in PyAMS management interface.
 """
+
 from pyams_i18n.interfaces import II18n
 from pyams_skin.viewlet.menu import MenuItem
 from pyams_template.template import template_config
@@ -25,7 +26,7 @@ from pyams_viewlet.manager import TemplateBasedViewletManager, WeightOrderedView
 from pyams_viewlet.viewlet import Viewlet
 from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.viewlet import IPageHeaderViewletManager, ITopLinksViewletManager
-
+from pyams_zmi.utils import get_object_label
 
 __docformat__ = 'restructuredtext'
 
@@ -54,15 +55,19 @@ class TopMenuViewletManager(TemplateBasedViewletManager, WeightOrderedViewletMan
     menus_permissions = ()
     """Set of permissions required to display menu items"""
 
-    def add_menu(self, context, request, parent, item):
+    def add_menu(self, context, request, parent, item, label=None):
         if self.menus_permissions:
             for permission in self.menus_permissions:
                 if request.has_permission(permission, context=item):
                     break
             else:
                 return
+        if not label:
+            label = (get_object_label(item, request=request, view=self.view) or
+                     II18n(item).query_attribute('title', request=request) or
+                     item.__name__)
         menu = MenuItem(context, request, parent, self)
-        menu.label = II18n(item).query_attribute('title', request=request) or item.__name__
+        menu.label = label
         menu.href = absolute_url(item, request, 'admin')
         self.viewlets.append(menu)
 
