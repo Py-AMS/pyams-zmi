@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.7.1
+-----
+ - added base adapters for objects label, icon and hint adapters
+ - updated top menu items label getter
+
 2.7.0
 -----
  - added support for hints with custom icon in fields switchers
